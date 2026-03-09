@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AgroStoc">
+<meta name="theme-color" content="#2d5a27">
+<title>AgroStoc — Evidență Pesticide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #2d5a27;
+    --verde-deschis: #4a8c42;
+    --verde-pal: #e8f2e6;
+    --galben: #c8a94a;
+    --rosu: #c0392b;
+    --rosu-pal: #fdf0ee;
+    --alb: #fafaf7;
+    --gri: #f2f0eb;
+    --text: #1a2e18;
+    --text-pal: #6b7c69;
+    --border: #d4ddd2;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--alb);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* AUTH SCREEN */
+  .auth-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: linear-gradient(135deg, #1a3a15 0%, #2d5a27 60%, #4a8c42 100%);
+  }
+
+  .auth-box {
+    background: #fff;
+    border-radius: 20px;
+    padding: 36px 28px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .auth-logo {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .auth-logo h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--verde);
+  }
+
+  .auth-logo p {
+    font-size: 0.85rem;
+    color: var(--text-pal);
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .auth-tabs {
+    display: flex;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 24px;
+  }
+
+  .auth-tab {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-pal);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+  }
+
+  .auth-tab.active {
+    color: var(--verde);
+    border-bottom-color: var(--verde);
+  }
+
+  .auth-form { display: flex; flex-direction: column; gap: 14px; }
+
+  .auth-form input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--text);
+    background: #fff;
+    -webkit-appearance: none;
+  }
+
+  .auth-form input:focus {
+    outline: none;
+    border-color: var(--verde-deschis);
+  }
+
+  .btn-auth {
+    padding: 13px;
+    background: var(--verde);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 4px;
+  }
+
+  .btn-auth:hover { background: var(--verde-deschis); }
+
+  .auth-error {
+    background: var(--rosu-pal);
+    color: var(--rosu);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    display: none;
+  }
+
+  .auth-error.visible { display: block; }
+
+  /* LOADING */
+  .loading-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    background: var(--verde);
+    color: #fff;
+  }
+
+  .loading-screen h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+  }
+
+  .spinner {
+    width: 40px; height: 40px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* APP */
+  #app { display: none; }
+
+  header {
+    background: var(--verde);
+    padding: 18px 24px;
+    padding-top: calc(18px + env(safe-area-inset-top));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+
+  header h1 { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.3rem; }
+
+  .header-right { display: flex; align-items: center; gap: 10px; }
+
+  .user-email {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.75rem;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .btn-logout {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 0.78rem;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-logout:hover { background: rgba(255,255,255,0.25); }
+
+  .tabs {
+    display: flex;
+    background: var(--verde);
+    padding: 0 24px;
+    gap: 4px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .tab {
+    padding: 10px 18px;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .tab.active { color: var(--galben); border-bottom-color: var(--galben); }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 20px 16px; }
+
+  .alerte { margin-bottom: 20px; }
+
+  .alerta-card {
+    background: var(--rosu-pal);
+    border: 1px solid #f5c6c0;
+    border-left: 4px solid var(--rosu);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.88rem;
+  }
+  .alerta-card strong { color: var(--rosu); }
+
+  .summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+
+  .sum-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .sum-card .num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--verde); line-height: 1; }
+  .sum-card .label { font-size: 0.75rem; color: var(--text-pal); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .filtre { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+
+  .filtru-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: #fff;
+    font-size: 0.82rem;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    color: var(--text-pal);
+    transition: all 0.2s;
+  }
+  .filtru-btn.active { background: var(--verde); color: #fff; border-color: var(--verde); }
+
+  .produse-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .produs-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    transition: box-shadow 0.2s;
+  }
+  .produs-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .produs-card.stoc-critic { border-left: 4px solid var(--rosu); }
+  .produs-card.stoc-ok { border-left: 4px solid var(--verde-deschis); }
+
+  .produs-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; gap: 8px; }
+  .produs-header-left { display: flex; flex-direction: column; gap: 5px; }
+  .produs-nume { font-weight: 600; font-size: 1rem; color: var(--text); }
+
+  .tip-badge {
+    font-size: 0.7rem; padding: 2px 8px; border-radius: 10px;
+    font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px;
+    display: inline-block; width: fit-content;
+  }
+
+  .tip-Fungicid      { background: #e8f0fe; color: #1a56db; }
+  .tip-Insecticid    { background: #fff3e0; color: #c75000; }
+  .tip-Acaricid      { background: #fce8f3; color: #9d174d; }
+  .tip-Erbicid       { background: #fef3c7; color: #78350f; }
+  .tip-Ingrasamant   { background: #fef9c3; color: #854d0e; }
+  .tip-Biostimulator { background: #f0fdf4; color: #166534; }
+  .tip-Adjuvant      { background: #f3f4f6; color: #374151; }
+  .tip-Altul         { background: #f5f3ff; color: #5b21b6; }
+
+  .cultura-badge { font-size: 0.72rem; padding: 3px 10px; border-radius: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+  .cultura-vie    { background: #f0e8f5; color: #7b3fa0; }
+  .cultura-aluni  { background: #fff3e0; color: #e65100; }
+  .cultura-ambele { background: var(--verde-pal); color: var(--verde); }
+
+  .produs-detalii { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; font-size: 0.82rem; color: var(--text-pal); }
+  .detaliu { display: flex; flex-direction: column; gap: 2px; }
+  .detaliu strong { color: var(--text); font-size: 0.9rem; }
+
+  .stoc-bar { margin-top: 12px; height: 6px; background: var(--gri); border-radius: 3px; overflow: hidden; }
+  .stoc-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+  .stoc-fill.ok     { background: var(--verde-deschis); }
+  .stoc-fill.critic { background: var(--rosu); }
+  .stoc-fill.mediu  { background: var(--galben); }
+
+  .produs-actiuni { display: flex; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--gri); }
+
+  .btn-actiune {
+    flex: 1; padding: 7px; border: 1px solid var(--border); border-radius: 6px;
+    background: #fff; font-size: 0.8rem; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; color: var(--text-pal); transition: all 0.2s; text-align: center;
+  }
+  .btn-actiune:hover { background: var(--gri); color: var(--text); }
+  .btn-actiune.primary { background: var(--verde); color: #fff; border-color: var(--verde); }
+  .btn-actiune.primary:hover { background: var(--verde-deschis); }
+  .btn-actiune.danger { color: var(--rosu); border-color: #f5c6c0; }
+  .btn-actiune.danger:hover { background: var(--rosu-pal); }
+
+  .fab {
+    position: fixed;
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    right: 24px;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--verde); color: #fff; border: none;
+    font-size: 1.6rem; cursor: pointer;
+    box-shadow: 0 4px 20px rgba(45,90,39,0.4);
+    transition: all 0.2s; z-index: 200;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .fab:hover { background: var(--verde-deschis); transform: scale(1.05); }
+
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 300; display: none;
+    align-items: flex-end; justify-content: center;
+  }
+  .overlay.active { display: flex; }
+
+  .modal {
+    background: #fff; width: 100%; max-width: 600px;
+    border-radius: 16px 16px 0 0;
+    padding: 24px;
+    padding-bottom: calc(24px + env(safe-area-inset-bottom));
+    max-height: 92vh; overflow-y: auto;
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+  .modal h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 20px; color: var(--verde); }
+
+  .form-group { margin-bottom: 14px; }
+  .form-group label {
+    display: block; font-size: 0.82rem; font-weight: 500;
+    color: var(--text-pal); margin-bottom: 5px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .form-group input,
+  .form-group select {
+    width: 100%; padding: 10px 12px;
+    border: 1px solid var(--border); border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+    color: var(--text); background: #fff;
+    transition: border 0.2s; -webkit-appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus { outline: none; border-color: var(--verde-deschis); }
+
+  .tip-selector { display: flex; flex-direction: column; gap: 8px; }
+  .tip-custom-input { display: none; }
+  .tip-custom-input.visible { display: block; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .modal-btns { display: flex; gap: 10px; margin-top: 20px; }
+
+  .btn-salveaza {
+    flex: 1; padding: 12px; background: var(--verde); color: #fff;
+    border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s;
+  }
+  .btn-salveaza:hover { background: var(--verde-deschis); }
+
+  .btn-anuleaza {
+    padding: 12px 20px; background: var(--gri); color: var(--text-pal);
+    border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; cursor: pointer;
+  }
+
+  .istoric-list { display: flex; flex-direction: column; gap: 8px; }
+  .istoric-item {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 16px;
+    display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem;
+  }
+  .istoric-left { display: flex; flex-direction: column; gap: 4px; }
+  .istoric-produs { font-weight: 600; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .istoric-data { color: var(--text-pal); font-size: 0.8rem; }
+  .istoric-qty { font-weight: 600; color: var(--rosu); white-space: nowrap; margin-left: 12px; }
+
+  .empty { text-align: center; padding: 60px 20px; color: var(--text-pal); }
+  .empty .icon { font-size: 3rem; margin-bottom: 12px; }
+  .empty p { font-size: 0.95rem; }
+
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--verde);
+    margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .section-title small { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--text-pal); font-weight: 400; }
+
+  .utilizare-info { background: var(--verde-pal); border-radius: 8px; padding: 12px; font-size: 0.85rem; color: var(--verde); margin-bottom: 16px; }
+
+  .sync-indicator {
+    font-size: 0.75rem;
+    color: var(--text-pal);
+    text-align: center;
+    padding: 8px;
+  }
+
+  @media (min-width: 600px) {
+    .modal { border-radius: 16px; margin: 20px; max-height: 85vh; }
+    .overlay { align-items: center; }
+    .produs-detalii { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div id="loading-screen" class="loading-screen">
+  <div class="spinner"></div>
+  <h2>🌿 AgroStoc</h2>
+</div>
+
+<!-- AUTH -->
+<div id="auth-screen" class="auth-screen" style="display:none">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <h1>🌿 AgroStoc</h1>
+      <p>Evidență Pesticide</p>
+    </div>
+    <div class="auth-tabs">
+      <div class="auth-tab active" onclick="schimbAuthTab('login')">Intră în cont</div>
+      <div class="auth-tab" onclick="schimbAuthTab('register')">Cont nou</div>
+    </div>
+    <div class="auth-form">
+      <input type="email" id="auth-email" placeholder="Email" autocomplete="email">
+      <input type="password" id="auth-parola" placeholder="Parolă" autocomplete="current-password">
+      <input type="password" id="auth-parola2" placeholder="Confirmă parola" style="display:none" autocomplete="new-password">
+      <div class="auth-error" id="auth-error"></div>
+      <button class="btn-auth" id="btn-auth" onclick="autentificare()">Intră în cont</button>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <header>
+    <h1>🌿 AgroStoc</h1>
+    <div class="header-right">
+      <span class="user-email" id="user-email-display"></span>
+      <button class="btn-logout" onclick="logout()">Ieșire</button>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <div class="tab active" onclick="schimbTab('stocuri')">📦 Stocuri</div>
+    <div class="tab" onclick="schimbTab('utilizare')">💧 Utilizare</div>
+    <div class="tab" onclick="schimbTab('istoric')">📋 Istoric</div>
+  </div>
+
+  <!-- TAB STOCURI -->
+  <div id="tab-stocuri" class="container">
+    <div id="alerte-container" class="alerte"></div>
+    <div class="summary">
+      <div class="sum-card">
+        <div class="num" id="total-produse">0</div>
+        <div class="label">Produse</div>
+      </div>
+      <div class="sum-card">
+        <div class="num" id="total-critic" style="color: var(--rosu)">0</div>
+        <div class="label">Stoc critic</div>
+      </div>
+      <div class="sum-card">
+        <div class="num" id="total-culturi">2</div>
+        <div class="label">Culturi</div>
+      </div>
+    </div>
+    <div class="filtre">
+      <button class="filtru-btn active" onclick="filtreaza('toate', event)">Toate</button>
+      <button class="filtru-btn" onclick="filtreaza('Vie', event)">🍇 Vie</button>
+      <button class="filtru-btn" onclick="filtreaza('Aluni', event)">🌰 Aluni</button>
+      <button class="filtru-btn" onclick="filtreaza('Ambele', event)">🌿 Ambele</button>
+    </div>
+    <div class="section-title">
+      Produse în stoc
+      <small id="count-produse"></small>
+    </div>
+    <div class="produse-list" id="produse-container"></div>
+  </div>
+
+  <!-- TAB UTILIZARE -->
+  <div id="tab-utilizare" class="container" style="display:none">
+    <div class="section-title">Înregistrează utilizare</div>
+    <div class="form-group">
+      <label>Produs</label>
+      <select id="util-produs" onchange="afiseazaInfoUtilizare()">
+        <option value="">Selectează produsul...</option>
+      </select>
+    </div>
+    <div class="utilizare-info" id="util-info" style="display:none"></div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Cantitate folosită (L/Kg)</label>
+        <input type="number" id="util-cantitate" placeholder="ex: 2.5" step="0.1" min="0">
+      </div>
+      <div class="form-group">
+        <label>Data aplicării</label>
+        <input type="date" id="util-data">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Observații (opțional)</label>
+      <input type="text" id="util-obs" placeholder="ex: Parcelă nord, după ploaie">
+    </div>
+    <button class="btn-salveaza" onclick="inregistreazaUtilizare()">✓ Înregistrează utilizarea</button>
+  </div>
+
+  <!-- TAB ISTORIC -->
+  <div id="tab-istoric" class="container" style="display:none">
+    <div class="section-title">Istoric utilizări</div>
+    <div class="istoric-list" id="istoric-container"></div>
+  </div>
+
+  <button class="fab" onclick="deschideModal()" title="Adaugă produs">+</button>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="inchideModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h2 id="modal-titlu">Adaugă produs nou</h2>
+    <div class="form-group">
+      <label>Nume produs *</label>
+      <input type="text" id="form-nume" placeholder="ex: Cuproxat, Topsin, Mospilan...">
+    </div>
+    <div class="form-group">
+      <label>Tip substanță</label>
+      <div class="tip-selector">
+        <select id="form-tip" onchange="verificaTipCustom()">
+          <option value="">— Selectează tipul —</option>
+          <option value="Fungicid">🔵 Fungicid</option>
+          <option value="Insecticid">🟠 Insecticid</option>
+          <option value="Acaricid">🔴 Acaricid</option>
+          <option value="Erbicid">🟤 Erbicid</option>
+          <option value="Îngrășământ foliar">🟡 Îngrășământ foliar</option>
+          <option value="Biostimulator">🟢 Biostimulator</option>
+          <option value="Adjuvant">⚪ Adjuvant</option>
+          <option value="__altul__">✏️ Altul (specifică)</option>
+        </select>
+        <input type="text" id="form-tip-custom" class="tip-custom-input" placeholder="Specifică tipul...">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Cultură *</label>
+        <select id="form-cultura">
+          <option value="Vie">🍇 Vie</option>
+          <option value="Aluni">🌰 Aluni</option>
+          <option value="Ambele">🌿 Ambele</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Unitate măsură</label>
+        <select id="form-unitate">
+          <option value="L">Litri (L)</option>
+          <option value="Kg">Kilograme (Kg)</option>
+          <option value="buc">Bucăți</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Cantitate în stoc *</label>
+        <input type="number" id="form-cantitate" placeholder="ex: 10" step="0.1" min="0">
+      </div>
+      <div class="form-group">
+        <label>Stoc minim alertă</label>
+        <input type="number" id="form-stoc-minim" placeholder="ex: 2" step="0.1" min="0">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Doză recomandată</label>
+        <input type="text" id="form-doza" placeholder="ex: 3L/ha">
+      </div>
+      <div class="form-group">
+        <label>Data ultimei utilizări</label>
+        <input type="date" id="form-data">
+      </div>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-anuleaza" onclick="inchideModalFortat()">Anulează</button>
+      <button class="btn-salveaza" onclick="salveazaProdus()">✓ Salvează</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, getDocs, onSnapshot, query, orderBy, serverTimestamp }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyD_1BVst8sFi9d2FhekGi8vJ5J2tl1La8Y",
+    authDomain: "agrostoc-c2fcc.firebaseapp.com",
+    projectId: "agrostoc-c2fcc",
+    storageBucket: "agrostoc-c2fcc.firebasestorage.app",
+    messagingSenderId: "507349861675",
+    appId: "1:507349861675:web:e745caf54010ac34fc716e",
+    measurementId: "G-10LSJL778B"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const TIPURI_FIXE = ['Fungicid','Insecticid','Acaricid','Erbicid','Îngrășământ foliar','Biostimulator','Adjuvant'];
+
+  let produse = [];
+  let istoric = [];
+  let editIndex = -1;
+  let editDocId = null;
+  let filtruActiv = 'toate';
+  let currentUser = null;
+  let unsubProduse = null;
+  let unsubIstoric = null;
+  let authMode = 'login';
+
+  // ---- AUTH STATE ----
+  onAuthStateChanged(auth, user => {
+    document.getElementById('loading-screen').style.display = 'none';
+    if (user) {
+      currentUser = user;
+      document.getElementById('auth-screen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      document.getElementById('user-email-display').textContent = user.email;
+      pornesteListen();
+    } else {
+      currentUser = null;
+      document.getElementById('app').style.display = 'none';
+      document.getElementById('auth-screen').style.display = 'flex';
+      if (unsubProduse) unsubProduse();
+      if (unsubIstoric) unsubIstoric();
+    }
+  });
+
+  // ---- AUTH FUNCTIONS ----
+  window.schimbAuthTab = function(mode) {
+    authMode = mode;
+    document.querySelectorAll('.auth-tab').forEach((t, i) => {
+      t.classList.toggle('active', (i === 0 && mode === 'login') || (i === 1 && mode === 'register'));
+    });
+    document.getElementById('auth-parola2').style.display = mode === 'register' ? 'block' : 'none';
+    document.getElementById('btn-auth').textContent = mode === 'login' ? 'Intră în cont' : 'Creează cont';
+    document.getElementById('auth-error').classList.remove('visible');
+  };
+
+  window.autentificare = async function() {
+    const email = document.getElementById('auth-email').value.trim();
+    const parola = document.getElementById('auth-parola').value;
+    const parola2 = document.getElementById('auth-parola2').value;
+    const errEl = document.getElementById('auth-error');
+    errEl.classList.remove('visible');
+
+    if (!email || !parola) { errEl.textContent = 'Completează email și parola!'; errEl.classList.add('visible'); return; }
+
+    try {
+      if (authMode === 'register') {
+        if (parola !== parola2) { errEl.textContent = 'Parolele nu coincid!'; errEl.classList.add('visible'); return; }
+        if (parola.length < 6) { errEl.textContent = 'Parola trebuie să aibă minim 6 caractere!'; errEl.classList.add('visible'); return; }
+        await createUserWithEmailAndPassword(auth, email, parola);
+      } else {
+        await signInWithEmailAndPassword(auth, email, parola);
+      }
+    } catch(e) {
+      const mesaje = {
+        'auth/user-not-found': 'Nu există cont cu acest email.',
+        'auth/wrong-password': 'Parolă incorectă.',
+        'auth/email-already-in-use': 'Email deja folosit. Încearcă să te loghezi.',
+        'auth/invalid-email': 'Email invalid.',
+        'auth/invalid-credential': 'Email sau parolă incorectă.',
+      };
+      errEl.textContent = mesaje[e.code] || 'Eroare: ' + e.message;
+      errEl.classList.add('visible');
+    }
+  };
+
+  window.logout = async function() {
+    await signOut(auth);
+  };
+
+  // ---- FIRESTORE LISTEN ----
+  function pornesteListen() {
+    const uid = currentUser.uid;
+
+    unsubProduse = onSnapshot(
+      query(collection(db, 'users', uid, 'produse')),
+      snap => {
+        produse = snap.docs.map(d => ({ ...d.data(), _id: d.id }));
+        randeazaTot();
+      }
+    );
+
+    unsubIstoric = onSnapshot(
+      query(collection(db, 'users', uid, 'istoric'), orderBy('timestamp', 'desc')),
+      snap => {
+        istoric = snap.docs.map(d => ({ ...d.data(), _id: d.id }));
+        randeazaIstoric();
+      }
+    );
+  }
+
+  // ---- TIP ----
+  window.verificaTipCustom = function() {
+    const sel = document.getElementById('form-tip');
+    const inp = document.getElementById('form-tip-custom');
+    if (sel.value === '__altul__') { inp.classList.add('visible'); inp.focus(); }
+    else { inp.classList.remove('visible'); inp.value = ''; }
+  };
+
+  function getTipSelectat() {
+    const sel = document.getElementById('form-tip');
+    if (sel.value === '__altul__') return document.getElementById('form-tip-custom').value.trim() || 'Altul';
+    return sel.value;
+  }
+
+  function setTipInForm(tip) {
+    const sel = document.getElementById('form-tip');
+    const inp = document.getElementById('form-tip-custom');
+    if (!tip) { sel.value = ''; inp.classList.remove('visible'); }
+    else if (TIPURI_FIXE.includes(tip)) { sel.value = tip; inp.classList.remove('visible'); }
+    else { sel.value = '__altul__'; inp.classList.add('visible'); inp.value = tip; }
+  }
+
+  function tipClass(tip) {
+    const map = { 'Fungicid':'tip-Fungicid','Insecticid':'tip-Insecticid','Acaricid':'tip-Acaricid','Erbicid':'tip-Erbicid','Îngrășământ foliar':'tip-Ingrasamant','Biostimulator':'tip-Biostimulator','Adjuvant':'tip-Adjuvant' };
+    return map[tip] || 'tip-Altul';
+  }
+
+  // ---- RANDARE ----
+  function randeazaTot() {
+    randeazaAlerte();
+    randeazaProduse();
+    randeazaSummary();
+    randeazaSelectUtilizare();
+  }
+
+  function randeazaSummary() {
+    document.getElementById('total-produse').textContent = produse.length;
+    document.getElementById('total-critic').textContent = produse.filter(p => p.stocMinim > 0 && p.cantitate <= p.stocMinim).length;
+  }
+
+  function randeazaAlerte() {
+    const container = document.getElementById('alerte-container');
+    const critice = produse.filter(p => p.stocMinim > 0 && p.cantitate <= p.stocMinim);
+    container.innerHTML = critice.map(p => `
+      <div class="alerta-card">
+        <span>⚠️</span>
+        <div><strong>${p.nume}</strong>${p.tip ? ' (' + p.tip + ')' : ''} — stoc critic: ${p.cantitate} ${p.unitate} (minim: ${p.stocMinim} ${p.unitate})</div>
+      </div>`).join('');
+  }
+
+  function randeazaProduse() {
+    const container = document.getElementById('produse-container');
+    let afisate = filtruActiv === 'toate' ? produse : produse.filter(p => p.cultura === filtruActiv);
+    document.getElementById('count-produse').textContent = `${afisate.length} produs${afisate.length !== 1 ? 'e' : ''}`;
+
+    if (afisate.length === 0) {
+      container.innerHTML = `<div class="empty"><div class="icon">📦</div><p>Niciun produs găsit.<br>Apasă + pentru a adăuga.</p></div>`;
+      return;
+    }
+
+    container.innerHTML = afisate.map(p => {
+      const critic = p.stocMinim > 0 && p.cantitate <= p.stocMinim;
+      const procent = p.stocMinim > 0 ? Math.min(100, (p.cantitate / (p.stocMinim * 3)) * 100) : 60;
+      const clasa = procent > 50 ? 'ok' : procent > 25 ? 'mediu' : 'critic';
+      const culturaBadge = p.cultura === 'Vie' ? 'cultura-vie' : p.cultura === 'Aluni' ? 'cultura-aluni' : 'cultura-ambele';
+      const culturaIcon = p.cultura === 'Vie' ? '🍇' : p.cultura === 'Aluni' ? '🌰' : '🌿';
+      const tipHtml = p.tip ? `<span class="tip-badge ${tipClass(p.tip)}">${p.tip}</span>` : '';
+      return `
+        <div class="produs-card ${critic ? 'stoc-critic' : 'stoc-ok'}">
+          <div class="produs-header">
+            <div class="produs-header-left">
+              <div class="produs-nume">${p.nume}</div>
+              ${tipHtml}
+            </div>
+            <span class="cultura-badge ${culturaBadge}">${culturaIcon} ${p.cultura}</span>
+          </div>
+          <div class="produs-detalii">
+            <div class="detaliu"><span>Stoc curent</span><strong style="color:${critic ? 'var(--rosu)' : 'var(--verde)'}">${p.cantitate} ${p.unitate}</strong></div>
+            <div class="detaliu"><span>Stoc minim</span><strong>${p.stocMinim || '—'} ${p.stocMinim ? p.unitate : ''}</strong></div>
+            <div class="detaliu"><span>Doză</span><strong>${p.doza || '—'}</strong></div>
+            <div class="detaliu"><span>Ultima aplicare</span><strong>${p.dataUtilizare ? new Date(p.dataUtilizare).toLocaleDateString('ro-RO') : '—'}</strong></div>
+          </div>
+          <div class="stoc-bar"><div class="stoc-fill ${clasa}" style="width:${procent}%"></div></div>
+          <div class="produs-actiuni">
+            <button class="btn-actiune" onclick="mergeUtilizare('${p._id}')">💧 Utilizare</button>
+            <button class="btn-actiune primary" onclick="editeazaProdus('${p._id}')">✏️ Editează</button>
+            <button class="btn-actiune danger" onclick="stergeProdus('${p._id}')">🗑️</button>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function randeazaIstoric() {
+    const container = document.getElementById('istoric-container');
+    if (istoric.length === 0) {
+      container.innerHTML = `<div class="empty"><div class="icon">📋</div><p>Nicio utilizare înregistrată încă.</p></div>`;
+      return;
+    }
+    container.innerHTML = istoric.map(item => `
+      <div class="istoric-item">
+        <div class="istoric-left">
+          <div class="istoric-produs">${item.produs}${item.tip ? ' <span class="tip-badge ' + tipClass(item.tip) + '">' + item.tip + '</span>' : ''}</div>
+          <span class="istoric-data">📅 ${item.data ? new Date(item.data).toLocaleDateString('ro-RO') : '—'} · ${item.cultura}${item.obs ? ' · ' + item.obs : ''}</span>
+        </div>
+        <span class="istoric-qty">-${item.cantitate} ${item.unitate}</span>
+      </div>`).join('');
+  }
+
+  function randeazaSelectUtilizare() {
+    const sel = document.getElementById('util-produs');
+    const val = sel.value;
+    sel.innerHTML = '<option value="">Selectează produsul...</option>' +
+      produse.map(p => `<option value="${p._id}">${p.nume}${p.tip ? ' [' + p.tip + ']' : ''} — ${p.cantitate} ${p.unitate}</option>`).join('');
+    if (val) sel.value = val;
+  }
+
+  // ---- TABS ----
+  window.schimbTab = function(tab) {
+    ['stocuri','utilizare','istoric'].forEach(t => {
+      document.getElementById('tab-' + t).style.display = t === tab ? 'block' : 'none';
+    });
+    document.querySelectorAll('.tab').forEach((el, i) => {
+      el.classList.toggle('active', ['stocuri','utilizare','istoric'][i] === tab);
+    });
+  };
+
+  window.filtreaza = function(tip, evt) {
+    filtruActiv = tip;
+    document.querySelectorAll('.filtru-btn').forEach(b => b.classList.remove('active'));
+    if (evt && evt.target) evt.target.classList.add('active');
+    randeazaProduse();
+  };
+
+  // ---- MODAL ----
+  window.deschideModal = function(docId) {
+    editDocId = docId || null;
+    editIndex = -1;
+    document.getElementById('modal-titlu').textContent = docId ? 'Editează produs' : 'Adaugă produs nou';
+    if (docId) {
+      const p = produse.find(x => x._id === docId);
+      document.getElementById('form-nume').value = p.nume;
+      setTipInForm(p.tip || '');
+      document.getElementById('form-cultura').value = p.cultura;
+      document.getElementById('form-unitate').value = p.unitate;
+      document.getElementById('form-cantitate').value = p.cantitate;
+      document.getElementById('form-stoc-minim').value = p.stocMinim || '';
+      document.getElementById('form-doza').value = p.doza || '';
+      document.getElementById('form-data').value = p.dataUtilizare || '';
+    } else {
+      document.getElementById('form-nume').value = '';
+      setTipInForm('');
+      document.getElementById('form-cultura').value = 'Vie';
+      document.getElementById('form-unitate').value = 'L';
+      document.getElementById('form-cantitate').value = '';
+      document.getElementById('form-stoc-minim').value = '';
+      document.getElementById('form-doza').value = '';
+      document.getElementById('form-data').value = new Date().toISOString().split('T')[0];
+    }
+    document.getElementById('overlay').classList.add('active');
+  };
+
+  window.editeazaProdus = function(docId) { window.deschideModal(docId); };
+
+  window.inchideModal = function(e) {
+    if (e.target === document.getElementById('overlay')) window.inchideModalFortat();
+  };
+
+  window.inchideModalFortat = function() {
+    document.getElementById('overlay').classList.remove('active');
+  };
+
+  window.salveazaProdus = async function() {
+    const nume = document.getElementById('form-nume').value.trim();
+    const cantitate = parseFloat(document.getElementById('form-cantitate').value);
+    if (!nume || isNaN(cantitate)) { alert('Completează cel puțin numele și cantitatea!'); return; }
+
+    const produs = {
+      nume, tip: getTipSelectat(),
+      cultura: document.getElementById('form-cultura').value,
+      unitate: document.getElementById('form-unitate').value,
+      cantitate,
+      stocMinim: parseFloat(document.getElementById('form-stoc-minim').value) || 0,
+      doza: document.getElementById('form-doza').value.trim(),
+      dataUtilizare: document.getElementById('form-data').value,
+    };
+
+    const uid = currentUser.uid;
+    if (editDocId) {
+      await updateDoc(doc(db, 'users', uid, 'produse', editDocId), produs);
+    } else {
+      await addDoc(collection(db, 'users', uid, 'produse'), produs);
+    }
+    window.inchideModalFortat();
+  };
+
+  window.stergeProdus = async function(docId) {
+    const p = produse.find(x => x._id === docId);
+    if (confirm(`Ștergi "${p.nume}"?`)) {
+      await deleteDoc(doc(db, 'users', currentUser.uid, 'produse', docId));
+    }
+  };
+
+  // ---- UTILIZARE ----
+  window.mergeUtilizare = function(docId) {
+    schimbTab('utilizare');
+    setTimeout(() => {
+      document.getElementById('util-produs').value = docId;
+      afiseazaInfoUtilizare();
+    }, 100);
+  };
+
+  window.afiseazaInfoUtilizare = function() {
+    const docId = document.getElementById('util-produs').value;
+    const info = document.getElementById('util-info');
+    if (!docId) { info.style.display = 'none'; return; }
+    const p = produse.find(x => x._id === docId);
+    info.style.display = 'block';
+    info.innerHTML = `<strong>${p.nume}</strong>${p.tip ? ' · <em>' + p.tip + '</em>' : ''} · Stoc: <strong>${p.cantitate} ${p.unitate}</strong> · Doză: ${p.doza || 'nespecificat'} · ${p.cultura}`;
+  };
+
+  window.inregistreazaUtilizare = async function() {
+    const docId = document.getElementById('util-produs').value;
+    const cantitate = parseFloat(document.getElementById('util-cantitate').value);
+    const data = document.getElementById('util-data').value;
+    if (!docId || isNaN(cantitate) || cantitate <= 0) { alert('Completează produsul și cantitatea!'); return; }
+    const p = produse.find(x => x._id === docId);
+    if (cantitate > p.cantitate) { alert('Cantitatea depășește stocul disponibil!'); return; }
+
+    const uid = currentUser.uid;
+    const nouCantitate = Math.round((p.cantitate - cantitate) * 100) / 100;
+
+    await updateDoc(doc(db, 'users', uid, 'produse', docId), {
+      cantitate: nouCantitate,
+      dataUtilizare: data
+    });
+
+    await addDoc(collection(db, 'users', uid, 'istoric'), {
+      produs: p.nume, tip: p.tip || '',
+      cultura: p.cultura, cantitate, unitate: p.unitate,
+      data, obs: document.getElementById('util-obs').value.trim(),
+      timestamp: serverTimestamp()
+    });
+
+    document.getElementById('util-cantitate').value = '';
+    document.getElementById('util-obs').value = '';
+    alert(`✓ Utilizare înregistrată! Stoc rămas: ${nouCantitate} ${p.unitate}`);
+    schimbTab('stocuri');
+  };
+
+  // ---- INIT ----
+  document.getElementById('util-data').value = new Date().toISOString().split('T')[0];
+
+  // Enter pe câmpuri auth
+  document.getElementById('auth-parola').addEventListener('keydown', e => { if(e.key==='Enter') window.autentificare(); });
+  document.getElementById('auth-parola2').addEventListener('keydown', e => { if(e.key==='Enter') window.autentificare(); });
+</script>
+</body>
+</html>
