@@ -11,302 +11,85 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --verde: #2d5a27;
-    --verde-deschis: #4a8c42;
-    --verde-pal: #e8f2e6;
-    --galben: #c8a94a;
-    --rosu: #c0392b;
-    --rosu-pal: #fdf0ee;
-    --alb: #fafaf7;
-    --gri: #f2f0eb;
-    --text: #1a2e18;
-    --text-pal: #6b7c69;
-    --border: #d4ddd2;
+    --verde: #2d5a27; --verde-deschis: #4a8c42; --verde-pal: #e8f2e6;
+    --galben: #c8a94a; --rosu: #c0392b; --rosu-pal: #fdf0ee;
+    --alb: #fafaf7; --gri: #f2f0eb; --text: #1a2e18; --text-pal: #6b7c69; --border: #d4ddd2;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--alb); color: var(--text); min-height: 100vh; padding-bottom: env(safe-area-inset-bottom); }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--alb);
-    color: var(--text);
-    min-height: 100vh;
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  /* AUTH SCREEN */
-  .auth-screen {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    background: linear-gradient(135deg, #1a3a15 0%, #2d5a27 60%, #4a8c42 100%);
-  }
-
-  .auth-box {
-    background: #fff;
-    border-radius: 20px;
-    padding: 36px 28px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  }
-
-  .auth-logo {
-    text-align: center;
-    margin-bottom: 28px;
-  }
-
-  .auth-logo h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    color: var(--verde);
-  }
-
-  .auth-logo p {
-    font-size: 0.85rem;
-    color: var(--text-pal);
-    margin-top: 4px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .auth-tabs {
-    display: flex;
-    border-bottom: 2px solid var(--border);
-    margin-bottom: 24px;
-  }
-
-  .auth-tab {
-    flex: 1;
-    padding: 10px;
-    text-align: center;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--text-pal);
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -2px;
-    transition: all 0.2s;
-  }
-
-  .auth-tab.active {
-    color: var(--verde);
-    border-bottom-color: var(--verde);
-  }
-
+  /* AUTH */
+  .auth-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; background: linear-gradient(135deg, #1a3a15 0%, #2d5a27 60%, #4a8c42 100%); }
+  .auth-box { background: #fff; border-radius: 20px; padding: 36px 28px; width: 100%; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  .auth-logo { text-align: center; margin-bottom: 28px; }
+  .auth-logo h1 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--verde); }
+  .auth-logo p { font-size: 0.85rem; color: var(--text-pal); margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+  .auth-tabs { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 24px; }
+  .auth-tab { flex: 1; padding: 10px; text-align: center; font-size: 0.9rem; font-weight: 500; color: var(--text-pal); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
+  .auth-tab.active { color: var(--verde); border-bottom-color: var(--verde); }
   .auth-form { display: flex; flex-direction: column; gap: 14px; }
-
-  .auth-form input {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    color: var(--text);
-    background: #fff;
-    -webkit-appearance: none;
-  }
-
-  .auth-form input:focus {
-    outline: none;
-    border-color: var(--verde-deschis);
-  }
-
-  .btn-auth {
-    padding: 13px;
-    background: var(--verde);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-    margin-top: 4px;
-  }
-
+  .auth-form input { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--text); background: #fff; -webkit-appearance: none; }
+  .auth-form input:focus { outline: none; border-color: var(--verde-deschis); }
+  .btn-auth { padding: 13px; background: var(--verde); color: #fff; border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 4px; }
   .btn-auth:hover { background: var(--verde-deschis); }
-
-  .auth-error {
-    background: var(--rosu-pal);
-    color: var(--rosu);
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 0.85rem;
-    display: none;
-  }
-
+  .auth-error { background: var(--rosu-pal); color: var(--rosu); border-radius: 8px; padding: 10px 14px; font-size: 0.85rem; display: none; }
   .auth-error.visible { display: block; }
 
   /* LOADING */
-  .loading-screen {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 16px;
-    background: var(--verde);
-    color: #fff;
-  }
-
-  .loading-screen h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-  }
-
-  .spinner {
-    width: 40px; height: 40px;
-    border: 3px solid rgba(255,255,255,0.3);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-
+  .loading-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px; background: var(--verde); color: #fff; }
+  .loading-screen h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; }
+  .spinner { width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
   /* APP */
   #app { display: none; }
-
-  header {
-    background: var(--verde);
-    padding: 18px 24px;
-    padding-top: calc(18px + env(safe-area-inset-top));
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-  }
-
+  header { background: var(--verde); padding: 18px 24px; padding-top: calc(18px + env(safe-area-inset-top)); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
   header h1 { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.3rem; }
-
   .header-right { display: flex; align-items: center; gap: 10px; }
-
-  .user-email {
-    color: rgba(255,255,255,0.7);
-    font-size: 0.75rem;
-    max-width: 140px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .btn-logout {
-    background: rgba(255,255,255,0.15);
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 5px 10px;
-    font-size: 0.78rem;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
+  .user-email { color: rgba(255,255,255,0.7); font-size: 0.75rem; max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .btn-logout { background: rgba(255,255,255,0.15); color: #fff; border: none; border-radius: 6px; padding: 5px 10px; font-size: 0.78rem; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.2s; }
   .btn-logout:hover { background: rgba(255,255,255,0.25); }
 
-  .tabs {
-    display: flex;
-    background: var(--verde);
-    padding: 0 24px;
-    gap: 4px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .tab {
-    padding: 10px 18px;
-    color: rgba(255,255,255,0.6);
-    font-size: 0.85rem;
-    font-weight: 500;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-
+  .tabs { display: flex; background: var(--verde); padding: 0 24px; gap: 4px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .tab { padding: 10px 18px; color: rgba(255,255,255,0.6); font-size: 0.85rem; font-weight: 500; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
   .tab.active { color: var(--galben); border-bottom-color: var(--galben); }
 
   .container { max-width: 900px; margin: 0 auto; padding: 20px 16px; }
-
   .alerte { margin-bottom: 20px; }
-
-  .alerta-card {
-    background: var(--rosu-pal);
-    border: 1px solid #f5c6c0;
-    border-left: 4px solid var(--rosu);
-    border-radius: 8px;
-    padding: 12px 16px;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.88rem;
-  }
+  .alerta-card { background: var(--rosu-pal); border: 1px solid #f5c6c0; border-left: 4px solid var(--rosu); border-radius: 8px; padding: 12px 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; font-size: 0.88rem; }
   .alerta-card strong { color: var(--rosu); }
 
   .summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
-
   .sum-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
   .sum-card .num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--verde); line-height: 1; }
   .sum-card .label { font-size: 0.75rem; color: var(--text-pal); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
 
   .filtre { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-
-  .filtru-btn {
-    padding: 6px 14px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    background: #fff;
-    font-size: 0.82rem;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    color: var(--text-pal);
-    transition: all 0.2s;
-  }
+  .filtru-btn { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border); background: #fff; font-size: 0.82rem; font-family: 'DM Sans', sans-serif; cursor: pointer; color: var(--text-pal); transition: all 0.2s; }
   .filtru-btn.active { background: var(--verde); color: #fff; border-color: var(--verde); }
 
   .produse-list { display: flex; flex-direction: column; gap: 10px; }
-
-  .produs-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px;
-    transition: box-shadow 0.2s;
-  }
+  .produs-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px; transition: box-shadow 0.2s; }
   .produs-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
   .produs-card.stoc-critic { border-left: 4px solid var(--rosu); }
   .produs-card.stoc-ok { border-left: 4px solid var(--verde-deschis); }
-
   .produs-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; gap: 8px; }
   .produs-header-left { display: flex; flex-direction: column; gap: 5px; }
   .produs-nume { font-weight: 600; font-size: 1rem; color: var(--text); }
 
-  .tip-badge {
-    font-size: 0.7rem; padding: 2px 8px; border-radius: 10px;
-    font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px;
-    display: inline-block; width: fit-content;
-  }
-
-  .tip-Fungicid      { background: #e8f0fe; color: #1a56db; }
-  .tip-Insecticid    { background: #fff3e0; color: #c75000; }
-  .tip-Acaricid      { background: #fce8f3; color: #9d174d; }
-  .tip-Erbicid       { background: #fef3c7; color: #78350f; }
-  .tip-Ingrasamant   { background: #fef9c3; color: #854d0e; }
+  .tip-badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; display: inline-block; width: fit-content; }
+  .tip-Fungicid { background: #e8f0fe; color: #1a56db; }
+  .tip-Insecticid { background: #fff3e0; color: #c75000; }
+  .tip-Acaricid { background: #fce8f3; color: #9d174d; }
+  .tip-Erbicid { background: #fef3c7; color: #78350f; }
+  .tip-Ingrasamant { background: #fef9c3; color: #854d0e; }
   .tip-Biostimulator { background: #f0fdf4; color: #166534; }
-  .tip-Adjuvant      { background: #f3f4f6; color: #374151; }
-  .tip-Altul         { background: #f5f3ff; color: #5b21b6; }
+  .tip-Adjuvant { background: #f3f4f6; color: #374151; }
+  .tip-Altul { background: #f5f3ff; color: #5b21b6; }
 
   .cultura-badge { font-size: 0.72rem; padding: 3px 10px; border-radius: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
-  .cultura-vie    { background: #f0e8f5; color: #7b3fa0; }
-  .cultura-aluni  { background: #fff3e0; color: #e65100; }
+  .cultura-vie { background: #f0e8f5; color: #7b3fa0; }
+  .cultura-aluni { background: #fff3e0; color: #e65100; }
   .cultura-ambele { background: var(--verde-pal); color: var(--verde); }
 
   .produs-detalii { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; font-size: 0.82rem; color: var(--text-pal); }
@@ -315,74 +98,43 @@
 
   .stoc-bar { margin-top: 12px; height: 6px; background: var(--gri); border-radius: 3px; overflow: hidden; }
   .stoc-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
-  .stoc-fill.ok     { background: var(--verde-deschis); }
+  .stoc-fill.ok { background: var(--verde-deschis); }
   .stoc-fill.critic { background: var(--rosu); }
-  .stoc-fill.mediu  { background: var(--galben); }
+  .stoc-fill.mediu { background: var(--galben); }
 
   .produs-actiuni { display: flex; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--gri); }
-
-  .btn-actiune {
-    flex: 1; padding: 7px; border: 1px solid var(--border); border-radius: 6px;
-    background: #fff; font-size: 0.8rem; font-family: 'DM Sans', sans-serif;
-    cursor: pointer; color: var(--text-pal); transition: all 0.2s; text-align: center;
-  }
+  .btn-actiune { flex: 1; padding: 7px; border: 1px solid var(--border); border-radius: 6px; background: #fff; font-size: 0.8rem; font-family: 'DM Sans', sans-serif; cursor: pointer; color: var(--text-pal); transition: all 0.2s; text-align: center; }
   .btn-actiune:hover { background: var(--gri); color: var(--text); }
   .btn-actiune.primary { background: var(--verde); color: #fff; border-color: var(--verde); }
   .btn-actiune.primary:hover { background: var(--verde-deschis); }
   .btn-actiune.danger { color: var(--rosu); border-color: #f5c6c0; }
   .btn-actiune.danger:hover { background: var(--rosu-pal); }
 
-  .fab {
-    position: fixed;
-    bottom: calc(24px + env(safe-area-inset-bottom));
-    right: 24px;
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    background: var(--verde); color: #fff; border: none;
-    font-size: 1.6rem; cursor: pointer;
-    box-shadow: 0 4px 20px rgba(45,90,39,0.4);
-    transition: all 0.2s; z-index: 200;
-    display: flex; align-items: center; justify-content: center;
-  }
+  .fab { position: fixed; bottom: calc(24px + env(safe-area-inset-bottom)); right: 24px; width: 56px; height: 56px; border-radius: 50%; background: var(--verde); color: #fff; border: none; font-size: 1.6rem; cursor: pointer; box-shadow: 0 4px 20px rgba(45,90,39,0.4); transition: all 0.2s; z-index: 200; display: flex; align-items: center; justify-content: center; }
   .fab:hover { background: var(--verde-deschis); transform: scale(1.05); }
 
-  .overlay {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 300; display: none;
-    align-items: flex-end; justify-content: center;
-  }
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 300; display: none; align-items: flex-end; justify-content: center; }
   .overlay.active { display: flex; }
-
-  .modal {
-    background: #fff; width: 100%; max-width: 600px;
-    border-radius: 16px 16px 0 0;
-    padding: 24px;
-    padding-bottom: calc(24px + env(safe-area-inset-bottom));
-    max-height: 92vh; overflow-y: auto;
-    animation: slideUp 0.3s ease;
-  }
-
+  .modal { background: #fff; width: 100%; max-width: 600px; border-radius: 16px 16px 0 0; padding: 24px; padding-bottom: calc(24px + env(safe-area-inset-bottom)); max-height: 92vh; overflow-y: auto; animation: slideUp 0.3s ease; }
   @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-
   .modal h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 20px; color: var(--verde); }
 
   .form-group { margin-bottom: 14px; }
-  .form-group label {
-    display: block; font-size: 0.82rem; font-weight: 500;
-    color: var(--text-pal); margin-bottom: 5px;
-    text-transform: uppercase; letter-spacing: 0.5px;
-  }
-  .form-group input,
-  .form-group select {
-    width: 100%; padding: 10px 12px;
-    border: 1px solid var(--border); border-radius: 8px;
-    font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
-    color: var(--text); background: #fff;
-    transition: border 0.2s; -webkit-appearance: none;
-  }
-  .form-group input:focus,
-  .form-group select:focus { outline: none; border-color: var(--verde-deschis); }
+  .form-group label { display: block; font-size: 0.82rem; font-weight: 500; color: var(--text-pal); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .form-group input, .form-group select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--text); background: #fff; transition: border 0.2s; -webkit-appearance: none; }
+  .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--verde-deschis); }
+
+  /* PRODUS SEARCH */
+  .produs-search-wrap { position: relative; }
+  .produs-search-wrap input { width: 100%; }
+  .produse-dropdown { position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid var(--border); border-radius: 0 0 8px 8px; max-height: 220px; overflow-y: auto; z-index: 10; box-shadow: 0 4px 16px rgba(0,0,0,0.1); display: none; }
+  .produse-dropdown.open { display: block; }
+  .dropdown-item { padding: 10px 14px; cursor: pointer; font-size: 0.9rem; border-bottom: 1px solid var(--gri); display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .dropdown-item:hover { background: var(--verde-pal); }
+  .dropdown-item:last-child { border-bottom: none; }
+  .dropdown-tip { font-size: 0.7rem; padding: 2px 6px; border-radius: 8px; font-weight: 600; }
+  .dropdown-manual { padding: 10px 14px; cursor: pointer; font-size: 0.88rem; color: var(--verde); font-weight: 500; border-top: 1px solid var(--border); background: var(--verde-pal); }
+  .dropdown-manual:hover { background: #d4ebd0; }
 
   .tip-selector { display: flex; flex-direction: column; gap: 8px; }
   .tip-custom-input { display: none; }
@@ -390,26 +142,12 @@
 
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .modal-btns { display: flex; gap: 10px; margin-top: 20px; }
-
-  .btn-salveaza {
-    flex: 1; padding: 12px; background: var(--verde); color: #fff;
-    border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif;
-    font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s;
-  }
+  .btn-salveaza { flex: 1; padding: 12px; background: var(--verde); color: #fff; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
   .btn-salveaza:hover { background: var(--verde-deschis); }
-
-  .btn-anuleaza {
-    padding: 12px 20px; background: var(--gri); color: var(--text-pal);
-    border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif;
-    font-size: 1rem; cursor: pointer;
-  }
+  .btn-anuleaza { padding: 12px 20px; background: var(--gri); color: var(--text-pal); border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 1rem; cursor: pointer; }
 
   .istoric-list { display: flex; flex-direction: column; gap: 8px; }
-  .istoric-item {
-    background: #fff; border: 1px solid var(--border);
-    border-radius: 8px; padding: 12px 16px;
-    display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem;
-  }
+  .istoric-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; }
   .istoric-left { display: flex; flex-direction: column; gap: 4px; }
   .istoric-produs { font-weight: 600; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .istoric-data { color: var(--text-pal); font-size: 0.8rem; }
@@ -419,20 +157,9 @@
   .empty .icon { font-size: 3rem; margin-bottom: 12px; }
   .empty p { font-size: 0.95rem; }
 
-  .section-title {
-    font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--verde);
-    margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;
-  }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--verde); margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
   .section-title small { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--text-pal); font-weight: 400; }
-
   .utilizare-info { background: var(--verde-pal); border-radius: 8px; padding: 12px; font-size: 0.85rem; color: var(--verde); margin-bottom: 16px; }
-
-  .sync-indicator {
-    font-size: 0.75rem;
-    color: var(--text-pal);
-    text-align: center;
-    padding: 8px;
-  }
 
   @media (min-width: 600px) {
     .modal { border-radius: 16px; margin: 20px; max-height: 85vh; }
@@ -443,13 +170,11 @@
 </head>
 <body>
 
-<!-- LOADING -->
 <div id="loading-screen" class="loading-screen">
   <div class="spinner"></div>
   <h2>🌿 AgroStoc</h2>
 </div>
 
-<!-- AUTH -->
 <div id="auth-screen" class="auth-screen" style="display:none">
   <div class="auth-box">
     <div class="auth-logo">
@@ -470,7 +195,6 @@
   </div>
 </div>
 
-<!-- APP -->
 <div id="app">
   <header>
     <h1>🌿 AgroStoc</h1>
@@ -479,71 +203,44 @@
       <button class="btn-logout" onclick="logout()">Ieșire</button>
     </div>
   </header>
-
   <div class="tabs">
     <div class="tab active" onclick="schimbTab('stocuri')">📦 Stocuri</div>
     <div class="tab" onclick="schimbTab('utilizare')">💧 Utilizare</div>
     <div class="tab" onclick="schimbTab('istoric')">📋 Istoric</div>
   </div>
 
-  <!-- TAB STOCURI -->
   <div id="tab-stocuri" class="container">
     <div id="alerte-container" class="alerte"></div>
     <div class="summary">
-      <div class="sum-card">
-        <div class="num" id="total-produse">0</div>
-        <div class="label">Produse</div>
-      </div>
-      <div class="sum-card">
-        <div class="num" id="total-critic" style="color: var(--rosu)">0</div>
-        <div class="label">Stoc critic</div>
-      </div>
-      <div class="sum-card">
-        <div class="num" id="total-culturi">2</div>
-        <div class="label">Culturi</div>
-      </div>
+      <div class="sum-card"><div class="num" id="total-produse">0</div><div class="label">Produse</div></div>
+      <div class="sum-card"><div class="num" id="total-critic" style="color:var(--rosu)">0</div><div class="label">Stoc critic</div></div>
+      <div class="sum-card"><div class="num" id="total-culturi">2</div><div class="label">Culturi</div></div>
     </div>
     <div class="filtre">
-      <button class="filtru-btn active" onclick="filtreaza('toate', event)">Toate</button>
-      <button class="filtru-btn" onclick="filtreaza('Vie', event)">🍇 Vie</button>
-      <button class="filtru-btn" onclick="filtreaza('Aluni', event)">🌰 Aluni</button>
-      <button class="filtru-btn" onclick="filtreaza('Ambele', event)">🌿 Ambele</button>
+      <button class="filtru-btn active" onclick="filtreaza('toate',event)">Toate</button>
+      <button class="filtru-btn" onclick="filtreaza('Vie',event)">🍇 Vie</button>
+      <button class="filtru-btn" onclick="filtreaza('Aluni',event)">🌰 Aluni</button>
+      <button class="filtru-btn" onclick="filtreaza('Ambele',event)">🌿 Ambele</button>
     </div>
-    <div class="section-title">
-      Produse în stoc
-      <small id="count-produse"></small>
-    </div>
+    <div class="section-title">Produse în stoc<small id="count-produse"></small></div>
     <div class="produse-list" id="produse-container"></div>
   </div>
 
-  <!-- TAB UTILIZARE -->
   <div id="tab-utilizare" class="container" style="display:none">
     <div class="section-title">Înregistrează utilizare</div>
     <div class="form-group">
       <label>Produs</label>
-      <select id="util-produs" onchange="afiseazaInfoUtilizare()">
-        <option value="">Selectează produsul...</option>
-      </select>
+      <select id="util-produs" onchange="afiseazaInfoUtilizare()"><option value="">Selectează produsul...</option></select>
     </div>
     <div class="utilizare-info" id="util-info" style="display:none"></div>
     <div class="form-row">
-      <div class="form-group">
-        <label>Cantitate folosită (L/Kg)</label>
-        <input type="number" id="util-cantitate" placeholder="ex: 2.5" step="0.1" min="0">
-      </div>
-      <div class="form-group">
-        <label>Data aplicării</label>
-        <input type="date" id="util-data">
-      </div>
+      <div class="form-group"><label>Cantitate folosită (L/Kg)</label><input type="number" id="util-cantitate" placeholder="ex: 2.5" step="0.1" min="0"></div>
+      <div class="form-group"><label>Data aplicării</label><input type="date" id="util-data"></div>
     </div>
-    <div class="form-group">
-      <label>Observații (opțional)</label>
-      <input type="text" id="util-obs" placeholder="ex: Parcelă nord, după ploaie">
-    </div>
+    <div class="form-group"><label>Observații (opțional)</label><input type="text" id="util-obs" placeholder="ex: Parcelă nord, după ploaie"></div>
     <button class="btn-salveaza" onclick="inregistreazaUtilizare()">✓ Înregistrează utilizarea</button>
   </div>
 
-  <!-- TAB ISTORIC -->
   <div id="tab-istoric" class="container" style="display:none">
     <div class="section-title">Istoric utilizări</div>
     <div class="istoric-list" id="istoric-container"></div>
@@ -556,10 +253,15 @@
 <div class="overlay" id="overlay" onclick="inchideModal(event)">
   <div class="modal" onclick="event.stopPropagation()">
     <h2 id="modal-titlu">Adaugă produs nou</h2>
+
     <div class="form-group">
-      <label>Nume produs *</label>
-      <input type="text" id="form-nume" placeholder="ex: Cuproxat, Topsin, Mospilan...">
+      <label>Caută sau scrie numele produsului *</label>
+      <div class="produs-search-wrap">
+        <input type="text" id="form-nume" placeholder="ex: Cuproxat, Topsin, Mospilan..." autocomplete="off" oninput="cautaProdus()" onfocus="cautaProdus()">
+        <div class="produse-dropdown" id="produse-dropdown"></div>
+      </div>
     </div>
+
     <div class="form-group">
       <label>Tip substanță</label>
       <div class="tip-selector">
@@ -577,6 +279,7 @@
         <input type="text" id="form-tip-custom" class="tip-custom-input" placeholder="Specifică tipul...">
       </div>
     </div>
+
     <div class="form-row">
       <div class="form-group">
         <label>Cultură *</label>
@@ -596,24 +299,12 @@
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group">
-        <label>Cantitate în stoc *</label>
-        <input type="number" id="form-cantitate" placeholder="ex: 10" step="0.1" min="0">
-      </div>
-      <div class="form-group">
-        <label>Stoc minim alertă</label>
-        <input type="number" id="form-stoc-minim" placeholder="ex: 2" step="0.1" min="0">
-      </div>
+      <div class="form-group"><label>Cantitate în stoc *</label><input type="number" id="form-cantitate" placeholder="ex: 10" step="0.1" min="0"></div>
+      <div class="form-group"><label>Stoc minim alertă</label><input type="number" id="form-stoc-minim" placeholder="ex: 2" step="0.1" min="0"></div>
     </div>
     <div class="form-row">
-      <div class="form-group">
-        <label>Doză recomandată</label>
-        <input type="text" id="form-doza" placeholder="ex: 3L/ha">
-      </div>
-      <div class="form-group">
-        <label>Data ultimei utilizări</label>
-        <input type="date" id="form-data">
-      </div>
+      <div class="form-group"><label>Doză recomandată</label><input type="text" id="form-doza" placeholder="ex: 3L/ha"></div>
+      <div class="form-group"><label>Data ultimei utilizări</label><input type="date" id="form-data"></div>
     </div>
     <div class="modal-btns">
       <button class="btn-anuleaza" onclick="inchideModalFortat()">Anulează</button>
@@ -624,10 +315,8 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged }
-    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-  import { getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, getDocs, onSnapshot, query, orderBy, serverTimestamp }
-    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getFirestore, collection, doc, addDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyD_1BVst8sFi9d2FhekGi8vJ5J2tl1La8Y",
@@ -635,27 +324,92 @@
     projectId: "agrostoc-c2fcc",
     storageBucket: "agrostoc-c2fcc.firebasestorage.app",
     messagingSenderId: "507349861675",
-    appId: "1:507349861675:web:e745caf54010ac34fc716e",
-    measurementId: "G-10LSJL778B"
+    appId: "1:507349861675:web:e745caf54010ac34fc716e"
   };
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
 
+  // ---- LISTA PRODUSE PREDEFINITE ----
+  const PRODUSE_LISTA = [
+    // FUNGICIDE VIȚĂ DE VIE
+    { nume: 'Cuproxat SC', tip: 'Fungicid', cultura: 'Vie', doza: '3 L/ha', unitate: 'L' },
+    { nume: 'Alcupral 50 PU', tip: 'Fungicid', cultura: 'Vie', doza: '4 kg/ha', unitate: 'Kg' },
+    { nume: 'Champ 77 WG', tip: 'Fungicid', cultura: 'Vie', doza: '2 kg/ha', unitate: 'Kg' },
+    { nume: 'Bordofix', tip: 'Fungicid', cultura: 'Vie', doza: '3 L/ha', unitate: 'L' },
+    { nume: 'Ridomil Gold MZ 68 WG', tip: 'Fungicid', cultura: 'Vie', doza: '2.5 kg/ha', unitate: 'Kg' },
+    { nume: 'Equation Pro', tip: 'Fungicid', cultura: 'Vie', doza: '0.4 kg/ha', unitate: 'Kg' },
+    { nume: 'Mikal Flash', tip: 'Fungicid', cultura: 'Vie', doza: '3 kg/ha', unitate: 'Kg' },
+    { nume: 'Curzate F', tip: 'Fungicid', cultura: 'Vie', doza: '2.5 kg/ha', unitate: 'Kg' },
+    { nume: 'Delan Pro', tip: 'Fungicid', cultura: 'Vie', doza: '1.5 L/ha', unitate: 'L' },
+    { nume: 'Forum Star', tip: 'Fungicid', cultura: 'Vie', doza: '2 kg/ha', unitate: 'Kg' },
+    { nume: 'Pergado F', tip: 'Fungicid', cultura: 'Vie', doza: '2.5 kg/ha', unitate: 'Kg' },
+    { nume: 'Chorus 50 WG', tip: 'Fungicid', cultura: 'Vie', doza: '0.5 kg/ha', unitate: 'Kg' },
+    { nume: 'Switch 62.5 WG', tip: 'Fungicid', cultura: 'Vie', doza: '1 kg/ha', unitate: 'Kg' },
+    { nume: 'Teldor 500 SC', tip: 'Fungicid', cultura: 'Vie', doza: '1.5 L/ha', unitate: 'L' },
+    { nume: 'Pyrus 400 SC', tip: 'Fungicid', cultura: 'Vie', doza: '1.5 L/ha', unitate: 'L' },
+    { nume: 'Topsin M 70 WP', tip: 'Fungicid', cultura: 'Vie', doza: '1 kg/ha', unitate: 'Kg' },
+    { nume: 'Topsin 500 SC', tip: 'Fungicid', cultura: 'Vie', doza: '1 L/ha', unitate: 'L' },
+    { nume: 'Thiovit Jet 80 WG', tip: 'Fungicid', cultura: 'Vie', doza: '3 kg/ha', unitate: 'Kg' },
+    { nume: 'Karathane Gold 350 EC', tip: 'Fungicid', cultura: 'Vie', doza: '0.5 L/ha', unitate: 'L' },
+    { nume: 'Luna Max 275 SE', tip: 'Fungicid', cultura: 'Vie', doza: '0.5 L/ha', unitate: 'L' },
+    { nume: 'Sercadis', tip: 'Fungicid', cultura: 'Vie', doza: '0.5 L/ha', unitate: 'L' },
+    { nume: 'Merpan 80 WDG', tip: 'Fungicid', cultura: 'Vie', doza: '1.5 kg/ha', unitate: 'Kg' },
+    // INSECTICIDE VIȚĂ DE VIE
+    { nume: 'Mospilan 20 SG', tip: 'Insecticid', cultura: 'Vie', doza: '0.2 kg/ha', unitate: 'Kg' },
+    { nume: 'Actara 25 WG', tip: 'Insecticid', cultura: 'Vie', doza: '0.1 kg/ha', unitate: 'Kg' },
+    { nume: 'Karate Zeon 50 CS', tip: 'Insecticid', cultura: 'Vie', doza: '0.15 L/ha', unitate: 'L' },
+    { nume: 'Calypso 480 SC', tip: 'Insecticid', cultura: 'Vie', doza: '0.2 L/ha', unitate: 'L' },
+    { nume: 'Laser 240 SC', tip: 'Insecticid', cultura: 'Vie', doza: '0.3 L/ha', unitate: 'L' },
+    { nume: 'Confidor Energy', tip: 'Insecticid', cultura: 'Vie', doza: '0.7 L/ha', unitate: 'L' },
+    { nume: 'Faster 10 CE', tip: 'Insecticid', cultura: 'Vie', doza: '0.15 L/ha', unitate: 'L' },
+    { nume: 'Decis Mega 50 EW', tip: 'Insecticid', cultura: 'Vie', doza: '0.15 L/ha', unitate: 'L' },
+    { nume: 'Ovipron Top', tip: 'Insecticid', cultura: 'Vie', doza: '1.5 L/ha', unitate: 'L' },
+    { nume: 'Nissorun 10 WP', tip: 'Acaricid', cultura: 'Vie', doza: '0.3 kg/ha', unitate: 'Kg' },
+    { nume: 'Envidor 240 SC', tip: 'Acaricid', cultura: 'Vie', doza: '0.5 L/ha', unitate: 'L' },
+    { nume: 'Masai 20 WP', tip: 'Acaricid', cultura: 'Vie', doza: '0.4 kg/ha', unitate: 'Kg' },
+    // FUNGICIDE ALUNI
+    { nume: 'Cuproxat SC', tip: 'Fungicid', cultura: 'Aluni', doza: '3 L/ha', unitate: 'L' },
+    { nume: 'Alcupral 50 PU', tip: 'Fungicid', cultura: 'Aluni', doza: '4 kg/ha', unitate: 'Kg' },
+    { nume: 'Topsin M 70 WP', tip: 'Fungicid', cultura: 'Aluni', doza: '1 kg/ha', unitate: 'Kg' },
+    { nume: 'Chorus 50 WG', tip: 'Fungicid', cultura: 'Aluni', doza: '0.5 kg/ha', unitate: 'Kg' },
+    { nume: 'Switch 62.5 WG', tip: 'Fungicid', cultura: 'Aluni', doza: '0.8 kg/ha', unitate: 'Kg' },
+    { nume: 'Teldor 500 SC', tip: 'Fungicid', cultura: 'Aluni', doza: '1.5 L/ha', unitate: 'L' },
+    { nume: 'Signum', tip: 'Fungicid', cultura: 'Aluni', doza: '1.5 kg/ha', unitate: 'Kg' },
+    { nume: 'Thiovit Jet 80 WG', tip: 'Fungicid', cultura: 'Aluni', doza: '3 kg/ha', unitate: 'Kg' },
+    // INSECTICIDE ALUNI
+    { nume: 'Mospilan 20 SG', tip: 'Insecticid', cultura: 'Aluni', doza: '0.2 kg/ha', unitate: 'Kg' },
+    { nume: 'Actara 25 WG', tip: 'Insecticid', cultura: 'Aluni', doza: '0.1 kg/ha', unitate: 'Kg' },
+    { nume: 'Karate Zeon 50 CS', tip: 'Insecticid', cultura: 'Aluni', doza: '0.15 L/ha', unitate: 'L' },
+    { nume: 'Calypso 480 SC', tip: 'Insecticid', cultura: 'Aluni', doza: '0.2 L/ha', unitate: 'L' },
+    { nume: 'Decis Mega 50 EW', tip: 'Insecticid', cultura: 'Aluni', doza: '0.15 L/ha', unitate: 'L' },
+    { nume: 'Nissorun 10 WP', tip: 'Acaricid', cultura: 'Aluni', doza: '0.3 kg/ha', unitate: 'Kg' },
+    // ERBICIDE
+    { nume: 'Roundup', tip: 'Erbicid', cultura: 'Ambele', doza: '3 L/ha', unitate: 'L' },
+    { nume: 'Basta 150 SL', tip: 'Erbicid', cultura: 'Ambele', doza: '5 L/ha', unitate: 'L' },
+    { nume: 'Folar 180 SL', tip: 'Erbicid', cultura: 'Ambele', doza: '3 L/ha', unitate: 'L' },
+    { nume: 'Clinic 480 SL', tip: 'Erbicid', cultura: 'Ambele', doza: '3 L/ha', unitate: 'L' },
+    // BIOSTIMULATOARE & ÎNGRĂȘĂMINTE FOLIARE
+    { nume: 'Cropmax', tip: 'Biostimulator', cultura: 'Ambele', doza: '1 L/ha', unitate: 'L' },
+    { nume: 'Amalgerol Premium', tip: 'Biostimulator', cultura: 'Ambele', doza: '2 L/ha', unitate: 'L' },
+    { nume: 'Kendal', tip: 'Biostimulator', cultura: 'Ambele', doza: '0.5 L/ha', unitate: 'L' },
+    { nume: 'Wuxal Micro', tip: 'Îngrășământ foliar', cultura: 'Ambele', doza: '2 L/ha', unitate: 'L' },
+    { nume: 'Nutrivant Plus', tip: 'Îngrășământ foliar', cultura: 'Ambele', doza: '2 kg/ha', unitate: 'Kg' },
+    { nume: 'Fertileader Gold', tip: 'Îngrășământ foliar', cultura: 'Ambele', doza: '1 L/ha', unitate: 'L' },
+    { nume: 'Haifa Cal', tip: 'Îngrășământ foliar', cultura: 'Ambele', doza: '3 kg/ha', unitate: 'Kg' },
+    // ADJUVANȚI
+    { nume: 'Silwet Gold', tip: 'Adjuvant', cultura: 'Ambele', doza: '0.1 L/ha', unitate: 'L' },
+    { nume: 'Drive', tip: 'Adjuvant', cultura: 'Ambele', doza: '0.2 L/ha', unitate: 'L' },
+    { nume: 'Trend 90 CE', tip: 'Adjuvant', cultura: 'Ambele', doza: '0.1 L/ha', unitate: 'L' },
+  ];
+
   const TIPURI_FIXE = ['Fungicid','Insecticid','Acaricid','Erbicid','Îngrășământ foliar','Biostimulator','Adjuvant'];
 
-  let produse = [];
-  let istoric = [];
-  let editIndex = -1;
-  let editDocId = null;
-  let filtruActiv = 'toate';
-  let currentUser = null;
-  let unsubProduse = null;
-  let unsubIstoric = null;
-  let authMode = 'login';
+  let produse = [], istoric = [], editDocId = null, filtruActiv = 'toate', currentUser = null;
+  let unsubProduse = null, unsubIstoric = null, authMode = 'login';
 
-  // ---- AUTH STATE ----
+  // ---- AUTH ----
   onAuthStateChanged(auth, user => {
     document.getElementById('loading-screen').style.display = 'none';
     if (user) {
@@ -673,12 +427,9 @@
     }
   });
 
-  // ---- AUTH FUNCTIONS ----
   window.schimbAuthTab = function(mode) {
     authMode = mode;
-    document.querySelectorAll('.auth-tab').forEach((t, i) => {
-      t.classList.toggle('active', (i === 0 && mode === 'login') || (i === 1 && mode === 'register'));
-    });
+    document.querySelectorAll('.auth-tab').forEach((t, i) => t.classList.toggle('active', (i===0&&mode==='login')||(i===1&&mode==='register')));
     document.getElementById('auth-parola2').style.display = mode === 'register' ? 'block' : 'none';
     document.getElementById('btn-auth').textContent = mode === 'login' ? 'Intră în cont' : 'Creează cont';
     document.getElementById('auth-error').classList.remove('visible');
@@ -690,9 +441,7 @@
     const parola2 = document.getElementById('auth-parola2').value;
     const errEl = document.getElementById('auth-error');
     errEl.classList.remove('visible');
-
     if (!email || !parola) { errEl.textContent = 'Completează email și parola!'; errEl.classList.add('visible'); return; }
-
     try {
       if (authMode === 'register') {
         if (parola !== parola2) { errEl.textContent = 'Parolele nu coincid!'; errEl.classList.add('visible'); return; }
@@ -702,42 +451,62 @@
         await signInWithEmailAndPassword(auth, email, parola);
       }
     } catch(e) {
-      const mesaje = {
-        'auth/user-not-found': 'Nu există cont cu acest email.',
-        'auth/wrong-password': 'Parolă incorectă.',
-        'auth/email-already-in-use': 'Email deja folosit. Încearcă să te loghezi.',
-        'auth/invalid-email': 'Email invalid.',
-        'auth/invalid-credential': 'Email sau parolă incorectă.',
-      };
+      const mesaje = { 'auth/user-not-found':'Nu există cont cu acest email.','auth/wrong-password':'Parolă incorectă.','auth/email-already-in-use':'Email deja folosit.','auth/invalid-email':'Email invalid.','auth/invalid-credential':'Email sau parolă incorectă.' };
       errEl.textContent = mesaje[e.code] || 'Eroare: ' + e.message;
       errEl.classList.add('visible');
     }
   };
 
-  window.logout = async function() {
-    await signOut(auth);
-  };
+  window.logout = async function() { await signOut(auth); };
 
-  // ---- FIRESTORE LISTEN ----
   function pornesteListen() {
     const uid = currentUser.uid;
-
-    unsubProduse = onSnapshot(
-      query(collection(db, 'users', uid, 'produse')),
-      snap => {
-        produse = snap.docs.map(d => ({ ...d.data(), _id: d.id }));
-        randeazaTot();
-      }
-    );
-
-    unsubIstoric = onSnapshot(
-      query(collection(db, 'users', uid, 'istoric'), orderBy('timestamp', 'desc')),
-      snap => {
-        istoric = snap.docs.map(d => ({ ...d.data(), _id: d.id }));
-        randeazaIstoric();
-      }
-    );
+    unsubProduse = onSnapshot(query(collection(db,'users',uid,'produse')), snap => {
+      produse = snap.docs.map(d => ({...d.data(), _id: d.id}));
+      randeazaTot();
+    });
+    unsubIstoric = onSnapshot(query(collection(db,'users',uid,'istoric'), orderBy('timestamp','desc')), snap => {
+      istoric = snap.docs.map(d => ({...d.data(), _id: d.id}));
+      randeazaIstoric();
+    });
   }
+
+  // ---- SEARCH PRODUSE ----
+  window.cautaProdus = function() {
+    const val = document.getElementById('form-nume').value.toLowerCase().trim();
+    const dropdown = document.getElementById('produse-dropdown');
+    if (!val || val.length < 1) { dropdown.classList.remove('open'); return; }
+
+    const filtrate = PRODUSE_LISTA.filter(p => p.nume.toLowerCase().includes(val)).slice(0, 8);
+    if (filtrate.length === 0) { dropdown.classList.remove('open'); return; }
+
+    dropdown.innerHTML = filtrate.map(p => `
+      <div class="dropdown-item" onclick="selecteazaProdus(${JSON.stringify(p).replace(/"/g,'&quot;')})">
+        <span>${p.nume}</span>
+        <span class="dropdown-tip tip-${tipClass(p.tip).replace('tip-','')}">${p.tip}</span>
+      </div>
+    `).join('') + `<div class="dropdown-manual" onclick="inchideDropdown()">✏️ Adaugă "${document.getElementById('form-nume').value}" manual</div>`;
+    dropdown.classList.add('open');
+  };
+
+  window.selecteazaProdus = function(p) {
+    document.getElementById('form-nume').value = p.nume;
+    setTipInForm(p.tip || '');
+    document.getElementById('form-cultura').value = p.cultura || 'Vie';
+    document.getElementById('form-unitate').value = p.unitate || 'L';
+    document.getElementById('form-doza').value = p.doza || '';
+    document.getElementById('produse-dropdown').classList.remove('open');
+  };
+
+  window.inchideDropdown = function() {
+    document.getElementById('produse-dropdown').classList.remove('open');
+  };
+
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.produs-search-wrap')) {
+      document.getElementById('produse-dropdown').classList.remove('open');
+    }
+  });
 
   // ---- TIP ----
   window.verificaTipCustom = function() {
@@ -762,16 +531,13 @@
   }
 
   function tipClass(tip) {
-    const map = { 'Fungicid':'tip-Fungicid','Insecticid':'tip-Insecticid','Acaricid':'tip-Acaricid','Erbicid':'tip-Erbicid','Îngrășământ foliar':'tip-Ingrasamant','Biostimulator':'tip-Biostimulator','Adjuvant':'tip-Adjuvant' };
+    const map = {'Fungicid':'tip-Fungicid','Insecticid':'tip-Insecticid','Acaricid':'tip-Acaricid','Erbicid':'tip-Erbicid','Îngrășământ foliar':'tip-Ingrasamant','Biostimulator':'tip-Biostimulator','Adjuvant':'tip-Adjuvant'};
     return map[tip] || 'tip-Altul';
   }
 
   // ---- RANDARE ----
   function randeazaTot() {
-    randeazaAlerte();
-    randeazaProduse();
-    randeazaSummary();
-    randeazaSelectUtilizare();
+    randeazaAlerte(); randeazaProduse(); randeazaSummary(); randeazaSelectUtilizare();
   }
 
   function randeazaSummary() {
@@ -782,87 +548,65 @@
   function randeazaAlerte() {
     const container = document.getElementById('alerte-container');
     const critice = produse.filter(p => p.stocMinim > 0 && p.cantitate <= p.stocMinim);
-    container.innerHTML = critice.map(p => `
-      <div class="alerta-card">
-        <span>⚠️</span>
-        <div><strong>${p.nume}</strong>${p.tip ? ' (' + p.tip + ')' : ''} — stoc critic: ${p.cantitate} ${p.unitate} (minim: ${p.stocMinim} ${p.unitate})</div>
-      </div>`).join('');
+    container.innerHTML = critice.map(p => `<div class="alerta-card"><span>⚠️</span><div><strong>${p.nume}</strong>${p.tip?' ('+p.tip+')':''} — stoc critic: ${p.cantitate} ${p.unitate} (minim: ${p.stocMinim} ${p.unitate})</div></div>`).join('');
   }
 
   function randeazaProduse() {
     const container = document.getElementById('produse-container');
     let afisate = filtruActiv === 'toate' ? produse : produse.filter(p => p.cultura === filtruActiv);
     document.getElementById('count-produse').textContent = `${afisate.length} produs${afisate.length !== 1 ? 'e' : ''}`;
-
-    if (afisate.length === 0) {
-      container.innerHTML = `<div class="empty"><div class="icon">📦</div><p>Niciun produs găsit.<br>Apasă + pentru a adăuga.</p></div>`;
-      return;
-    }
-
+    if (afisate.length === 0) { container.innerHTML = `<div class="empty"><div class="icon">📦</div><p>Niciun produs găsit.<br>Apasă + pentru a adăuga.</p></div>`; return; }
     container.innerHTML = afisate.map(p => {
       const critic = p.stocMinim > 0 && p.cantitate <= p.stocMinim;
       const procent = p.stocMinim > 0 ? Math.min(100, (p.cantitate / (p.stocMinim * 3)) * 100) : 60;
       const clasa = procent > 50 ? 'ok' : procent > 25 ? 'mediu' : 'critic';
-      const culturaBadge = p.cultura === 'Vie' ? 'cultura-vie' : p.cultura === 'Aluni' ? 'cultura-aluni' : 'cultura-ambele';
-      const culturaIcon = p.cultura === 'Vie' ? '🍇' : p.cultura === 'Aluni' ? '🌰' : '🌿';
+      const culturaBadge = p.cultura==='Vie'?'cultura-vie':p.cultura==='Aluni'?'cultura-aluni':'cultura-ambele';
+      const culturaIcon = p.cultura==='Vie'?'🍇':p.cultura==='Aluni'?'🌰':'🌿';
       const tipHtml = p.tip ? `<span class="tip-badge ${tipClass(p.tip)}">${p.tip}</span>` : '';
-      return `
-        <div class="produs-card ${critic ? 'stoc-critic' : 'stoc-ok'}">
-          <div class="produs-header">
-            <div class="produs-header-left">
-              <div class="produs-nume">${p.nume}</div>
-              ${tipHtml}
-            </div>
-            <span class="cultura-badge ${culturaBadge}">${culturaIcon} ${p.cultura}</span>
-          </div>
-          <div class="produs-detalii">
-            <div class="detaliu"><span>Stoc curent</span><strong style="color:${critic ? 'var(--rosu)' : 'var(--verde)'}">${p.cantitate} ${p.unitate}</strong></div>
-            <div class="detaliu"><span>Stoc minim</span><strong>${p.stocMinim || '—'} ${p.stocMinim ? p.unitate : ''}</strong></div>
-            <div class="detaliu"><span>Doză</span><strong>${p.doza || '—'}</strong></div>
-            <div class="detaliu"><span>Ultima aplicare</span><strong>${p.dataUtilizare ? new Date(p.dataUtilizare).toLocaleDateString('ro-RO') : '—'}</strong></div>
-          </div>
-          <div class="stoc-bar"><div class="stoc-fill ${clasa}" style="width:${procent}%"></div></div>
-          <div class="produs-actiuni">
-            <button class="btn-actiune" onclick="mergeUtilizare('${p._id}')">💧 Utilizare</button>
-            <button class="btn-actiune primary" onclick="editeazaProdus('${p._id}')">✏️ Editează</button>
-            <button class="btn-actiune danger" onclick="stergeProdus('${p._id}')">🗑️</button>
-          </div>
-        </div>`;
+      return `<div class="produs-card ${critic?'stoc-critic':'stoc-ok'}">
+        <div class="produs-header">
+          <div class="produs-header-left"><div class="produs-nume">${p.nume}</div>${tipHtml}</div>
+          <span class="cultura-badge ${culturaBadge}">${culturaIcon} ${p.cultura}</span>
+        </div>
+        <div class="produs-detalii">
+          <div class="detaliu"><span>Stoc curent</span><strong style="color:${critic?'var(--rosu)':'var(--verde)'}">${p.cantitate} ${p.unitate}</strong></div>
+          <div class="detaliu"><span>Stoc minim</span><strong>${p.stocMinim||'—'} ${p.stocMinim?p.unitate:''}</strong></div>
+          <div class="detaliu"><span>Doză</span><strong>${p.doza||'—'}</strong></div>
+          <div class="detaliu"><span>Ultima aplicare</span><strong>${p.dataUtilizare?new Date(p.dataUtilizare).toLocaleDateString('ro-RO'):'—'}</strong></div>
+        </div>
+        <div class="stoc-bar"><div class="stoc-fill ${clasa}" style="width:${procent}%"></div></div>
+        <div class="produs-actiuni">
+          <button class="btn-actiune" onclick="mergeUtilizare('${p._id}')">💧 Utilizare</button>
+          <button class="btn-actiune primary" onclick="editeazaProdus('${p._id}')">✏️ Editează</button>
+          <button class="btn-actiune danger" onclick="stergeProdus('${p._id}')">🗑️</button>
+        </div>
+      </div>`;
     }).join('');
   }
 
   function randeazaIstoric() {
     const container = document.getElementById('istoric-container');
-    if (istoric.length === 0) {
-      container.innerHTML = `<div class="empty"><div class="icon">📋</div><p>Nicio utilizare înregistrată încă.</p></div>`;
-      return;
-    }
-    container.innerHTML = istoric.map(item => `
-      <div class="istoric-item">
-        <div class="istoric-left">
-          <div class="istoric-produs">${item.produs}${item.tip ? ' <span class="tip-badge ' + tipClass(item.tip) + '">' + item.tip + '</span>' : ''}</div>
-          <span class="istoric-data">📅 ${item.data ? new Date(item.data).toLocaleDateString('ro-RO') : '—'} · ${item.cultura}${item.obs ? ' · ' + item.obs : ''}</span>
-        </div>
-        <span class="istoric-qty">-${item.cantitate} ${item.unitate}</span>
-      </div>`).join('');
+    if (istoric.length === 0) { container.innerHTML = `<div class="empty"><div class="icon">📋</div><p>Nicio utilizare înregistrată încă.</p></div>`; return; }
+    container.innerHTML = istoric.map(item => `<div class="istoric-item">
+      <div class="istoric-left">
+        <div class="istoric-produs">${item.produs}${item.tip?' <span class="tip-badge '+tipClass(item.tip)+'">'+item.tip+'</span>':''}</div>
+        <span class="istoric-data">📅 ${item.data?new Date(item.data).toLocaleDateString('ro-RO'):'—'} · ${item.cultura}${item.obs?' · '+item.obs:''}</span>
+      </div>
+      <span class="istoric-qty">-${item.cantitate} ${item.unitate}</span>
+    </div>`).join('');
   }
 
   function randeazaSelectUtilizare() {
     const sel = document.getElementById('util-produs');
     const val = sel.value;
-    sel.innerHTML = '<option value="">Selectează produsul...</option>' +
-      produse.map(p => `<option value="${p._id}">${p.nume}${p.tip ? ' [' + p.tip + ']' : ''} — ${p.cantitate} ${p.unitate}</option>`).join('');
+    sel.innerHTML = '<option value="">Selectează produsul...</option>' + produse.map(p => `<option value="${p._id}">${p.nume}${p.tip?' ['+p.tip+']':''} — ${p.cantitate} ${p.unitate}</option>`).join('');
     if (val) sel.value = val;
   }
 
   // ---- TABS ----
   window.schimbTab = function(tab) {
-    ['stocuri','utilizare','istoric'].forEach(t => {
-      document.getElementById('tab-' + t).style.display = t === tab ? 'block' : 'none';
-    });
-    document.querySelectorAll('.tab').forEach((el, i) => {
-      el.classList.toggle('active', ['stocuri','utilizare','istoric'][i] === tab);
-    });
+    ['stocuri','utilizare','istoric'].forEach(t => document.getElementById('tab-'+t).style.display = t===tab?'block':'none');
+    document.querySelectorAll('.tab').forEach((el,i) => el.classList.toggle('active', ['stocuri','utilizare','istoric'][i]===tab));
   };
 
   window.filtreaza = function(tip, evt) {
@@ -875,18 +619,18 @@
   // ---- MODAL ----
   window.deschideModal = function(docId) {
     editDocId = docId || null;
-    editIndex = -1;
     document.getElementById('modal-titlu').textContent = docId ? 'Editează produs' : 'Adaugă produs nou';
+    document.getElementById('produse-dropdown').classList.remove('open');
     if (docId) {
       const p = produse.find(x => x._id === docId);
       document.getElementById('form-nume').value = p.nume;
-      setTipInForm(p.tip || '');
+      setTipInForm(p.tip||'');
       document.getElementById('form-cultura').value = p.cultura;
       document.getElementById('form-unitate').value = p.unitate;
       document.getElementById('form-cantitate').value = p.cantitate;
-      document.getElementById('form-stoc-minim').value = p.stocMinim || '';
-      document.getElementById('form-doza').value = p.doza || '';
-      document.getElementById('form-data').value = p.dataUtilizare || '';
+      document.getElementById('form-stoc-minim').value = p.stocMinim||'';
+      document.getElementById('form-doza').value = p.doza||'';
+      document.getElementById('form-data').value = p.dataUtilizare||'';
     } else {
       document.getElementById('form-nume').value = '';
       setTipInForm('');
@@ -901,87 +645,59 @@
   };
 
   window.editeazaProdus = function(docId) { window.deschideModal(docId); };
-
-  window.inchideModal = function(e) {
-    if (e.target === document.getElementById('overlay')) window.inchideModalFortat();
-  };
-
-  window.inchideModalFortat = function() {
-    document.getElementById('overlay').classList.remove('active');
-  };
+  window.inchideModal = function(e) { if (e.target===document.getElementById('overlay')) window.inchideModalFortat(); };
+  window.inchideModalFortat = function() { document.getElementById('overlay').classList.remove('active'); };
 
   window.salveazaProdus = async function() {
     const nume = document.getElementById('form-nume').value.trim();
     const cantitate = parseFloat(document.getElementById('form-cantitate').value);
     if (!nume || isNaN(cantitate)) { alert('Completează cel puțin numele și cantitatea!'); return; }
-
     const produs = {
       nume, tip: getTipSelectat(),
       cultura: document.getElementById('form-cultura').value,
       unitate: document.getElementById('form-unitate').value,
       cantitate,
-      stocMinim: parseFloat(document.getElementById('form-stoc-minim').value) || 0,
+      stocMinim: parseFloat(document.getElementById('form-stoc-minim').value)||0,
       doza: document.getElementById('form-doza').value.trim(),
       dataUtilizare: document.getElementById('form-data').value,
     };
-
     const uid = currentUser.uid;
-    if (editDocId) {
-      await updateDoc(doc(db, 'users', uid, 'produse', editDocId), produs);
-    } else {
-      await addDoc(collection(db, 'users', uid, 'produse'), produs);
-    }
+    if (editDocId) await updateDoc(doc(db,'users',uid,'produse',editDocId), produs);
+    else await addDoc(collection(db,'users',uid,'produse'), produs);
     window.inchideModalFortat();
   };
 
   window.stergeProdus = async function(docId) {
-    const p = produse.find(x => x._id === docId);
-    if (confirm(`Ștergi "${p.nume}"?`)) {
-      await deleteDoc(doc(db, 'users', currentUser.uid, 'produse', docId));
-    }
+    const p = produse.find(x => x._id===docId);
+    if (confirm(`Ștergi "${p.nume}"?`)) await deleteDoc(doc(db,'users',currentUser.uid,'produse',docId));
   };
 
   // ---- UTILIZARE ----
   window.mergeUtilizare = function(docId) {
     schimbTab('utilizare');
-    setTimeout(() => {
-      document.getElementById('util-produs').value = docId;
-      afiseazaInfoUtilizare();
-    }, 100);
+    setTimeout(() => { document.getElementById('util-produs').value = docId; afiseazaInfoUtilizare(); }, 100);
   };
 
   window.afiseazaInfoUtilizare = function() {
     const docId = document.getElementById('util-produs').value;
     const info = document.getElementById('util-info');
-    if (!docId) { info.style.display = 'none'; return; }
-    const p = produse.find(x => x._id === docId);
-    info.style.display = 'block';
-    info.innerHTML = `<strong>${p.nume}</strong>${p.tip ? ' · <em>' + p.tip + '</em>' : ''} · Stoc: <strong>${p.cantitate} ${p.unitate}</strong> · Doză: ${p.doza || 'nespecificat'} · ${p.cultura}`;
+    if (!docId) { info.style.display='none'; return; }
+    const p = produse.find(x=>x._id===docId);
+    info.style.display='block';
+    info.innerHTML = `<strong>${p.nume}</strong>${p.tip?' · <em>'+p.tip+'</em>':''} · Stoc: <strong>${p.cantitate} ${p.unitate}</strong> · Doză: ${p.doza||'nespecificat'} · ${p.cultura}`;
   };
 
   window.inregistreazaUtilizare = async function() {
     const docId = document.getElementById('util-produs').value;
     const cantitate = parseFloat(document.getElementById('util-cantitate').value);
     const data = document.getElementById('util-data').value;
-    if (!docId || isNaN(cantitate) || cantitate <= 0) { alert('Completează produsul și cantitatea!'); return; }
-    const p = produse.find(x => x._id === docId);
+    if (!docId||isNaN(cantitate)||cantitate<=0) { alert('Completează produsul și cantitatea!'); return; }
+    const p = produse.find(x=>x._id===docId);
     if (cantitate > p.cantitate) { alert('Cantitatea depășește stocul disponibil!'); return; }
-
     const uid = currentUser.uid;
-    const nouCantitate = Math.round((p.cantitate - cantitate) * 100) / 100;
-
-    await updateDoc(doc(db, 'users', uid, 'produse', docId), {
-      cantitate: nouCantitate,
-      dataUtilizare: data
-    });
-
-    await addDoc(collection(db, 'users', uid, 'istoric'), {
-      produs: p.nume, tip: p.tip || '',
-      cultura: p.cultura, cantitate, unitate: p.unitate,
-      data, obs: document.getElementById('util-obs').value.trim(),
-      timestamp: serverTimestamp()
-    });
-
+    const nouCantitate = Math.round((p.cantitate-cantitate)*100)/100;
+    await updateDoc(doc(db,'users',uid,'produse',docId), { cantitate: nouCantitate, dataUtilizare: data });
+    await addDoc(collection(db,'users',uid,'istoric'), { produs: p.nume, tip: p.tip||'', cultura: p.cultura, cantitate, unitate: p.unitate, data, obs: document.getElementById('util-obs').value.trim(), timestamp: serverTimestamp() });
     document.getElementById('util-cantitate').value = '';
     document.getElementById('util-obs').value = '';
     alert(`✓ Utilizare înregistrată! Stoc rămas: ${nouCantitate} ${p.unitate}`);
@@ -990,8 +706,6 @@
 
   // ---- INIT ----
   document.getElementById('util-data').value = new Date().toISOString().split('T')[0];
-
-  // Enter pe câmpuri auth
   document.getElementById('auth-parola').addEventListener('keydown', e => { if(e.key==='Enter') window.autentificare(); });
   document.getElementById('auth-parola2').addEventListener('keydown', e => { if(e.key==='Enter') window.autentificare(); });
 </script>
