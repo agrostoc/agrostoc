@@ -161,6 +161,34 @@
   .section-title small { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--text-pal); font-weight: 400; }
   .utilizare-info { background: var(--verde-pal); border-radius: 8px; padding: 12px; font-size: 0.85rem; color: var(--verde); margin-bottom: 16px; }
 
+
+  /* RAPOARTE */
+  .raport-selector { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .raport-selector select, .raport-selector input { padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text); background: #fff; -webkit-appearance: none; }
+  .raport-export-btns { display: flex; gap: 8px; margin-left: auto; }
+  .btn-export { padding: 8px 16px; border-radius: 8px; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
+  .btn-export-pdf { background: #e53e3e; color: #fff; }
+  .btn-export-pdf:hover { background: #c53030; }
+  .btn-export-excel { background: #276749; color: #fff; }
+  .btn-export-excel:hover { background: #1e5138; }
+  .raport-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+  .raport-section { margin-bottom: 28px; }
+  .raport-section h3 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--verde); margin-bottom: 12px; padding-bottom: 6px; border-bottom: 2px solid var(--verde-pal); }
+  .raport-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; background: #fff; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+  .raport-table th { background: var(--verde); color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.4px; }
+  .raport-table td { padding: 9px 12px; border-bottom: 1px solid var(--gri); color: var(--text); }
+  .raport-table tr:last-child td { border-bottom: none; }
+  .raport-table tr:hover td { background: var(--verde-pal); }
+  .raport-table .total-row td { font-weight: 700; background: var(--verde-pal); color: var(--verde); border-top: 2px solid var(--border); }
+  .raport-luna-titlu { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--verde); text-align: center; margin-bottom: 20px; padding: 12px; background: var(--verde-pal); border-radius: 8px; }
+  .no-raport { text-align: center; padding: 40px; color: var(--text-pal); font-size: 0.95rem; }
+
+  @media print {
+    header, .tabs, .fab, .raport-export-btns, .raport-selector { display: none !important; }
+    #tab-rapoarte { display: block !important; }
+    body { background: #fff; }
+  }
+
   @media (min-width: 600px) {
     .modal { border-radius: 16px; margin: 20px; max-height: 85vh; }
     .overlay { align-items: center; }
@@ -207,6 +235,7 @@
     <div class="tab active" onclick="schimbTab('stocuri')">📦 Stocuri</div>
     <div class="tab" onclick="schimbTab('utilizare')">💧 Utilizare</div>
     <div class="tab" onclick="schimbTab('istoric')">📋 Istoric</div>
+    <div class="tab" onclick="schimbTab('rapoarte')">📊 Rapoarte</div>
   </div>
 
   <div id="tab-stocuri" class="container">
@@ -244,6 +273,19 @@
   <div id="tab-istoric" class="container" style="display:none">
     <div class="section-title">Istoric utilizări</div>
     <div class="istoric-list" id="istoric-container"></div>
+  </div>
+
+  <div id="tab-rapoarte" class="container" style="display:none">
+    <div class="raport-selector">
+      <select id="raport-luna" onchange="genereazaRaport()">
+        <option value="">— Selectează luna —</option>
+      </select>
+      <div class="raport-export-btns">
+        <button class="btn-export btn-export-pdf" onclick="exportPDF()">📄 PDF</button>
+        <button class="btn-export btn-export-excel" onclick="exportExcel()">📊 Excel</button>
+      </div>
+    </div>
+    <div id="raport-continut"></div>
   </div>
 
   <button class="fab" onclick="deschideModal()" title="Adaugă produs">+</button>
@@ -374,7 +416,7 @@
     { nume: 'Alcupral 50 PU', tip: 'Fungicid', cultura: 'Aluni', doza: '4 kg/ha', unitate: 'Kg' },
     { nume: 'Topsin M 70 WP', tip: 'Fungicid', cultura: 'Aluni', doza: '1 kg/ha', unitate: 'Kg' },
     { nume: 'Chorus 50 WG', tip: 'Fungicid', cultura: 'Aluni', doza: '0.5 kg/ha', unitate: 'Kg' },
-    { nume: 'Switch 62.5 WG', tip: 'Fungicid', cultura: 'Aluni', doza: '0.8 kg/ha', unitate: 'Kg' },
+    { nume: 'Switch 62.5 WG', tip: 'Fungicid', cultura: 'Aluni', doza: '1 kg/ha', unitate: 'Kg' },
     { nume: 'Teldor 500 SC', tip: 'Fungicid', cultura: 'Aluni', doza: '1.5 L/ha', unitate: 'L' },
     { nume: 'Signum', tip: 'Fungicid', cultura: 'Aluni', doza: '1.5 kg/ha', unitate: 'Kg' },
     { nume: 'Thiovit Jet 80 WG', tip: 'Fungicid', cultura: 'Aluni', doza: '3 kg/ha', unitate: 'Kg' },
@@ -391,7 +433,7 @@
     { nume: 'Folar 180 SL', tip: 'Erbicid', cultura: 'Ambele', doza: '3 L/ha', unitate: 'L' },
     { nume: 'Clinic 480 SL', tip: 'Erbicid', cultura: 'Ambele', doza: '3 L/ha', unitate: 'L' },
     // CORTEVA Fungicide & Insecticide viță
-    { nume: 'Equation Max', tip: 'Fungicid', cultura: 'Vie', doza: '0.4 kg/ha', unitate: 'Kg' },
+    { nume: 'Equation Max', tip: 'Fungicid', cultura: 'Vie', doza: '0.4 L/ha', unitate: 'L' },
     { nume: 'Curzate 600', tip: 'Fungicid', cultura: 'Vie', doza: '0.3 kg/ha', unitate: 'Kg' },
     // BASF Fungicide viță
     { nume: 'Revyona', tip: 'Fungicid', cultura: 'Vie', doza: '1 L/ha', unitate: 'L' },
@@ -620,8 +662,9 @@
 
   // ---- TABS ----
   window.schimbTab = function(tab) {
-    ['stocuri','utilizare','istoric'].forEach(t => document.getElementById('tab-'+t).style.display = t===tab?'block':'none');
-    document.querySelectorAll('.tab').forEach((el,i) => el.classList.toggle('active', ['stocuri','utilizare','istoric'][i]===tab));
+    ['stocuri','utilizare','istoric','rapoarte'].forEach(t => document.getElementById('tab-'+t).style.display = t===tab?'block':'none');
+    document.querySelectorAll('.tab').forEach((el,i) => el.classList.toggle('active', ['stocuri','utilizare','istoric','rapoarte'][i]===tab));
+    if (tab === 'rapoarte') initRapoarte();
   };
 
   window.filtreaza = function(tip, evt) {
@@ -717,6 +760,170 @@
     document.getElementById('util-obs').value = '';
     alert(`✓ Utilizare înregistrată! Stoc rămas: ${nouCantitate} ${p.unitate}`);
     schimbTab('stocuri');
+  };
+
+
+  // ---- RAPOARTE ----
+  function initRapoarte() {
+    const sel = document.getElementById('raport-luna');
+    const luni = new Set();
+    istoric.forEach(item => {
+      if (item.data) {
+        const d = new Date(item.data);
+        luni.add(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`);
+      }
+    });
+    const luniSortate = [...luni].sort().reverse();
+    const valCurent = sel.value;
+    sel.innerHTML = '<option value="">— Selectează luna —</option>' +
+      luniSortate.map(l => {
+        const [an, luna] = l.split('-');
+        const numeL = new Date(an, luna-1, 1).toLocaleDateString('ro-RO', {month:'long', year:'numeric'});
+        return `<option value="${l}">${numeL}</option>`;
+      }).join('');
+    if (valCurent) sel.value = valCurent;
+    if (luniSortate.length > 0 && !sel.value) { sel.value = luniSortate[0]; }
+    genereazaRaport();
+  }
+
+  window.genereazaRaport = function() {
+    const luna = document.getElementById('raport-luna').value;
+    const container = document.getElementById('raport-continut');
+    if (!luna) { container.innerHTML = '<div class="no-raport">📊 Selectează o lună pentru a genera raportul.</div>'; return; }
+
+    const [an, lunaNum] = luna.split('-').map(Number);
+    const numeLuna = new Date(an, lunaNum-1, 1).toLocaleDateString('ro-RO', {month:'long', year:'numeric'});
+
+    // Filtrăm istoricul pe luna selectată
+    const itemeLuna = istoric.filter(item => {
+      if (!item.data) return false;
+      const d = new Date(item.data);
+      return d.getFullYear() === an && d.getMonth()+1 === lunaNum;
+    }).sort((a,b) => new Date(a.data) - new Date(b.data));
+
+    if (itemeLuna.length === 0) {
+      container.innerHTML = `<div class="no-raport">📭 Nicio utilizare înregistrată în ${numeLuna}.</div>`;
+      return;
+    }
+
+    // Calcul consum per produs
+    const consum = {};
+    itemeLuna.forEach(item => {
+      const key = item.produs;
+      if (!consum[key]) consum[key] = { produs: item.produs, tip: item.tip, cultura: item.cultura, unitate: item.unitate, total: 0, aplicari: 0 };
+      consum[key].total += item.cantitate;
+      consum[key].aplicari++;
+    });
+
+    // Stoc curent (din produse)
+    const stocMap = {};
+    produse.forEach(p => { stocMap[p.nume] = { cantitate: p.cantitate, unitate: p.unitate }; });
+
+    // Summary cards
+    const totalAplicari = itemeLuna.length;
+    const produseDiferite = Object.keys(consum).length;
+    const totalLitriKg = Object.values(consum).reduce((s,c) => s + c.total, 0).toFixed(2);
+
+    container.innerHTML = `
+      <div class="raport-luna-titlu">📊 Raport lunar — ${numeLuna}</div>
+
+      <div class="raport-summary">
+        <div class="sum-card"><div class="num">${totalAplicari}</div><div class="label">Aplicări</div></div>
+        <div class="sum-card"><div class="num">${produseDiferite}</div><div class="label">Produse folosite</div></div>
+        <div class="sum-card"><div class="num">${totalLitriKg}</div><div class="label">Total L/Kg</div></div>
+      </div>
+
+      <div class="raport-section">
+        <h3>📅 Tratamente efectuate</h3>
+        <table class="raport-table">
+          <thead><tr><th>Data</th><th>Produs</th><th>Tip</th><th>Cultură</th><th>Cantitate</th><th>Observații</th></tr></thead>
+          <tbody>
+            ${itemeLuna.map(item => `<tr>
+              <td>${new Date(item.data).toLocaleDateString('ro-RO')}</td>
+              <td><strong>${item.produs}</strong></td>
+              <td>${item.tip||'—'}</td>
+              <td>${item.cultura}</td>
+              <td><strong>${item.cantitate} ${item.unitate}</strong></td>
+              <td>${item.obs||'—'}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="raport-section">
+        <h3>📦 Consum produse în ${numeLuna}</h3>
+        <table class="raport-table">
+          <thead><tr><th>Produs</th><th>Tip</th><th>Cultură</th><th>Nr. aplicări</th><th>Total consumat</th><th>Stoc rămas</th></tr></thead>
+          <tbody>
+            ${Object.values(consum).map(c => {
+              const stocRamas = stocMap[c.produs] ? stocMap[c.produs].cantitate : '?';
+              return `<tr>
+                <td><strong>${c.produs}</strong></td>
+                <td>${c.tip||'—'}</td>
+                <td>${c.cultura}</td>
+                <td>${c.aplicari}</td>
+                <td><strong>${c.total.toFixed(2)} ${c.unitate}</strong></td>
+                <td style="color:${stocRamas !== '?' && stocRamas <= 0 ? 'var(--rosu)' : 'var(--verde)'}">${stocRamas !== '?' ? stocRamas + ' ' + c.unitate : '—'}</td>
+              </tr>`;
+            }).join('')}
+            <tr class="total-row">
+              <td colspan="4">TOTAL</td>
+              <td>${totalLitriKg} L/Kg</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+  };
+
+  window.exportPDF = function() {
+    const luna = document.getElementById('raport-luna').value;
+    if (!luna) { alert('Selectează o lună mai întâi!'); return; }
+    window.print();
+  };
+
+  window.exportExcel = function() {
+    const luna = document.getElementById('raport-luna').value;
+    if (!luna) { alert('Selectează o lună mai întâi!'); return; }
+    const [an, lunaNum] = luna.split('-').map(Number);
+    const numeLuna = new Date(an, lunaNum-1, 1).toLocaleDateString('ro-RO', {month:'long', year:'numeric'});
+
+    const itemeLuna = istoric.filter(item => {
+      if (!item.data) return false;
+      const d = new Date(item.data);
+      return d.getFullYear() === an && d.getMonth()+1 === lunaNum;
+    }).sort((a,b) => new Date(a.data) - new Date(b.data));
+
+    // Construim CSV
+    let csv = 'RAPORT LUNAR - ' + numeLuna + '\n\n';
+    csv += 'TRATAMENTE EFECTUATE\n';
+    csv += 'Data,Produs,Tip,Cultura,Cantitate,Unitate,Observatii\n';
+    itemeLuna.forEach(item => {
+      csv += `${item.data},${item.produs},${item.tip||''},${item.cultura},${item.cantitate},${item.unitate},"${item.obs||''}"\n`;
+    });
+
+    csv += '\nCONSUM PRODUSE\n';
+    csv += 'Produs,Tip,Cultura,Nr aplicari,Total consumat,Unitate,Stoc ramas\n';
+    const consum = {};
+    itemeLuna.forEach(item => {
+      if (!consum[item.produs]) consum[item.produs] = { tip: item.tip, cultura: item.cultura, unitate: item.unitate, total: 0, aplicari: 0 };
+      consum[item.produs].total += item.cantitate;
+      consum[item.produs].aplicari++;
+    });
+    const stocMap = {};
+    produse.forEach(p => { stocMap[p.nume] = p.cantitate; });
+    Object.entries(consum).forEach(([produs, c]) => {
+      csv += `${produs},${c.tip||''},${c.cultura},${c.aplicari},${c.total.toFixed(2)},${c.unitate},${stocMap[produs]||''}\n`;
+    });
+
+    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `AgroStoc_Raport_${luna}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   // ---- INIT ----
