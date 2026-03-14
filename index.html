@@ -19,7 +19,6 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'DM Sans', sans-serif; background: var(--alb); color: var(--text); min-height: 100vh; padding-bottom: env(safe-area-inset-bottom); }
 
-  /* AUTH */
   .auth-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; background: linear-gradient(135deg, #1a3a15 0%, #2d5a27 60%, #4a8c42 100%); }
   .auth-box { background: #fff; border-radius: 20px; padding: 36px 28px; width: 100%; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
   .auth-logo { text-align: center; margin-bottom: 28px; }
@@ -36,26 +35,24 @@
   .auth-error { background: var(--rosu-pal); color: var(--rosu); border-radius: 8px; padding: 10px 14px; font-size: 0.85rem; display: none; }
   .auth-error.visible { display: block; }
 
-  /* LOADING */
   .loading-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px; background: var(--verde); color: #fff; }
   .loading-screen h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; }
   .spinner { width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* APP */
   #app { display: none; }
   header { background: var(--verde); padding: 18px 24px; padding-top: calc(18px + env(safe-area-inset-top)); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
   header h1 { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.3rem; }
   .header-right { display: flex; align-items: center; gap: 10px; }
   .user-email { color: rgba(255,255,255,0.7); font-size: 0.75rem; max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .btn-logout { background: rgba(255,255,255,0.15); color: #fff; border: none; border-radius: 6px; padding: 5px 10px; font-size: 0.78rem; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.2s; }
+  .btn-logout { background: rgba(255,255,255,0.15); color: #fff; border: none; border-radius: 6px; padding: 5px 10px; font-size: 0.78rem; font-family: 'DM Sans', sans-serif; cursor: pointer; }
   .btn-logout:hover { background: rgba(255,255,255,0.25); }
 
-  .tabs { display: flex; background: var(--verde); padding: 0 8px; gap: 2px; border-top: 1px solid rgba(255,255,255,0.1); overflow-x: auto; }
-  .tab { padding: 10px 14px; color: rgba(255,255,255,0.6); font-size: 0.82rem; font-weight: 500; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+  .tabs { display: flex; background: var(--verde); padding: 0 8px; gap: 2px; border-top: 1px solid rgba(255,255,255,0.1); overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tab { padding: 10px 13px; color: rgba(255,255,255,0.6); font-size: 0.8rem; font-weight: 500; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
   .tab.active { color: var(--galben); border-bottom-color: var(--galben); }
 
-  .container { max-width: 900px; margin: 0 auto; padding: 20px 16px; }
+  .container { max-width: 960px; margin: 0 auto; padding: 20px 16px; }
   .alerte { margin-bottom: 20px; }
   .alerta-card { background: var(--rosu-pal); border: 1px solid #f5c6c0; border-left: 4px solid var(--rosu); border-radius: 8px; padding: 12px 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; font-size: 0.88rem; }
   .alerta-card strong { color: var(--rosu); }
@@ -99,13 +96,11 @@
   .produs-detalii { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; font-size: 0.82rem; color: var(--text-pal); }
   .detaliu { display: flex; flex-direction: column; gap: 2px; }
   .detaliu strong { color: var(--text); font-size: 0.9rem; }
-
   .stoc-bar { margin-top: 12px; height: 6px; background: var(--gri); border-radius: 3px; overflow: hidden; }
   .stoc-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
   .stoc-fill.ok { background: var(--verde-deschis); }
   .stoc-fill.critic { background: var(--rosu); }
   .stoc-fill.mediu { background: var(--galben); }
-
   .produs-actiuni { display: flex; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--gri); }
   .btn-actiune { flex: 1; padding: 7px; border: 1px solid var(--border); border-radius: 6px; background: #fff; font-size: 0.8rem; font-family: 'DM Sans', sans-serif; cursor: pointer; color: var(--text-pal); transition: all 0.2s; text-align: center; }
   .btn-actiune:hover { background: var(--gri); color: var(--text); }
@@ -119,18 +114,14 @@
 
   .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 300; display: none; align-items: flex-end; justify-content: center; }
   .overlay.active { display: flex; }
-  .modal { background: #fff; width: 100%; max-width: 600px; border-radius: 16px 16px 0 0; padding: 24px; padding-bottom: calc(24px + env(safe-area-inset-bottom)); max-height: 92vh; overflow-y: auto; animation: slideUp 0.3s ease; }
+  .modal { background: #fff; width: 100%; max-width: 700px; border-radius: 16px 16px 0 0; padding: 24px; padding-bottom: calc(24px + env(safe-area-inset-bottom)); max-height: 92vh; overflow-y: auto; animation: slideUp 0.3s ease; }
   @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
   .modal h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 20px; color: var(--verde); }
-
   .form-group { margin-bottom: 14px; }
   .form-group label { display: block; font-size: 0.82rem; font-weight: 500; color: var(--text-pal); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
   .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--text); background: #fff; transition: border 0.2s; -webkit-appearance: none; }
   .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--verde-deschis); }
-
-  /* PRODUS SEARCH */
   .produs-search-wrap { position: relative; }
-  .produs-search-wrap input { width: 100%; }
   .produse-dropdown { position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid var(--border); border-radius: 0 0 8px 8px; max-height: 220px; overflow-y: auto; z-index: 10; box-shadow: 0 4px 16px rgba(0,0,0,0.1); display: none; }
   .produse-dropdown.open { display: block; }
   .dropdown-item { padding: 10px 14px; cursor: pointer; font-size: 0.9rem; border-bottom: 1px solid var(--gri); display: flex; justify-content: space-between; align-items: center; gap: 8px; }
@@ -139,11 +130,9 @@
   .dropdown-tip { font-size: 0.7rem; padding: 2px 6px; border-radius: 8px; font-weight: 600; }
   .dropdown-manual { padding: 10px 14px; cursor: pointer; font-size: 0.88rem; color: var(--verde); font-weight: 500; border-top: 1px solid var(--border); background: var(--verde-pal); }
   .dropdown-manual:hover { background: #d4ebd0; }
-
   .tip-selector { display: flex; flex-direction: column; gap: 8px; }
   .tip-custom-input { display: none; }
   .tip-custom-input.visible { display: block; }
-
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
   .modal-btns { display: flex; gap: 10px; margin-top: 20px; }
@@ -157,30 +146,32 @@
   .istoric-produs { font-weight: 600; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .istoric-data { color: var(--text-pal); font-size: 0.8rem; }
   .istoric-qty { font-weight: 600; color: var(--rosu); white-space: nowrap; margin-left: 12px; }
-
   .empty { text-align: center; padding: 60px 20px; color: var(--text-pal); }
   .empty .icon { font-size: 3rem; margin-bottom: 12px; }
   .empty p { font-size: 0.95rem; }
-
-  .section-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--verde); margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--verde); margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
   .section-title small { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--text-pal); font-weight: 400; }
   .utilizare-info { background: var(--verde-pal); border-radius: 8px; padding: 12px; font-size: 0.85rem; color: var(--verde); margin-bottom: 16px; }
 
   /* RAPOARTE */
   .raport-selector { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-  .raport-selector select, .raport-selector input { padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text); background: #fff; -webkit-appearance: none; }
-  .raport-export-btns { display: flex; gap: 8px; margin-left: auto; }
-  .btn-export { padding: 8px 16px; border-radius: 8px; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
+  .raport-selector select { padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text); background: #fff; -webkit-appearance: none; }
+  .raport-export-btns { display: flex; gap: 8px; margin-left: auto; flex-wrap: wrap; }
+  .btn-export { padding: 8px 14px; border-radius: 8px; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
   .btn-export-pdf { background: #e53e3e; color: #fff; }
   .btn-export-pdf:hover { background: #c53030; }
   .btn-export-excel { background: #276749; color: #fff; }
   .btn-export-excel:hover { background: #1e5138; }
+  .btn-export-registru-pdf { background: #7c3aed; color: #fff; }
+  .btn-export-registru-pdf:hover { background: #6d28d9; }
+  .btn-export-registru-csv { background: #0369a1; color: #fff; }
+  .btn-export-registru-csv:hover { background: #075985; }
   .raport-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
   .raport-section { margin-bottom: 28px; }
   .raport-section h3 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--verde); margin-bottom: 12px; padding-bottom: 6px; border-bottom: 2px solid var(--verde-pal); }
   .raport-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; background: #fff; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
   .raport-table th { background: var(--verde); color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.4px; }
-  .raport-table td { padding: 9px 12px; border-bottom: 1px solid var(--gri); color: var(--text); }
+  .raport-table td { padding: 9px 12px; border-bottom: 1px solid var(--gri); color: var(--text); vertical-align: top; }
   .raport-table tr:last-child td { border-bottom: none; }
   .raport-table tr:hover td { background: var(--verde-pal); }
   .raport-table .total-row td { font-weight: 700; background: var(--verde-pal); color: var(--verde); border-top: 2px solid var(--border); }
@@ -188,54 +179,50 @@
   .no-raport { text-align: center; padding: 40px; color: var(--text-pal); font-size: 0.95rem; }
 
   /* TRATAMENTE */
-  .tratament-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 12px; transition: box-shadow 0.2s; }
-  .tratament-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .tratament-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 12px; }
   .tratament-card.planificat { border-left: 4px solid var(--albastru); }
   .tratament-card.efectuat { border-left: 4px solid var(--verde-deschis); }
   .tratament-card.anulat { border-left: 4px solid var(--text-pal); opacity: 0.7; }
-  .tratament-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .tratament-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 8px; }
   .tratament-titlu { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--text); }
   .tratament-meta { font-size: 0.8rem; color: var(--text-pal); margin-top: 3px; }
-  .status-badge { font-size: 0.72rem; padding: 3px 10px; border-radius: 12px; font-weight: 600; text-transform: uppercase; }
+  .status-badge { font-size: 0.72rem; padding: 3px 10px; border-radius: 12px; font-weight: 600; text-transform: uppercase; white-space: nowrap; }
   .status-planificat { background: var(--albastru-pal); color: var(--albastru); }
   .status-efectuat { background: var(--verde-pal); color: var(--verde); }
   .status-anulat { background: var(--gri); color: var(--text-pal); }
-
-  .necesar-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 10px; }
-  .necesar-table th { background: var(--gri); padding: 7px 10px; text-align: left; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text-pal); font-weight: 600; }
-  .necesar-table td { padding: 7px 10px; border-bottom: 1px solid var(--gri); }
+  .necesar-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin-top: 10px; }
+  .necesar-table th { background: var(--gri); padding: 7px 8px; text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text-pal); font-weight: 600; }
+  .necesar-table td { padding: 7px 8px; border-bottom: 1px solid var(--gri); vertical-align: top; }
   .necesar-table tr:last-child td { border-bottom: none; }
   .necesar-table .achizitie { color: var(--rosu); font-weight: 600; }
-  .necesar-table .stoc-ok { color: var(--verde); }
+  .necesar-table .stoc-ok-txt { color: var(--verde); }
   .cost-summary { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 12px; padding: 10px; background: var(--verde-pal); border-radius: 8px; }
   .cost-item { text-align: center; }
   .cost-item .cost-val { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--verde); }
-  .cost-item .cost-label { font-size: 0.72rem; color: var(--text-pal); text-transform: uppercase; letter-spacing: 0.4px; }
+  .cost-item .cost-label { font-size: 0.7rem; color: var(--text-pal); text-transform: uppercase; letter-spacing: 0.4px; }
   .cost-item.achizitie .cost-val { color: var(--rosu); }
-
   .sablon-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
   .sablon-tab { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border); background: #fff; font-size: 0.82rem; font-family: 'DM Sans', sans-serif; cursor: pointer; color: var(--text-pal); transition: all 0.2s; }
   .sablon-tab.active { background: var(--verde); color: #fff; border-color: var(--verde); }
-
-  .produse-tratament-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
-  .produs-tratament-row { display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 8px; align-items: center; background: var(--gri); border-radius: 8px; padding: 8px 10px; font-size: 0.85rem; }
+  .produse-tratament-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+  .produs-tratament-row { display: grid; grid-template-columns: 2fr 0.8fr 0.6fr 0.6fr 0.6fr auto; gap: 6px; align-items: center; background: var(--gri); border-radius: 8px; padding: 8px 10px; font-size: 0.83rem; }
   .btn-remove-produs { background: none; border: none; cursor: pointer; color: var(--rosu); font-size: 1rem; padding: 0 4px; }
   .btn-add-produs { padding: 8px 16px; background: var(--verde-pal); color: var(--verde); border: 1px dashed var(--verde-deschis); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; cursor: pointer; width: 100%; margin-top: 8px; font-weight: 500; }
   .btn-add-produs:hover { background: #d4ebd0; }
+  .phi-badge { font-size: 0.72rem; padding: 2px 7px; border-radius: 10px; background: #fff3e0; color: #c75000; font-weight: 600; }
 
-  .info-box { background: var(--albastru-pal); border-radius: 8px; padding: 12px; font-size: 0.85rem; color: var(--albastru); margin-bottom: 16px; border-left: 3px solid var(--albastru); }
-  .warning-box { background: #fff8e1; border-radius: 8px; padding: 12px; font-size: 0.85rem; color: #b45309; margin-bottom: 16px; border-left: 3px solid #f59e0b; }
-
+  /* PRINT styles pentru registru */
   @media print {
-    header, .tabs, .fab, .raport-export-btns, .raport-selector { display: none !important; }
-    #tab-rapoarte { display: block !important; }
-    body { background: #fff; }
+    header, .tabs, .fab, .raport-export-btns, .raport-selector, .sablon-tabs, .btn-actiune, .produs-actiuni, #overlay, #overlay-tratament { display: none !important; }
+    .container { padding: 0; }
+    body { background: #fff; font-size: 11px; }
+    .raport-table th, .necesar-table th { background: #2d5a27 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
 
   @media (min-width: 600px) {
-    .modal { border-radius: 16px; margin: 20px; max-height: 85vh; }
+    .modal { border-radius: 16px; margin: 20px; max-height: 88vh; }
     .overlay { align-items: center; }
-    .produs-detalii { grid-template-columns: repeat(4, 1fr); }
+    .produs-detalii { grid-template-columns: repeat(3, 1fr); }
   }
 </style>
 </head>
@@ -277,12 +264,12 @@
   <div class="tabs">
     <div class="tab active" onclick="schimbTab('stocuri')">📦 Stocuri</div>
     <div class="tab" onclick="schimbTab('tratamente')">🌿 Tratamente</div>
+    <div class="tab" onclick="schimbTab('registru')">📋 Registru</div>
     <div class="tab" onclick="schimbTab('utilizare')">💧 Utilizare</div>
-    <div class="tab" onclick="schimbTab('istoric')">📋 Istoric</div>
     <div class="tab" onclick="schimbTab('rapoarte')">📊 Rapoarte</div>
   </div>
 
-  <!-- TAB STOCURI -->
+  <!-- STOCURI -->
   <div id="tab-stocuri" class="container">
     <div id="alerte-container" class="alerte"></div>
     <div class="summary">
@@ -300,23 +287,46 @@
     <div class="produse-list" id="produse-container"></div>
   </div>
 
-  <!-- TAB TRATAMENTE -->
+  <!-- TRATAMENTE -->
   <div id="tab-tratamente" class="container" style="display:none">
     <div class="section-title">
       Program tratamente
       <button class="btn-actiune primary" onclick="deschideModalTratament()" style="flex:none;padding:8px 16px;font-size:0.85rem">+ Tratament nou</button>
     </div>
-
-    <div class="sablon-tabs" id="sablon-tabs">
+    <div class="sablon-tabs">
       <button class="sablon-tab active" onclick="filtreazaTratamente('toate',event)">Toate</button>
       <button class="sablon-tab" onclick="filtreazaTratamente('planificat',event)">Planificate</button>
       <button class="sablon-tab" onclick="filtreazaTratamente('efectuat',event)">Efectuate</button>
     </div>
-
     <div id="tratamente-container"></div>
   </div>
 
-  <!-- TAB UTILIZARE -->
+  <!-- REGISTRU FITOSANITAR -->
+  <div id="tab-registru" class="container" style="display:none">
+    <div class="section-title">
+      Registru tratamente fitosanitar
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn-export btn-export-registru-pdf" onclick="exportRegistruPDF()">🖨️ PDF oficial</button>
+        <button class="btn-export btn-export-registru-csv" onclick="exportRegistruCSV()">📊 Excel/CSV</button>
+      </div>
+    </div>
+    <div style="background:var(--albastru-pal);border-left:3px solid var(--albastru);border-radius:8px;padding:12px;font-size:0.85rem;color:#1e3a8a;margin-bottom:20px">
+      📌 Registru conform OUG 34/2012 — include toate tratamentele marcate ca <strong>efectuate</strong>. Exportul PDF este tipăribil și poate fi prezentat la controale fitosanitare.
+    </div>
+    <div class="raport-selector">
+      <select id="registru-an" onchange="randeazaRegistru()">
+        <option value="">— Selectează anul —</option>
+      </select>
+      <select id="registru-cultura" onchange="randeazaRegistru()">
+        <option value="">Toate culturile</option>
+        <option value="Vie">🍇 Vie</option>
+        <option value="Aluni">🌰 Aluni</option>
+      </select>
+    </div>
+    <div id="registru-continut"></div>
+  </div>
+
+  <!-- UTILIZARE -->
   <div id="tab-utilizare" class="container" style="display:none">
     <div class="section-title">Înregistrează utilizare</div>
     <div class="form-group">
@@ -332,18 +342,10 @@
     <button class="btn-salveaza" onclick="inregistreazaUtilizare()">✓ Înregistrează utilizarea</button>
   </div>
 
-  <!-- TAB ISTORIC -->
-  <div id="tab-istoric" class="container" style="display:none">
-    <div class="section-title">Istoric utilizări</div>
-    <div class="istoric-list" id="istoric-container"></div>
-  </div>
-
-  <!-- TAB RAPOARTE -->
+  <!-- RAPOARTE -->
   <div id="tab-rapoarte" class="container" style="display:none">
     <div class="raport-selector">
-      <select id="raport-luna" onchange="genereazaRaport()">
-        <option value="">— Selectează luna —</option>
-      </select>
+      <select id="raport-luna" onchange="genereazaRaport()"><option value="">— Selectează luna —</option></select>
       <div class="raport-export-btns">
         <button class="btn-export btn-export-pdf" onclick="exportPDF()">📄 PDF</button>
         <button class="btn-export btn-export-excel" onclick="exportExcel()">📊 Excel</button>
@@ -359,7 +361,6 @@
 <div class="overlay" id="overlay" onclick="inchideModal(event)">
   <div class="modal" onclick="event.stopPropagation()">
     <h2 id="modal-titlu">Adaugă produs nou</h2>
-
     <div class="form-group">
       <label>Caută sau scrie numele produsului *</label>
       <div class="produs-search-wrap">
@@ -367,26 +368,24 @@
         <div class="produse-dropdown" id="produse-dropdown"></div>
       </div>
     </div>
-
-    <div class="form-group">
-      <label>Tip substanță</label>
-      <div class="tip-selector">
-        <select id="form-tip" onchange="verificaTipCustom()">
-          <option value="">— Selectează tipul —</option>
-          <option value="Fungicid">🔵 Fungicid</option>
-          <option value="Insecticid">🟠 Insecticid</option>
-          <option value="Acaricid">🔴 Acaricid</option>
-          <option value="Erbicid">🟤 Erbicid</option>
-          <option value="Îngrășământ foliar">🟡 Îngrășământ foliar</option>
-          <option value="Biostimulator">🟢 Biostimulator</option>
-          <option value="Adjuvant">⚪ Adjuvant</option>
-          <option value="__altul__">✏️ Altul (specifică)</option>
-        </select>
-        <input type="text" id="form-tip-custom" class="tip-custom-input" placeholder="Specifică tipul...">
-      </div>
-    </div>
-
     <div class="form-row">
+      <div class="form-group">
+        <label>Tip substanță</label>
+        <div class="tip-selector">
+          <select id="form-tip" onchange="verificaTipCustom()">
+            <option value="">— Selectează —</option>
+            <option value="Fungicid">🔵 Fungicid</option>
+            <option value="Insecticid">🟠 Insecticid</option>
+            <option value="Acaricid">🔴 Acaricid</option>
+            <option value="Erbicid">🟤 Erbicid</option>
+            <option value="Îngrășământ foliar">🟡 Îngrășământ foliar</option>
+            <option value="Biostimulator">🟢 Biostimulator</option>
+            <option value="Adjuvant">⚪ Adjuvant</option>
+            <option value="__altul__">✏️ Altul</option>
+          </select>
+          <input type="text" id="form-tip-custom" class="tip-custom-input" placeholder="Specifică tipul...">
+        </div>
+      </div>
       <div class="form-group">
         <label>Cultură *</label>
         <select id="form-cultura">
@@ -395,8 +394,11 @@
           <option value="Ambele">🌿 Ambele</option>
         </select>
       </div>
-      <div class="form-group">
-        <label>Unitate măsură</label>
+    </div>
+    <div class="form-group"><label>Substanța activă</label><input type="text" id="form-substanta-activa" placeholder="ex: Mancozeb 640g/kg + Metalaxil 40g/kg"></div>
+    <div class="form-row">
+      <div class="form-group"><label>PHI — Pauză pre-recoltă (zile)</label><input type="number" id="form-phi" placeholder="ex: 21" min="0" step="1"></div>
+      <div class="form-group"><label>Unitate măsură</label>
         <select id="form-unitate">
           <option value="L">Litri (L)</option>
           <option value="Kg">Kilograme (Kg)</option>
@@ -425,9 +427,8 @@
 
 <!-- MODAL TRATAMENT -->
 <div class="overlay" id="overlay-tratament" onclick="inchideModalTratament(event)">
-  <div class="modal" onclick="event.stopPropagation()" style="max-width:700px">
+  <div class="modal" onclick="event.stopPropagation()">
     <h2 id="modal-tratament-titlu">Tratament nou</h2>
-
     <div class="form-row">
       <div class="form-group">
         <label>Număr tratament *</label>
@@ -452,40 +453,31 @@
         </select>
       </div>
     </div>
-
     <div class="form-row">
       <div class="form-group"><label>Data tratamentului *</label><input type="date" id="trat-data"></div>
       <div class="form-group"><label>Suprafața (ha) *</label><input type="number" id="trat-suprafata" placeholder="ex: 5.5" step="0.1" min="0" oninput="recalculeazaNecesar()"></div>
     </div>
-
-    <div class="form-group">
-      <label>Observații</label>
-      <input type="text" id="trat-obs" placeholder="ex: După ploaie, fenofaza buton floral">
+    <div class="form-row">
+      <div class="form-group"><label>Motivul aplicării</label><input type="text" id="trat-motiv" placeholder="ex: Prevenire mană, atac făinare"></div>
+      <div class="form-group"><label>Numele aplicatorului</label><input type="text" id="trat-aplicator" placeholder="ex: Ion Popescu"></div>
     </div>
+    <div class="form-group"><label>Observații</label><input type="text" id="trat-obs" placeholder="ex: După ploaie, vânt slab"></div>
 
-    <div class="section-title" style="margin-top:8px">
+    <div class="section-title" style="margin-top:8px;font-size:1rem">
       Produse componente
-      <small>doză × suprafață = necesar</small>
+      <small>Produs · Doză/ha · Unitate · % soluție</small>
     </div>
-
     <div id="produse-tratament-list" class="produse-tratament-list"></div>
     <button class="btn-add-produs" onclick="adaugaRandProdus()">+ Adaugă produs</button>
 
     <div id="necesar-calcul" style="margin-top:16px;display:none">
-      <div class="section-title" style="margin-top:0">Necesar și costuri</div>
+      <div class="section-title" style="font-size:1rem;margin-top:0">Necesar și costuri</div>
       <div style="overflow-x:auto">
         <table class="necesar-table" id="tabel-necesar">
-          <thead>
-            <tr>
-              <th>Produs</th>
-              <th>Doză/ha</th>
-              <th>Necesar total</th>
-              <th>Stoc existent</th>
-              <th>De achiziționat</th>
-              <th>Cost stoc</th>
-              <th>Cost achiziție</th>
-            </tr>
-          </thead>
+          <thead><tr>
+            <th>Produs</th><th>Doză/ha</th><th>Necesar total</th>
+            <th>Stoc existent</th><th>De achiziționat</th><th>Cost stoc</th><th>Cost achiziție</th>
+          </tr></thead>
           <tbody id="necesar-tbody"></tbody>
           <tfoot id="necesar-tfoot"></tfoot>
         </table>
@@ -495,7 +487,7 @@
 
     <div class="modal-btns">
       <button class="btn-anuleaza" onclick="inchideModalTratamentFortat()">Anulează</button>
-      <button class="btn-salveaza" id="btn-salveaza-trat" onclick="salveazaTratament()">✓ Salvează tratament</button>
+      <button class="btn-salveaza" onclick="salveazaTratament()">✓ Salvează tratament</button>
     </div>
   </div>
 </div>
@@ -518,122 +510,91 @@
   const auth = getAuth(app);
   const db = getFirestore(app);
 
-  // ---- LISTA PRODUSE PREDEFINITE ----
   const PRODUSE_LISTA = [
-    { nume: 'Cuproxat SC', tip: 'Fungicid', cultura: 'Vie', doza: '3 L/ha', unitate: 'L' },
-    { nume: 'Alcupral 50 PU', tip: 'Fungicid', cultura: 'Vie', doza: '4 kg/ha', unitate: 'Kg' },
-    { nume: 'Champ 77 WG', tip: 'Fungicid', cultura: 'Vie', doza: '2 kg/ha', unitate: 'Kg' },
-    { nume: 'Bordofix', tip: 'Fungicid', cultura: 'Vie', doza: '3 L/ha', unitate: 'L' },
-    { nume: 'Ridomil Gold MZ 68 WG', tip: 'Fungicid', cultura: 'Vie', doza: '2.5 kg/ha', unitate: 'Kg' },
-    { nume: 'Equation Pro', tip: 'Fungicid', cultura: 'Vie', doza: '0.4 kg/ha', unitate: 'Kg' },
-    { nume: 'Mikal Flash', tip: 'Fungicid', cultura: 'Vie', doza: '3 kg/ha', unitate: 'Kg' },
-    { nume: 'Curzate F', tip: 'Fungicid', cultura: 'Vie', doza: '2.5 kg/ha', unitate: 'Kg' },
-    { nume: 'Delan Pro', tip: 'Fungicid', cultura: 'Vie', doza: '1.5 L/ha', unitate: 'L' },
-    { nume: 'Forum Star', tip: 'Fungicid', cultura: 'Vie', doza: '2 kg/ha', unitate: 'Kg' },
-    { nume: 'Pergado F', tip: 'Fungicid', cultura: 'Vie', doza: '2.5 kg/ha', unitate: 'Kg' },
-    { nume: 'Chorus 50 WG', tip: 'Fungicid', cultura: 'Vie', doza: '0.5 kg/ha', unitate: 'Kg' },
-    { nume: 'Switch 62.5 WG', tip: 'Fungicid', cultura: 'Vie', doza: '1 kg/ha', unitate: 'Kg' },
-    { nume: 'Teldor 500 SC', tip: 'Fungicid', cultura: 'Vie', doza: '1.5 L/ha', unitate: 'L' },
-    { nume: 'Pyrus 400 SC', tip: 'Fungicid', cultura: 'Vie', doza: '1.5 L/ha', unitate: 'L' },
-    { nume: 'Topsin M 70 WP', tip: 'Fungicid', cultura: 'Vie', doza: '1 kg/ha', unitate: 'Kg' },
-    { nume: 'Topsin 500 SC', tip: 'Fungicid', cultura: 'Vie', doza: '1 L/ha', unitate: 'L' },
-    { nume: 'Thiovit Jet 80 WG', tip: 'Fungicid', cultura: 'Vie', doza: '3 kg/ha', unitate: 'Kg' },
-    { nume: 'Karathane Gold 350 EC', tip: 'Fungicid', cultura: 'Vie', doza: '0.5 L/ha', unitate: 'L' },
-    { nume: 'Luna Max 275 SE', tip: 'Fungicid', cultura: 'Vie', doza: '0.5 L/ha', unitate: 'L' },
-    { nume: 'Sercadis', tip: 'Fungicid', cultura: 'Vie', doza: '0.5 L/ha', unitate: 'L' },
-    { nume: 'Merpan 80 WDG', tip: 'Fungicid', cultura: 'Vie', doza: '1.5 kg/ha', unitate: 'Kg' },
-    { nume: 'Mospilan 20 SG', tip: 'Insecticid', cultura: 'Vie', doza: '0.2 kg/ha', unitate: 'Kg' },
-    { nume: 'Actara 25 WG', tip: 'Insecticid', cultura: 'Vie', doza: '0.1 kg/ha', unitate: 'Kg' },
-    { nume: 'Karate Zeon 50 CS', tip: 'Insecticid', cultura: 'Vie', doza: '0.15 L/ha', unitate: 'L' },
-    { nume: 'Calypso 480 SC', tip: 'Insecticid', cultura: 'Vie', doza: '0.2 L/ha', unitate: 'L' },
-    { nume: 'Laser 240 SC', tip: 'Insecticid', cultura: 'Vie', doza: '0.3 L/ha', unitate: 'L' },
-    { nume: 'Confidor Energy', tip: 'Insecticid', cultura: 'Vie', doza: '0.7 L/ha', unitate: 'L' },
-    { nume: 'Faster 10 CE', tip: 'Insecticid', cultura: 'Vie', doza: '0.15 L/ha', unitate: 'L' },
-    { nume: 'Decis Mega 50 EW', tip: 'Insecticid', cultura: 'Vie', doza: '0.15 L/ha', unitate: 'L' },
-    { nume: 'Ovipron Top', tip: 'Insecticid', cultura: 'Vie', doza: '1.5 L/ha', unitate: 'L' },
-    { nume: 'Nissorun 10 WP', tip: 'Acaricid', cultura: 'Vie', doza: '0.3 kg/ha', unitate: 'Kg' },
-    { nume: 'Envidor 240 SC', tip: 'Acaricid', cultura: 'Vie', doza: '0.5 L/ha', unitate: 'L' },
-    { nume: 'Masai 20 WP', tip: 'Acaricid', cultura: 'Vie', doza: '0.4 kg/ha', unitate: 'Kg' },
-    { nume: 'Cuproxat SC', tip: 'Fungicid', cultura: 'Aluni', doza: '3 L/ha', unitate: 'L' },
-    { nume: 'Alcupral 50 PU', tip: 'Fungicid', cultura: 'Aluni', doza: '4 kg/ha', unitate: 'Kg' },
-    { nume: 'Topsin M 70 WP', tip: 'Fungicid', cultura: 'Aluni', doza: '1 kg/ha', unitate: 'Kg' },
-    { nume: 'Chorus 50 WG', tip: 'Fungicid', cultura: 'Aluni', doza: '0.5 kg/ha', unitate: 'Kg' },
-    { nume: 'Switch 62.5 WG', tip: 'Fungicid', cultura: 'Aluni', doza: '1 kg/ha', unitate: 'Kg' },
-    { nume: 'Teldor 500 SC', tip: 'Fungicid', cultura: 'Aluni', doza: '1.5 L/ha', unitate: 'L' },
-    { nume: 'Signum', tip: 'Fungicid', cultura: 'Aluni', doza: '1.5 kg/ha', unitate: 'Kg' },
-    { nume: 'Thiovit Jet 80 WG', tip: 'Fungicid', cultura: 'Aluni', doza: '3 kg/ha', unitate: 'Kg' },
-    { nume: 'Mospilan 20 SG', tip: 'Insecticid', cultura: 'Aluni', doza: '0.2 kg/ha', unitate: 'Kg' },
-    { nume: 'Actara 25 WG', tip: 'Insecticid', cultura: 'Aluni', doza: '0.1 kg/ha', unitate: 'Kg' },
-    { nume: 'Karate Zeon 50 CS', tip: 'Insecticid', cultura: 'Aluni', doza: '0.15 L/ha', unitate: 'L' },
-    { nume: 'Calypso 480 SC', tip: 'Insecticid', cultura: 'Aluni', doza: '0.2 L/ha', unitate: 'L' },
-    { nume: 'Decis Mega 50 EW', tip: 'Insecticid', cultura: 'Aluni', doza: '0.15 L/ha', unitate: 'L' },
-    { nume: 'Nissorun 10 WP', tip: 'Acaricid', cultura: 'Aluni', doza: '0.3 kg/ha', unitate: 'Kg' },
-    { nume: 'Roundup', tip: 'Erbicid', cultura: 'Ambele', doza: '3 L/ha', unitate: 'L' },
-    { nume: 'Basta 150 SL', tip: 'Erbicid', cultura: 'Ambele', doza: '5 L/ha', unitate: 'L' },
-    { nume: 'Clinic 480 SL', tip: 'Erbicid', cultura: 'Ambele', doza: '3 L/ha', unitate: 'L' },
-    { nume: 'Equation Max', tip: 'Fungicid', cultura: 'Vie', doza: '0.4 L/ha', unitate: 'L' },
-    { nume: 'Revyona', tip: 'Fungicid', cultura: 'Vie', doza: '1 L/ha', unitate: 'L' },
-    { nume: 'Talendo', tip: 'Fungicid', cultura: 'Vie', doza: '0.25 L/ha', unitate: 'L' },
-    { nume: 'Zorvec Zelavin', tip: 'Fungicid', cultura: 'Vie', doza: '0.2 L/ha', unitate: 'L' },
-    { nume: 'Coragen 20 SC', tip: 'Insecticid', cultura: 'Vie', doza: '0.175 L/ha', unitate: 'L' },
-    { nume: 'Vantex 60 CS', tip: 'Insecticid', cultura: 'Vie', doza: '0.06 L/ha', unitate: 'L' },
-    { nume: 'Utrisha N', tip: 'Biostimulator', cultura: 'Ambele', doza: '0.5 L/ha', unitate: 'L' },
-    { nume: 'Cropmax', tip: 'Biostimulator', cultura: 'Ambele', doza: '1 L/ha', unitate: 'L' },
-    { nume: 'Amalgerol Premium', tip: 'Biostimulator', cultura: 'Ambele', doza: '2 L/ha', unitate: 'L' },
-    { nume: 'Wuxal Micro', tip: 'Îngrășământ foliar', cultura: 'Ambele', doza: '2 L/ha', unitate: 'L' },
-    { nume: 'Nutrivant Plus', tip: 'Îngrășământ foliar', cultura: 'Ambele', doza: '2 kg/ha', unitate: 'Kg' },
-    { nume: 'Silwet Gold', tip: 'Adjuvant', cultura: 'Ambele', doza: '0.1 L/ha', unitate: 'L' },
-    { nume: 'Drive', tip: 'Adjuvant', cultura: 'Ambele', doza: '0.2 L/ha', unitate: 'L' },
-    { nume: 'Trend 90 CE', tip: 'Adjuvant', cultura: 'Ambele', doza: '0.1 L/ha', unitate: 'L' },
+    { nume: 'Cuproxat SC', tip: 'Fungicid', cultura: 'Vie', doza: '3 L/ha', unitate: 'L', substantaActiva: 'Hidroxid de cupru 345 g/L', phi: 14 },
+    { nume: 'Alcupral 50 PU', tip: 'Fungicid', cultura: 'Vie', doza: '4 kg/ha', unitate: 'Kg', substantaActiva: 'Oxiclorură de cupru 500 g/kg', phi: 21 },
+    { nume: 'Champ 77 WG', tip: 'Fungicid', cultura: 'Vie', doza: '2 kg/ha', unitate: 'Kg', substantaActiva: 'Hidroxid de cupru 770 g/kg', phi: 21 },
+    { nume: 'Bordofix', tip: 'Fungicid', cultura: 'Vie', doza: '3 L/ha', unitate: 'L', substantaActiva: 'Sulfat de cupru 200 g/L', phi: 28 },
+    { nume: 'Ridomil Gold MZ 68 WG', tip: 'Fungicid', cultura: 'Vie', doza: '2.5 kg/ha', unitate: 'Kg', substantaActiva: 'Mancozeb 640g/kg + Metalaxil-M 40g/kg', phi: 28 },
+    { nume: 'Equation Pro', tip: 'Fungicid', cultura: 'Vie', doza: '0.4 kg/ha', unitate: 'Kg', substantaActiva: 'Famoxadon 225g/kg + Cymoxanil 300g/kg', phi: 28 },
+    { nume: 'Mikal Flash', tip: 'Fungicid', cultura: 'Vie', doza: '3 kg/ha', unitate: 'Kg', substantaActiva: 'Fosetil-Al 500g/kg + Folpet 250g/kg', phi: 28 },
+    { nume: 'Delan Pro', tip: 'Fungicid', cultura: 'Vie', doza: '1.5 L/ha', unitate: 'L', substantaActiva: 'Dithianon 100g/L + Fluopicolide 50g/L', phi: 28 },
+    { nume: 'Forum Star', tip: 'Fungicid', cultura: 'Vie', doza: '2 kg/ha', unitate: 'Kg', substantaActiva: 'Dimetomorf 500g/kg + Mancozeb 400g/kg', phi: 28 },
+    { nume: 'Chorus 50 WG', tip: 'Fungicid', cultura: 'Vie', doza: '0.5 kg/ha', unitate: 'Kg', substantaActiva: 'Ciprodinil 500 g/kg', phi: 14 },
+    { nume: 'Switch 62.5 WG', tip: 'Fungicid', cultura: 'Vie', doza: '1 kg/ha', unitate: 'Kg', substantaActiva: 'Ciprodinil 375g/kg + Fludioxonil 250g/kg', phi: 7 },
+    { nume: 'Teldor 500 SC', tip: 'Fungicid', cultura: 'Vie', doza: '1.5 L/ha', unitate: 'L', substantaActiva: 'Fenhexamid 500 g/L', phi: 7 },
+    { nume: 'Topsin M 70 WP', tip: 'Fungicid', cultura: 'Vie', doza: '1 kg/ha', unitate: 'Kg', substantaActiva: 'Tiofanat-metil 700 g/kg', phi: 21 },
+    { nume: 'Thiovit Jet 80 WG', tip: 'Fungicid', cultura: 'Vie', doza: '3 kg/ha', unitate: 'Kg', substantaActiva: 'Sulf 800 g/kg', phi: 35 },
+    { nume: 'Karathane Gold 350 EC', tip: 'Fungicid', cultura: 'Vie', doza: '0.5 L/ha', unitate: 'L', substantaActiva: 'Meptildinocap 350 g/L', phi: 28 },
+    { nume: 'Luna Max 275 SE', tip: 'Fungicid', cultura: 'Vie', doza: '0.5 L/ha', unitate: 'L', substantaActiva: 'Fluopyram 125g/L + Tebuconazol 150g/L', phi: 14 },
+    { nume: 'Merpan 80 WDG', tip: 'Fungicid', cultura: 'Vie', doza: '1.5 kg/ha', unitate: 'Kg', substantaActiva: 'Captan 800 g/kg', phi: 14 },
+    { nume: 'Mospilan 20 SG', tip: 'Insecticid', cultura: 'Vie', doza: '0.2 kg/ha', unitate: 'Kg', substantaActiva: 'Acetamiprid 200 g/kg', phi: 14 },
+    { nume: 'Actara 25 WG', tip: 'Insecticid', cultura: 'Vie', doza: '0.1 kg/ha', unitate: 'Kg', substantaActiva: 'Tiametoxam 250 g/kg', phi: 14 },
+    { nume: 'Karate Zeon 50 CS', tip: 'Insecticid', cultura: 'Vie', doza: '0.15 L/ha', unitate: 'L', substantaActiva: 'Lambda-cihalotrin 50 g/L', phi: 14 },
+    { nume: 'Calypso 480 SC', tip: 'Insecticid', cultura: 'Vie', doza: '0.2 L/ha', unitate: 'L', substantaActiva: 'Tiacloprid 480 g/L', phi: 14 },
+    { nume: 'Decis Mega 50 EW', tip: 'Insecticid', cultura: 'Vie', doza: '0.15 L/ha', unitate: 'L', substantaActiva: 'Deltametrin 50 g/L', phi: 7 },
+    { nume: 'Nissorun 10 WP', tip: 'Acaricid', cultura: 'Vie', doza: '0.3 kg/ha', unitate: 'Kg', substantaActiva: 'Hexitiazox 100 g/kg', phi: 30 },
+    { nume: 'Envidor 240 SC', tip: 'Acaricid', cultura: 'Vie', doza: '0.5 L/ha', unitate: 'L', substantaActiva: 'Spirodiclof en 240 g/L', phi: 21 },
+    { nume: 'Roundup', tip: 'Erbicid', cultura: 'Ambele', doza: '3 L/ha', unitate: 'L', substantaActiva: 'Glifosat 360 g/L', phi: 0 },
+    { nume: 'Basta 150 SL', tip: 'Erbicid', cultura: 'Ambele', doza: '5 L/ha', unitate: 'L', substantaActiva: 'Glufosinat-amoniu 150 g/L', phi: 0 },
+    { nume: 'Clinic 480 SL', tip: 'Erbicid', cultura: 'Ambele', doza: '3 L/ha', unitate: 'L', substantaActiva: 'Glifosat 480 g/L', phi: 0 },
+    { nume: 'Coragen 20 SC', tip: 'Insecticid', cultura: 'Vie', doza: '0.175 L/ha', unitate: 'L', substantaActiva: 'Clorantraniliprol 200 g/L', phi: 14 },
+    { nume: 'Revyona', tip: 'Fungicid', cultura: 'Vie', doza: '1 L/ha', unitate: 'L', substantaActiva: 'Mefentrifluconazol 200 g/L', phi: 21 },
+    { nume: 'Silwet Gold', tip: 'Adjuvant', cultura: 'Ambele', doza: '0.1 L/ha', unitate: 'L', substantaActiva: 'Trisiloxa n 830 g/L', phi: 0 },
+    { nume: 'Wuxal Micro', tip: 'Îngrășământ foliar', cultura: 'Ambele', doza: '2 L/ha', unitate: 'L', substantaActiva: 'Microelemente chelate', phi: 0 },
+    { nume: 'Cropmax', tip: 'Biostimulator', cultura: 'Ambele', doza: '1 L/ha', unitate: 'L', substantaActiva: 'Extracte alge marine', phi: 0 },
+    { nume: 'Cuproxat SC', tip: 'Fungicid', cultura: 'Aluni', doza: '3 L/ha', unitate: 'L', substantaActiva: 'Hidroxid de cupru 345 g/L', phi: 14 },
+    { nume: 'Topsin M 70 WP', tip: 'Fungicid', cultura: 'Aluni', doza: '1 kg/ha', unitate: 'Kg', substantaActiva: 'Tiofanat-metil 700 g/kg', phi: 21 },
+    { nume: 'Switch 62.5 WG', tip: 'Fungicid', cultura: 'Aluni', doza: '1 kg/ha', unitate: 'Kg', substantaActiva: 'Ciprodinil 375g/kg + Fludioxonil 250g/kg', phi: 7 },
+    { nume: 'Mospilan 20 SG', tip: 'Insecticid', cultura: 'Aluni', doza: '0.2 kg/ha', unitate: 'Kg', substantaActiva: 'Acetamiprid 200 g/kg', phi: 14 },
+    { nume: 'Karate Zeon 50 CS', tip: 'Insecticid', cultura: 'Aluni', doza: '0.15 L/ha', unitate: 'L', substantaActiva: 'Lambda-cihalotrin 50 g/L', phi: 14 },
   ];
 
-  // ---- ȘABLOANE TRATAMENTE PREDEFINITE ----
   const SABLOANE_TRATAMENTE = {
     1: { nume: 'Tratament 1 — Repaus vegetativ', fenofaza: 'BBCH 00', produse: [
-      { nume: 'Cuproxat SC', doza: 3, unitate: 'L', procent: 0.3 },
-      { nume: 'Thiovit Jet 80 WG', doza: 3, unitate: 'Kg', procent: 0.3 },
+      { nume: 'Cuproxat SC', dozaPerHa: 3, unitate: 'L', procent: 0.3 },
+      { nume: 'Thiovit Jet 80 WG', dozaPerHa: 3, unitate: 'Kg', procent: 0.3 },
     ]},
     2: { nume: 'Tratament 2 — Umflarea mugurilor', fenofaza: 'BBCH 01-05', produse: [
-      { nume: 'Alcupral 50 PU', doza: 4, unitate: 'Kg', procent: 0.4 },
-      { nume: 'Mospilan 20 SG', doza: 0.2, unitate: 'Kg', procent: 0.02 },
+      { nume: 'Alcupral 50 PU', dozaPerHa: 4, unitate: 'Kg', procent: 0.4 },
+      { nume: 'Mospilan 20 SG', dozaPerHa: 0.2, unitate: 'Kg', procent: 0.02 },
     ]},
     3: { nume: 'Tratament 3 — Dezmugurire', fenofaza: 'BBCH 09-11', produse: [
-      { nume: 'Ridomil Gold MZ 68 WG', doza: 2.5, unitate: 'Kg', procent: 0.25 },
-      { nume: 'Karate Zeon 50 CS', doza: 0.15, unitate: 'L', procent: 0.015 },
+      { nume: 'Ridomil Gold MZ 68 WG', dozaPerHa: 2.5, unitate: 'Kg', procent: 0.25 },
+      { nume: 'Karate Zeon 50 CS', dozaPerHa: 0.15, unitate: 'L', procent: 0.015 },
     ]},
     4: { nume: 'Tratament 4 — Buton floral', fenofaza: 'BBCH 55-57', produse: [
-      { nume: 'Equation Pro', doza: 0.4, unitate: 'Kg', procent: 0.04 },
-      { nume: 'Thiovit Jet 80 WG', doza: 3, unitate: 'Kg', procent: 0.3 },
-      { nume: 'Actara 25 WG', doza: 0.1, unitate: 'Kg', procent: 0.01 },
+      { nume: 'Equation Pro', dozaPerHa: 0.4, unitate: 'Kg', procent: 0.04 },
+      { nume: 'Thiovit Jet 80 WG', dozaPerHa: 3, unitate: 'Kg', procent: 0.3 },
+      { nume: 'Actara 25 WG', dozaPerHa: 0.1, unitate: 'Kg', procent: 0.01 },
     ]},
     5: { nume: 'Tratament 5 — Pre-înflorit', fenofaza: 'BBCH 60-61', produse: [
-      { nume: 'Mikal Flash', doza: 3, unitate: 'Kg', procent: 0.3 },
-      { nume: 'Switch 62.5 WG', doza: 1, unitate: 'Kg', procent: 0.1 },
-      { nume: 'Silwet Gold', doza: 0.1, unitate: 'L', procent: 0.01 },
+      { nume: 'Mikal Flash', dozaPerHa: 3, unitate: 'Kg', procent: 0.3 },
+      { nume: 'Switch 62.5 WG', dozaPerHa: 1, unitate: 'Kg', procent: 0.1 },
+      { nume: 'Silwet Gold', dozaPerHa: 0.1, unitate: 'L', procent: 0.01 },
     ]},
     6: { nume: 'Tratament 6 — Post-înflorit', fenofaza: 'BBCH 71-73', produse: [
-      { nume: 'Forum Star', doza: 2, unitate: 'Kg', procent: 0.2 },
-      { nume: 'Teldor 500 SC', doza: 1.5, unitate: 'L', procent: 0.15 },
-      { nume: 'Nissorun 10 WP', doza: 0.3, unitate: 'Kg', procent: 0.03 },
+      { nume: 'Forum Star', dozaPerHa: 2, unitate: 'Kg', procent: 0.2 },
+      { nume: 'Teldor 500 SC', dozaPerHa: 1.5, unitate: 'L', procent: 0.15 },
+      { nume: 'Nissorun 10 WP', dozaPerHa: 0.3, unitate: 'Kg', procent: 0.03 },
     ]},
     7: { nume: 'Tratament 7 — Creșterea bobului', fenofaza: 'BBCH 75-79', produse: [
-      { nume: 'Delan Pro', doza: 1.5, unitate: 'L', procent: 0.15 },
-      { nume: 'Chorus 50 WG', doza: 0.5, unitate: 'Kg', procent: 0.05 },
-      { nume: 'Decis Mega 50 EW', doza: 0.15, unitate: 'L', procent: 0.015 },
+      { nume: 'Delan Pro', dozaPerHa: 1.5, unitate: 'L', procent: 0.15 },
+      { nume: 'Chorus 50 WG', dozaPerHa: 0.5, unitate: 'Kg', procent: 0.05 },
+      { nume: 'Decis Mega 50 EW', dozaPerHa: 0.15, unitate: 'L', procent: 0.015 },
     ]},
     8: { nume: 'Tratament 8 — Pre-recoltă', fenofaza: 'BBCH 81-85', produse: [
-      { nume: 'Merpan 80 WDG', doza: 1.5, unitate: 'Kg', procent: 0.15 },
-      { nume: 'Topsin 500 SC', doza: 1, unitate: 'L', procent: 0.1 },
+      { nume: 'Merpan 80 WDG', dozaPerHa: 1.5, unitate: 'Kg', procent: 0.15 },
+      { nume: 'Topsin M 70 WP', dozaPerHa: 1, unitate: 'L', procent: 0.1 },
     ]},
   };
 
   const TIPURI_FIXE = ['Fungicid','Insecticid','Acaricid','Erbicid','Îngrășământ foliar','Biostimulator','Adjuvant'];
-
   let produse = [], istoric = [], tratamente = [];
   let editDocId = null, filtruActiv = 'toate', filtruTratamente = 'toate';
   let currentUser = null;
   let unsubProduse = null, unsubIstoric = null, unsubTratamente = null, authMode = 'login';
-  let produseRandTratament = []; // randurile din modalul tratament
+  let produseRandTratament = [];
   let editTratamentId = null;
 
   // ---- AUTH ----
@@ -657,9 +618,9 @@
 
   window.schimbAuthTab = function(mode) {
     authMode = mode;
-    document.querySelectorAll('.auth-tab').forEach((t, i) => t.classList.toggle('active', (i===0&&mode==='login')||(i===1&&mode==='register')));
-    document.getElementById('auth-parola2').style.display = mode === 'register' ? 'block' : 'none';
-    document.getElementById('btn-auth').textContent = mode === 'login' ? 'Intră în cont' : 'Creează cont';
+    document.querySelectorAll('.auth-tab').forEach((t,i) => t.classList.toggle('active',(i===0&&mode==='login')||(i===1&&mode==='register')));
+    document.getElementById('auth-parola2').style.display = mode==='register'?'block':'none';
+    document.getElementById('btn-auth').textContent = mode==='login'?'Intră în cont':'Creează cont';
     document.getElementById('auth-error').classList.remove('visible');
   };
 
@@ -669,18 +630,18 @@
     const parola2 = document.getElementById('auth-parola2').value;
     const errEl = document.getElementById('auth-error');
     errEl.classList.remove('visible');
-    if (!email || !parola) { errEl.textContent = 'Completează email și parola!'; errEl.classList.add('visible'); return; }
+    if (!email||!parola) { errEl.textContent='Completează email și parola!'; errEl.classList.add('visible'); return; }
     try {
-      if (authMode === 'register') {
-        if (parola !== parola2) { errEl.textContent = 'Parolele nu coincid!'; errEl.classList.add('visible'); return; }
-        if (parola.length < 6) { errEl.textContent = 'Parola trebuie să aibă minim 6 caractere!'; errEl.classList.add('visible'); return; }
+      if (authMode==='register') {
+        if (parola!==parola2) { errEl.textContent='Parolele nu coincid!'; errEl.classList.add('visible'); return; }
+        if (parola.length<6) { errEl.textContent='Parola trebuie să aibă minim 6 caractere!'; errEl.classList.add('visible'); return; }
         await createUserWithEmailAndPassword(auth, email, parola);
       } else {
         await signInWithEmailAndPassword(auth, email, parola);
       }
     } catch(e) {
-      const mesaje = { 'auth/user-not-found':'Nu există cont cu acest email.','auth/wrong-password':'Parolă incorectă.','auth/email-already-in-use':'Email deja folosit.','auth/invalid-email':'Email invalid.','auth/invalid-credential':'Email sau parolă incorectă.' };
-      errEl.textContent = mesaje[e.code] || 'Eroare: ' + e.message;
+      const mesaje = {'auth/user-not-found':'Nu există cont cu acest email.','auth/wrong-password':'Parolă incorectă.','auth/email-already-in-use':'Email deja folosit.','auth/invalid-email':'Email invalid.','auth/invalid-credential':'Email sau parolă incorectă.'};
+      errEl.textContent = mesaje[e.code]||'Eroare: '+e.message;
       errEl.classList.add('visible');
     }
   };
@@ -707,104 +668,105 @@
   window.cautaProdus = function() {
     const val = document.getElementById('form-nume').value.toLowerCase().trim();
     const dropdown = document.getElementById('produse-dropdown');
-    if (!val || val.length < 1) { dropdown.classList.remove('open'); return; }
-    const filtrate = PRODUSE_LISTA.filter(p => p.nume.toLowerCase().includes(val)).slice(0, 8);
-    if (filtrate.length === 0) { dropdown.classList.remove('open'); return; }
+    if (!val) { dropdown.classList.remove('open'); return; }
+    const filtrate = PRODUSE_LISTA.filter(p => p.nume.toLowerCase().includes(val)).slice(0,8);
+    if (!filtrate.length) { dropdown.classList.remove('open'); return; }
     dropdown.innerHTML = filtrate.map(p => `
       <div class="dropdown-item" onclick="selecteazaProdus(${JSON.stringify(p).replace(/"/g,'&quot;')})">
         <span>${p.nume}</span>
         <span class="dropdown-tip tip-${tipClass(p.tip).replace('tip-','')}">${p.tip}</span>
-      </div>
-    `).join('') + `<div class="dropdown-manual" onclick="inchideDropdown()">✏️ Adaugă "${document.getElementById('form-nume').value}" manual</div>`;
+      </div>`).join('') +
+      `<div class="dropdown-manual" onclick="inchideDropdown()">✏️ Adaugă "${document.getElementById('form-nume').value}" manual</div>`;
     dropdown.classList.add('open');
   };
 
   window.selecteazaProdus = function(p) {
     document.getElementById('form-nume').value = p.nume;
-    setTipInForm(p.tip || '');
-    document.getElementById('form-cultura').value = p.cultura || 'Vie';
-    document.getElementById('form-unitate').value = p.unitate || 'L';
-    document.getElementById('form-doza').value = p.doza || '';
+    setTipInForm(p.tip||'');
+    document.getElementById('form-cultura').value = p.cultura||'Vie';
+    document.getElementById('form-unitate').value = p.unitate||'L';
+    document.getElementById('form-doza').value = p.doza||'';
+    document.getElementById('form-substanta-activa').value = p.substantaActiva||'';
+    document.getElementById('form-phi').value = p.phi||'';
     document.getElementById('produse-dropdown').classList.remove('open');
   };
 
   window.inchideDropdown = function() { document.getElementById('produse-dropdown').classList.remove('open'); };
-
-  document.addEventListener('click', e => {
-    if (!e.target.closest('.produs-search-wrap')) document.getElementById('produse-dropdown').classList.remove('open');
-  });
+  document.addEventListener('click', e => { if (!e.target.closest('.produs-search-wrap')) document.getElementById('produse-dropdown').classList.remove('open'); });
 
   // ---- TIP ----
   window.verificaTipCustom = function() {
     const sel = document.getElementById('form-tip');
     const inp = document.getElementById('form-tip-custom');
-    if (sel.value === '__altul__') { inp.classList.add('visible'); inp.focus(); }
-    else { inp.classList.remove('visible'); inp.value = ''; }
+    if (sel.value==='__altul__') { inp.classList.add('visible'); inp.focus(); }
+    else { inp.classList.remove('visible'); inp.value=''; }
   };
 
   function getTipSelectat() {
     const sel = document.getElementById('form-tip');
-    if (sel.value === '__altul__') return document.getElementById('form-tip-custom').value.trim() || 'Altul';
+    if (sel.value==='__altul__') return document.getElementById('form-tip-custom').value.trim()||'Altul';
     return sel.value;
   }
 
   function setTipInForm(tip) {
     const sel = document.getElementById('form-tip');
     const inp = document.getElementById('form-tip-custom');
-    if (!tip) { sel.value = ''; inp.classList.remove('visible'); }
-    else if (TIPURI_FIXE.includes(tip)) { sel.value = tip; inp.classList.remove('visible'); }
-    else { sel.value = '__altul__'; inp.classList.add('visible'); inp.value = tip; }
+    if (!tip) { sel.value=''; inp.classList.remove('visible'); }
+    else if (TIPURI_FIXE.includes(tip)) { sel.value=tip; inp.classList.remove('visible'); }
+    else { sel.value='__altul__'; inp.classList.add('visible'); inp.value=tip; }
   }
 
   function tipClass(tip) {
     const map = {'Fungicid':'tip-Fungicid','Insecticid':'tip-Insecticid','Acaricid':'tip-Acaricid','Erbicid':'tip-Erbicid','Îngrășământ foliar':'tip-Ingrasamant','Biostimulator':'tip-Biostimulator','Adjuvant':'tip-Adjuvant'};
-    return map[tip] || 'tip-Altul';
+    return map[tip]||'tip-Altul';
   }
 
-  // ---- RANDARE ----
-  function randeazaTot() {
-    randeazaAlerte(); randeazaProduse(); randeazaSummary(); randeazaSelectUtilizare();
-  }
+  // ---- RANDARE STOCURI ----
+  function randeazaTot() { randeazaAlerte(); randeazaProduse(); randeazaSummary(); randeazaSelectUtilizare(); }
 
   function randeazaSummary() {
     document.getElementById('total-produse').textContent = produse.length;
-    document.getElementById('total-critic').textContent = produse.filter(p => p.stocMinim > 0 && p.cantitate <= p.stocMinim).length;
+    document.getElementById('total-critic').textContent = produse.filter(p=>p.stocMinim>0&&p.cantitate<=p.stocMinim).length;
   }
 
   function randeazaAlerte() {
     const container = document.getElementById('alerte-container');
-    const critice = produse.filter(p => p.stocMinim > 0 && p.cantitate <= p.stocMinim);
+    const critice = produse.filter(p=>p.stocMinim>0&&p.cantitate<=p.stocMinim);
     const azi = new Date(); azi.setHours(0,0,0,0);
     const peste30 = new Date(azi); peste30.setDate(azi.getDate()+30);
-    const expirate = produse.filter(p => p.dataExpirare && new Date(p.dataExpirare) <= peste30);
+    const expirate = produse.filter(p=>p.dataExpirare&&new Date(p.dataExpirare)<=peste30);
     container.innerHTML =
-      critice.map(p => `<div class="alerta-card"><span>⚠️</span><div><strong>${p.nume}</strong>${p.tip?' ('+p.tip+')':''} — stoc critic: ${p.cantitate} ${p.unitate} (minim: ${p.stocMinim} ${p.unitate})</div></div>`).join('') +
-      expirate.map(p => {
-        const exp = new Date(p.dataExpirare);
-        const expirat = exp < azi;
+      critice.map(p=>`<div class="alerta-card"><span>⚠️</span><div><strong>${p.nume}</strong>${p.tip?' ('+p.tip+')':''} — stoc critic: ${p.cantitate} ${p.unitate} (minim: ${p.stocMinim} ${p.unitate})</div></div>`).join('')+
+      expirate.map(p=>{
+        const exp=new Date(p.dataExpirare); const expirat=exp<azi;
         return `<div class="alerta-card expirare"><span>${expirat?'❌':'⏰'}</span><div><strong>${p.nume}</strong> — ${expirat?'EXPIRAT la':'Expiră la'} ${exp.toLocaleDateString('ro-RO')}</div></div>`;
       }).join('');
   }
 
   function randeazaProduse() {
     const container = document.getElementById('produse-container');
-    let afisate = filtruActiv === 'toate' ? produse : produse.filter(p => p.cultura === filtruActiv);
-    document.getElementById('count-produse').textContent = `${afisate.length} produs${afisate.length !== 1 ? 'e' : ''}`;
-    if (afisate.length === 0) { container.innerHTML = `<div class="empty"><div class="icon">📦</div><p>Niciun produs găsit.<br>Apasă + pentru a adăuga.</p></div>`; return; }
-    const azi = new Date(); azi.setHours(0,0,0,0);
-    container.innerHTML = afisate.map(p => {
-      const critic = p.stocMinim > 0 && p.cantitate <= p.stocMinim;
-      const expirat = p.dataExpirare && new Date(p.dataExpirare) < azi;
-      const procent = p.stocMinim > 0 ? Math.min(100, (p.cantitate / (p.stocMinim * 3)) * 100) : 60;
-      const clasa = procent > 50 ? 'ok' : procent > 25 ? 'mediu' : 'critic';
-      const culturaBadge = p.cultura==='Vie'?'cultura-vie':p.cultura==='Aluni'?'cultura-aluni':'cultura-ambele';
-      const culturaIcon = p.cultura==='Vie'?'🍇':p.cultura==='Aluni'?'🌰':'🌿';
-      const tipHtml = p.tip ? `<span class="tip-badge ${tipClass(p.tip)}">${p.tip}</span>` : '';
-      const cardClasa = expirat ? 'expirat' : critic ? 'stoc-critic' : 'stoc-ok';
-      const expColor = p.dataExpirare ? (new Date(p.dataExpirare) < azi ? 'var(--rosu)' : new Date(p.dataExpirare) <= new Date(azi.getTime()+30*86400000) ? '#b45309' : 'inherit') : 'inherit';
+    let afisate = filtruActiv==='toate'?produse:produse.filter(p=>p.cultura===filtruActiv);
+    document.getElementById('count-produse').textContent = `${afisate.length} produs${afisate.length!==1?'e':''}`;
+    if (!afisate.length) { container.innerHTML=`<div class="empty"><div class="icon">📦</div><p>Niciun produs găsit.<br>Apasă + pentru a adăuga.</p></div>`; return; }
+    const azi=new Date(); azi.setHours(0,0,0,0);
+    container.innerHTML = afisate.map(p=>{
+      const critic=p.stocMinim>0&&p.cantitate<=p.stocMinim;
+      const expirat=p.dataExpirare&&new Date(p.dataExpirare)<azi;
+      const procent=p.stocMinim>0?Math.min(100,(p.cantitate/(p.stocMinim*3))*100):60;
+      const clasa=procent>50?'ok':procent>25?'mediu':'critic';
+      const culturaBadge=p.cultura==='Vie'?'cultura-vie':p.cultura==='Aluni'?'cultura-aluni':'cultura-ambele';
+      const culturaIcon=p.cultura==='Vie'?'🍇':p.cultura==='Aluni'?'🌰':'🌿';
+      const tipHtml=p.tip?`<span class="tip-badge ${tipClass(p.tip)}">${p.tip}</span>`:'';
+      const cardClasa=expirat?'expirat':critic?'stoc-critic':'stoc-ok';
+      const expColor=p.dataExpirare?(new Date(p.dataExpirare)<azi?'var(--rosu)':new Date(p.dataExpirare)<=new Date(azi.getTime()+30*86400000)?'#b45309':'inherit'):'inherit';
+      const phiHtml=p.phi?`<span class="phi-badge">PHI: ${p.phi}z</span>`:'';
       return `<div class="produs-card ${cardClasa}">
         <div class="produs-header">
-          <div class="produs-header-left"><div class="produs-nume">${p.nume}</div>${tipHtml}</div>
+          <div class="produs-header-left">
+            <div class="produs-nume">${p.nume} ${phiHtml}</div>
+            ${tipHtml}
+            ${p.substantaActiva?`<div style="font-size:0.75rem;color:var(--text-pal);margin-top:2px">🔬 ${p.substantaActiva}</div>`:''}
+          </div>
           <span class="cultura-badge ${culturaBadge}">${culturaIcon} ${p.cultura}</span>
         </div>
         <div class="produs-detalii">
@@ -827,8 +789,8 @@
 
   function randeazaIstoric() {
     const container = document.getElementById('istoric-container');
-    if (istoric.length === 0) { container.innerHTML = `<div class="empty"><div class="icon">📋</div><p>Nicio utilizare înregistrată încă.</p></div>`; return; }
-    container.innerHTML = istoric.map(item => `<div class="istoric-item">
+    if (!istoric.length) { container.innerHTML=`<div class="empty"><div class="icon">📋</div><p>Nicio utilizare înregistrată încă.</p></div>`; return; }
+    container.innerHTML = istoric.map(item=>`<div class="istoric-item">
       <div class="istoric-left">
         <div class="istoric-produs">${item.produs}${item.tip?' <span class="tip-badge '+tipClass(item.tip)+'">'+item.tip+'</span>':''}</div>
         <span class="istoric-data">📅 ${item.data?new Date(item.data).toLocaleDateString('ro-RO'):'—'} · ${item.cultura}${item.obs?' · '+item.obs:''}</span>
@@ -840,216 +802,370 @@
   function randeazaSelectUtilizare() {
     const sel = document.getElementById('util-produs');
     const val = sel.value;
-    sel.innerHTML = '<option value="">Selectează produsul...</option>' + produse.map(p => `<option value="${p._id}">${p.nume}${p.tip?' ['+p.tip+']':''} — ${p.cantitate} ${p.unitate}</option>`).join('');
+    sel.innerHTML = '<option value="">Selectează produsul...</option>'+produse.map(p=>`<option value="${p._id}">${p.nume}${p.tip?' ['+p.tip+']':''} — ${p.cantitate} ${p.unitate}</option>`).join('');
     if (val) sel.value = val;
   }
 
   // ---- TRATAMENTE ----
   function randeazaTratamente() {
     const container = document.getElementById('tratamente-container');
-    let afisate = filtruTratamente === 'toate' ? tratamente : tratamente.filter(t => t.status === filtruTratamente);
-    if (afisate.length === 0) {
-      container.innerHTML = `<div class="empty"><div class="icon">🌿</div><p>Niciun tratament ${filtruTratamente !== 'toate' ? filtruTratamente : 'înregistrat'}.<br>Apasă "Tratament nou" pentru a adăuga.</p></div>`;
+    let afisate = filtruTratamente==='toate'?tratamente:tratamente.filter(t=>t.status===filtruTratamente);
+    if (!afisate.length) {
+      container.innerHTML=`<div class="empty"><div class="icon">🌿</div><p>Niciun tratament ${filtruTratamente!=='toate'?filtruTratamente:'înregistrat'}.<br>Apasă "Tratament nou" pentru a adăuga.</p></div>`;
       return;
     }
-    container.innerHTML = afisate.map(t => {
-      const sablon = SABLOANE_TRATAMENTE[t.numarTratament] || {};
+    container.innerHTML = afisate.map(t=>{
+      const sablon = SABLOANE_TRATAMENTE[t.numarTratament]||{};
       const statusBadge = `<span class="status-badge status-${t.status}">${t.status}</span>`;
-      const produseTabel = (t.produse||[]).map(p => {
-        const stocProdus = produse.find(x => x.nume === p.nume);
-        const stocEx = stocProdus ? stocProdus.cantitate : 0;
-        const necesar = parseFloat((p.dozaPerHa * t.suprafata).toFixed(3));
-        const deAchiz = Math.max(0, necesar - stocEx);
-        const pret = stocProdus ? (stocProdus.pretAchizitie||0) : 0;
-        const costStoc = Math.min(stocEx, necesar) * pret;
-        const costAchiz = deAchiz * pret;
+      let totalCostStoc=0, totalCostAchiz=0;
+      const produseTabel = (t.produse||[]).map(p=>{
+        const sp = produse.find(x=>x.nume===p.nume);
+        const stocEx = sp?sp.cantitate:0;
+        const necesar = parseFloat((p.dozaPerHa*t.suprafata).toFixed(3));
+        const deAchiz = parseFloat(Math.max(0,necesar-stocEx).toFixed(3));
+        const pret = sp?(sp.pretAchizitie||0):0;
+        const phi = sp?(sp.phi||0):0;
+        const substanta = sp?(sp.substantaActiva||''):PRODUSE_LISTA.find(x=>x.nume===p.nume)?.substantaActiva||'';
+        totalCostStoc += Math.min(stocEx,necesar)*pret;
+        totalCostAchiz += deAchiz*pret;
         return `<tr>
-          <td><strong>${p.nume}</strong><br><small style="color:var(--text-pal)">${p.procent?p.procent+'%':''} · ${p.dozaPerHa} ${p.unitate}/ha</small></td>
-          <td>${p.dozaPerHa} ${p.unitate}</td>
+          <td><strong>${p.nume}</strong><br>
+            <small style="color:var(--text-pal)">${substanta||''}</small>
+            ${phi?`<br><span class="phi-badge">PHI: ${phi}z</span>`:''}
+          </td>
+          <td>${p.dozaPerHa} ${p.unitate}/ha${p.procent?`<br><small>${p.procent}% sol.</small>`:''}</td>
           <td><strong>${necesar} ${p.unitate}</strong></td>
-          <td class="${stocEx >= necesar ? 'stoc-ok' : 'achizitie'}">${stocEx} ${p.unitate}</td>
-          <td class="${deAchiz > 0 ? 'achizitie' : 'stoc-ok'}">${deAchiz > 0 ? deAchiz.toFixed(3)+' '+p.unitate : '✓ suficient'}</td>
-          <td>${pret > 0 ? costStoc.toFixed(2)+' lei' : '—'}</td>
-          <td class="${deAchiz > 0 ? 'achizitie' : ''}">${pret > 0 && deAchiz > 0 ? costAchiz.toFixed(2)+' lei' : deAchiz > 0 ? 'preț lipsă' : '—'}</td>
+          <td class="${stocEx>=necesar?'stoc-ok-txt':'achizitie'}">${stocEx} ${p.unitate}</td>
+          <td class="${deAchiz>0?'achizitie':'stoc-ok-txt'}">${deAchiz>0?deAchiz+' '+p.unitate:'✓'}</td>
+          <td>${pret>0?(Math.min(stocEx,necesar)*pret).toFixed(2)+' lei':'—'}</td>
+          <td class="${deAchiz>0?'achizitie':''}">${pret>0&&deAchiz>0?(deAchiz*pret).toFixed(2)+' lei':deAchiz>0?'—':'—'}</td>
         </tr>`;
       }).join('');
 
-      // Calculez totaluri costuri
-      let totalCostStoc = 0, totalCostAchiz = 0;
-      (t.produse||[]).forEach(p => {
-        const sp = produse.find(x => x.nume === p.nume);
-        const stocEx = sp ? sp.cantitate : 0;
-        const necesar = p.dozaPerHa * t.suprafata;
-        const deAchiz = Math.max(0, necesar - stocEx);
-        const pret = sp ? (sp.pretAchizitie||0) : 0;
-        totalCostStoc += Math.min(stocEx, necesar) * pret;
-        totalCostAchiz += deAchiz * pret;
-      });
-
-      const actiuniExtra = t.status === 'planificat' ? `
+      const actiuni = t.status==='planificat'?`
         <button class="btn-actiune primary" onclick="marcheazaEfectuat('${t._id}')">✓ Marchează efectuat</button>
         <button class="btn-actiune" onclick="editeazaTratament('${t._id}')">✏️ Editează</button>
         <button class="btn-actiune danger" onclick="stergeTratament('${t._id}')">🗑️</button>
-      ` : `<button class="btn-actiune danger" onclick="stergeTratament('${t._id}')">🗑️ Șterge</button>`;
+      `:`<button class="btn-actiune danger" onclick="stergeTratament('${t._id}')">🗑️ Șterge</button>`;
 
       return `<div class="tratament-card ${t.status}">
         <div class="tratament-header">
           <div>
-            <div class="tratament-titlu">${sablon.nume || 'Tratament '+t.numarTratament}</div>
-            <div class="tratament-meta">📅 ${t.dataTratament?new Date(t.dataTratament+'T00:00:00').toLocaleDateString('ro-RO'):'—'} · 📐 ${t.suprafata} ha · 🌱 ${t.cultura||'—'}${t.obs?' · '+t.obs:''}</div>
+            <div class="tratament-titlu">${sablon.nume||'Tratament '+t.numarTratament}</div>
+            <div class="tratament-meta">
+              📅 ${t.dataTratament?new Date(t.dataTratament+'T00:00:00').toLocaleDateString('ro-RO'):'—'}
+              · 📐 ${t.suprafata} ha · 🌱 ${t.cultura||'—'}
+              ${t.motiv?' · 🎯 '+t.motiv:''}
+              ${t.aplicator?' · 👤 '+t.aplicator:''}
+              ${t.obs?' · '+t.obs:''}
+            </div>
           </div>
           ${statusBadge}
         </div>
-        ${(t.produse||[]).length > 0 ? `
+        ${(t.produse||[]).length?`
           <div style="overflow-x:auto">
             <table class="necesar-table">
-              <thead><tr><th>Produs</th><th>Doză/ha</th><th>Necesar total</th><th>Stoc existent</th><th>De achiziționat</th><th>Cost stoc</th><th>Cost achiziție</th></tr></thead>
+              <thead><tr><th>Produs / Substanță activă</th><th>Doză/ha · %</th><th>Necesar total</th><th>Stoc existent</th><th>De achiziționat</th><th>Cost stoc</th><th>Cost achiziție</th></tr></thead>
               <tbody>${produseTabel}</tbody>
               <tfoot><tr style="background:var(--verde-pal);font-weight:700">
                 <td colspan="5">TOTAL COSTURI</td>
-                <td>${totalCostStoc > 0 ? totalCostStoc.toFixed(2)+' lei' : '—'}</td>
-                <td style="color:var(--rosu)">${totalCostAchiz > 0 ? totalCostAchiz.toFixed(2)+' lei' : '—'}</td>
+                <td>${totalCostStoc>0?totalCostStoc.toFixed(2)+' lei':'—'}</td>
+                <td style="color:var(--rosu)">${totalCostAchiz>0?totalCostAchiz.toFixed(2)+' lei':'—'}</td>
               </tr></tfoot>
             </table>
           </div>
           <div class="cost-summary">
-            <div class="cost-item"><div class="cost-val">${(totalCostStoc+totalCostAchiz) > 0 ? (totalCostStoc+totalCostAchiz).toFixed(2)+' lei' : '—'}</div><div class="cost-label">Cost total tratament</div></div>
-            <div class="cost-item"><div class="cost-val stoc-ok">${totalCostStoc > 0 ? totalCostStoc.toFixed(2)+' lei' : '—'}</div><div class="cost-label">Valoare stoc existent</div></div>
-            <div class="cost-item achizitie"><div class="cost-val">${totalCostAchiz > 0 ? totalCostAchiz.toFixed(2)+' lei' : '—'}</div><div class="cost-label">Necesar achiziție</div></div>
+            <div class="cost-item"><div class="cost-val">${(totalCostStoc+totalCostAchiz)>0?(totalCostStoc+totalCostAchiz).toFixed(2)+' lei':'—'}</div><div class="cost-label">Cost total</div></div>
+            <div class="cost-item"><div class="cost-val" style="color:var(--verde)">${totalCostStoc>0?totalCostStoc.toFixed(2)+' lei':'—'}</div><div class="cost-label">Valoare stoc</div></div>
+            <div class="cost-item achizitie"><div class="cost-val">${totalCostAchiz>0?totalCostAchiz.toFixed(2)+' lei':'—'}</div><div class="cost-label">Necesar achiziție</div></div>
           </div>
-        ` : ''}
-        <div class="produs-actiuni" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--gri)">${actiuniExtra}</div>
+        `:''}
+        <div class="produs-actiuni" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--gri)">${actiuni}</div>
       </div>`;
     }).join('');
   }
 
-  window.filtreazaTratamente = function(tip, evt) {
-    filtruTratamente = tip;
-    document.querySelectorAll('.sablon-tab').forEach(b => b.classList.remove('active'));
-    if (evt && evt.target) evt.target.classList.add('active');
+  window.filtreazaTratamente = function(tip,evt) {
+    filtruTratamente=tip;
+    document.querySelectorAll('.sablon-tab').forEach(b=>b.classList.remove('active'));
+    if (evt&&evt.target) evt.target.classList.add('active');
     randeazaTratamente();
+  };
+
+  // ---- REGISTRU FITOSANITAR ----
+  function initRegistru() {
+    const selAn = document.getElementById('registru-an');
+    const ani = new Set();
+    tratamente.filter(t=>t.status==='efectuat').forEach(t=>{
+      if (t.dataTratament) ani.add(new Date(t.dataTratament+'T00:00:00').getFullYear());
+    });
+    const aniSortati = [...ani].sort().reverse();
+    const valCurent = selAn.value;
+    selAn.innerHTML = '<option value="">— Selectează anul —</option>'+aniSortati.map(a=>`<option value="${a}">${a}</option>`).join('');
+    if (valCurent) selAn.value = valCurent;
+    if (aniSortati.length&&!selAn.value) selAn.value = aniSortati[0];
+    randeazaRegistru();
+  }
+
+  window.randeazaRegistru = function() {
+    const an = parseInt(document.getElementById('registru-an').value);
+    const cultura = document.getElementById('registru-cultura').value;
+    const container = document.getElementById('registru-continut');
+    if (!an) { container.innerHTML='<div class="no-raport">📋 Selectează un an pentru a afișa registrul.</div>'; return; }
+
+    let filtrate = tratamente.filter(t=>{
+      if (t.status!=='efectuat') return false;
+      if (!t.dataTratament) return false;
+      const tAn = new Date(t.dataTratament+'T00:00:00').getFullYear();
+      if (tAn!==an) return false;
+      if (cultura&&t.cultura!==cultura&&t.cultura!=='Ambele') return false;
+      return true;
+    }).sort((a,b)=>new Date(a.dataTratament)-new Date(b.dataTratament));
+
+    if (!filtrate.length) { container.innerHTML=`<div class="no-raport">📭 Niciun tratament efectuat în ${an}${cultura?' pentru '+cultura:''}.</div>`; return; }
+
+    let nr = 1;
+    const randuri = filtrate.flatMap(t=>{
+      const sablon = SABLOANE_TRATAMENTE[t.numarTratament]||{};
+      return (t.produse||[]).map(p=>{
+        const sp = produse.find(x=>x.nume===p.nume);
+        const substantaActiva = sp?.substantaActiva||PRODUSE_LISTA.find(x=>x.nume===p.nume)?.substantaActiva||'—';
+        const phi = sp?.phi??PRODUSE_LISTA.find(x=>x.nume===p.nume)?.phi;
+        const cantTotal = parseFloat((p.dozaPerHa*t.suprafata).toFixed(3));
+        const dataRecolta = phi!=null&&t.dataTratament ? calcDataRecolta(t.dataTratament, phi) : '—';
+        return {
+          nr: nr++,
+          data: t.dataTratament?new Date(t.dataTratament+'T00:00:00').toLocaleDateString('ro-RO'):'—',
+          cultura: t.cultura,
+          suprafata: t.suprafata,
+          produs: p.nume,
+          substantaActiva,
+          dozaPerHa: p.dozaPerHa+' '+p.unitate+'/ha',
+          procent: p.procent?(p.procent+'%'):'—',
+          cantTotal: cantTotal+' '+p.unitate,
+          motiv: t.motiv||'—',
+          aplicator: t.aplicator||'—',
+          phi: phi!=null?phi+'zile':'—',
+          dataRecolta,
+          tratamentNr: t.numarTratament,
+          sablon: sablon.nume||'Tratament '+t.numarTratament,
+        };
+      });
+    });
+
+    container.innerHTML = `
+      <div class="raport-luna-titlu">📋 Registru tratamente fitosanitare — ${an}${cultura?' · '+cultura:''}</div>
+      <div style="overflow-x:auto">
+        <table class="raport-table" id="tabel-registru">
+          <thead>
+            <tr>
+              <th>Nr.</th>
+              <th>Data</th>
+              <th>Cultură</th>
+              <th>Suprafața (ha)</th>
+              <th>Produs fitosanitar</th>
+              <th>Substanța activă</th>
+              <th>Doză/ha</th>
+              <th>% soluție</th>
+              <th>Cantitate totală</th>
+              <th>Motivul aplicării</th>
+              <th>Aplicator</th>
+              <th>PHI</th>
+              <th>Dată limită recoltare</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${randuri.map(r=>`<tr>
+              <td>${r.nr}</td>
+              <td><strong>${r.data}</strong></td>
+              <td>${r.cultura}</td>
+              <td>${r.suprafata}</td>
+              <td><strong>${r.produs}</strong><br><small style="color:var(--text-pal)">${r.sablon}</small></td>
+              <td><small>${r.substantaActiva}</small></td>
+              <td>${r.dozaPerHa}</td>
+              <td>${r.procent}</td>
+              <td><strong>${r.cantTotal}</strong></td>
+              <td>${r.motiv}</td>
+              <td>${r.aplicator}</td>
+              <td><span class="phi-badge">${r.phi}</span></td>
+              <td style="color:var(--rosu);font-weight:600">${r.dataRecolta}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:16px;font-size:0.8rem;color:var(--text-pal);padding:12px;background:var(--gri);border-radius:8px">
+        📌 Total înregistrări: <strong>${randuri.length}</strong> · 
+        Total tratamente efectuate: <strong>${filtrate.length}</strong> · 
+        An: <strong>${an}</strong>${cultura?' · Cultură: <strong>'+cultura+'</strong>':''}
+      </div>
+    `;
+  };
+
+  function calcDataRecolta(dataTratament, phiZile) {
+    if (!phiZile||phiZile<=0) return 'Fără restricție';
+    const d = new Date(dataTratament+'T00:00:00');
+    d.setDate(d.getDate()+parseInt(phiZile));
+    return d.toLocaleDateString('ro-RO');
+  }
+
+  window.exportRegistruPDF = function() {
+    const an = document.getElementById('registru-an').value;
+    if (!an) { alert('Selectează un an mai întâi!'); return; }
+    window.print();
+  };
+
+  window.exportRegistruCSV = function() {
+    const an = parseInt(document.getElementById('registru-an').value);
+    const cultura = document.getElementById('registru-cultura').value;
+    if (!an) { alert('Selectează un an mai întâi!'); return; }
+
+    let filtrate = tratamente.filter(t=>{
+      if (t.status!=='efectuat') return false;
+      const tAn = t.dataTratament?new Date(t.dataTratament+'T00:00:00').getFullYear():0;
+      if (tAn!==an) return false;
+      if (cultura&&t.cultura!==cultura&&t.cultura!=='Ambele') return false;
+      return true;
+    }).sort((a,b)=>new Date(a.dataTratament)-new Date(b.dataTratament));
+
+    let csv = `REGISTRU TRATAMENTE FITOSANITARE - ${an}${cultura?' - '+cultura:''}\n`;
+    csv += 'Conform OUG 34/2012\n\n';
+    csv += 'Nr.,Data,Cultura,Suprafata (ha),Produs fitosanitar,Substanta activa,Doza/ha,% solutie,Cantitate totala,Motivul aplicarii,Aplicator,PHI (zile),Data limita recoltare\n';
+
+    let nr = 1;
+    filtrate.forEach(t=>{
+      const sablon = SABLOANE_TRATAMENTE[t.numarTratament]||{};
+      (t.produse||[]).forEach(p=>{
+        const sp = produse.find(x=>x.nume===p.nume);
+        const substanta = sp?.substantaActiva||PRODUSE_LISTA.find(x=>x.nume===p.nume)?.substantaActiva||'';
+        const phi = sp?.phi??PRODUSE_LISTA.find(x=>x.nume===p.nume)?.phi;
+        const cantTotal = parseFloat((p.dozaPerHa*t.suprafata).toFixed(3));
+        const dataRec = phi!=null?calcDataRecolta(t.dataTratament,phi):'';
+        const data = t.dataTratament?new Date(t.dataTratament+'T00:00:00').toLocaleDateString('ro-RO'):'';
+        csv += `${nr++},${data},${t.cultura},${t.suprafata},"${p.nume}","${substanta}","${p.dozaPerHa} ${p.unitate}/ha",${p.procent||0},${cantTotal} ${p.unitate},"${t.motiv||''}","${t.aplicator||''}",${phi??''},"${dataRec}"\n`;
+      });
+    });
+
+    const blob = new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href=url; a.download=`Registru_Fitosanitar_${an}${cultura?'_'+cultura:''}.csv`; a.click();
+    URL.revokeObjectURL(url);
   };
 
   // ---- MODAL TRATAMENT ----
   window.deschideModalTratament = function(docId) {
-    editTratamentId = docId || null;
+    editTratamentId = docId||null;
     produseRandTratament = [];
-    document.getElementById('modal-tratament-titlu').textContent = docId ? 'Editează tratament' : 'Tratament nou';
+    document.getElementById('modal-tratament-titlu').textContent = docId?'Editează tratament':'Tratament nou';
     document.getElementById('trat-data').value = new Date().toISOString().split('T')[0];
     document.getElementById('trat-suprafata').value = '';
     document.getElementById('trat-obs').value = '';
+    document.getElementById('trat-motiv').value = '';
+    document.getElementById('trat-aplicator').value = '';
     document.getElementById('trat-numar').value = '';
     document.getElementById('trat-cultura').value = 'Vie';
     document.getElementById('necesar-calcul').style.display = 'none';
-
     if (docId) {
-      const t = tratamente.find(x => x._id === docId);
+      const t = tratamente.find(x=>x._id===docId);
       document.getElementById('trat-numar').value = t.numarTratament;
       document.getElementById('trat-data').value = t.dataTratament;
       document.getElementById('trat-suprafata').value = t.suprafata;
       document.getElementById('trat-obs').value = t.obs||'';
+      document.getElementById('trat-motiv').value = t.motiv||'';
+      document.getElementById('trat-aplicator').value = t.aplicator||'';
       document.getElementById('trat-cultura').value = t.cultura||'Vie';
-      produseRandTratament = (t.produse||[]).map(p => ({...p}));
+      produseRandTratament = (t.produse||[]).map(p=>({...p}));
     }
-
     randeazaProduseModal();
     document.getElementById('overlay-tratament').classList.add('active');
   };
 
   window.aplicaSablon = function() {
     const nr = parseInt(document.getElementById('trat-numar').value);
-    if (!nr || !SABLOANE_TRATAMENTE[nr]) { produseRandTratament = []; randeazaProduseModal(); return; }
-    const sablon = SABLOANE_TRATAMENTE[nr];
-    produseRandTratament = sablon.produse.map(p => ({
-      nume: p.nume, dozaPerHa: p.doza, unitate: p.unitate, procent: p.procent || 0
-    }));
+    if (!nr||!SABLOANE_TRATAMENTE[nr]) { produseRandTratament=[]; randeazaProduseModal(); return; }
+    produseRandTratament = SABLOANE_TRATAMENTE[nr].produse.map(p=>({...p}));
     randeazaProduseModal();
     recalculeazaNecesar();
   };
 
   window.adaugaRandProdus = function() {
-    produseRandTratament.push({ nume: '', dozaPerHa: 0, unitate: 'L', procent: 0 });
+    produseRandTratament.push({nume:'',dozaPerHa:0,unitate:'L',procent:0});
     randeazaProduseModal();
   };
 
   window.removeRandProdus = function(idx) {
-    produseRandTratament.splice(idx, 1);
+    produseRandTratament.splice(idx,1);
     randeazaProduseModal();
     recalculeazaNecesar();
   };
 
-  window.updateRandProdus = function(idx, camp, val) {
-    produseRandTratament[idx][camp] = camp === 'dozaPerHa' || camp === 'procent' ? parseFloat(val)||0 : val;
-    if (camp === 'dozaPerHa' || camp === 'procent') recalculeazaNecesar();
+  window.updateRandProdus = function(idx,camp,val) {
+    produseRandTratament[idx][camp] = (camp==='dozaPerHa'||camp==='procent')?parseFloat(val)||0:val;
+    if (camp==='dozaPerHa'||camp==='procent') recalculeazaNecesar();
   };
 
   function randeazaProduseModal() {
     const container = document.getElementById('produse-tratament-list');
-    if (produseRandTratament.length === 0) {
-      container.innerHTML = '<div style="color:var(--text-pal);font-size:0.85rem;padding:8px 0">Niciun produs adăugat. Alege un șablon sau adaugă manual.</div>';
+    if (!produseRandTratament.length) {
+      container.innerHTML='<div style="color:var(--text-pal);font-size:0.85rem;padding:8px 0">Niciun produs. Alege un șablon sau adaugă manual.</div>';
       return;
     }
-    container.innerHTML = produseRandTratament.map((p, idx) => {
-      const optiuni = produse.map(pr => `<option value="${pr.nume}" ${pr.nume===p.nume?'selected':''}>${pr.nume} (stoc: ${pr.cantitate} ${pr.unitate})</option>`).join('');
-      return `<div class="produs-tratament-row" style="grid-template-columns:2fr 1fr 0.7fr 0.7fr auto">
+    container.innerHTML = produseRandTratament.map((p,idx)=>{
+      const optiuni = produse.map(pr=>`<option value="${pr.nume}" ${pr.nume===p.nume?'selected':''}>${pr.nume} (${pr.cantitate} ${pr.unitate})</option>`).join('');
+      return `<div class="produs-tratament-row">
         <select onchange="updateRandProdus(${idx},'nume',this.value);randeazaProduseModal()">
-          <option value="">— Selectează produs —</option>
-          ${optiuni}
+          <option value="">— Selectează —</option>${optiuni}
         </select>
-        <input type="number" value="${p.dozaPerHa||''}" placeholder="Doză/ha" step="0.001" min="0" oninput="updateRandProdus(${idx},'dozaPerHa',this.value)" style="width:100%">
+        <input type="number" value="${p.dozaPerHa||''}" placeholder="Doză/ha" step="0.001" min="0" oninput="updateRandProdus(${idx},'dozaPerHa',this.value)" title="Doză per hectar">
         <select onchange="updateRandProdus(${idx},'unitate',this.value)">
           <option value="L" ${p.unitate==='L'?'selected':''}>L</option>
           <option value="Kg" ${p.unitate==='Kg'?'selected':''}>Kg</option>
           <option value="buc" ${p.unitate==='buc'?'selected':''}>buc</option>
         </select>
-        <input type="number" value="${p.procent||''}" placeholder="% sol." step="0.001" min="0" oninput="updateRandProdus(${idx},'procent',this.value)" style="width:100%" title="Concentrație soluție %">
+        <input type="number" value="${p.procent||''}" placeholder="% sol." step="0.001" min="0" oninput="updateRandProdus(${idx},'procent',this.value)" title="Concentrație soluție %">
         <button class="btn-remove-produs" onclick="removeRandProdus(${idx})">✕</button>
       </div>`;
     }).join('');
   }
 
   window.recalculeazaNecesar = function() {
-    const suprafata = parseFloat(document.getElementById('trat-suprafata').value) || 0;
+    const suprafata = parseFloat(document.getElementById('trat-suprafata').value)||0;
     const calcDiv = document.getElementById('necesar-calcul');
-    if (suprafata <= 0 || produseRandTratament.length === 0) { calcDiv.style.display = 'none'; return; }
-    calcDiv.style.display = 'block';
-
-    let totalCostStoc = 0, totalCostAchiz = 0, totalCostTotal = 0;
+    if (suprafata<=0||!produseRandTratament.filter(p=>p.nume).length) { calcDiv.style.display='none'; return; }
+    calcDiv.style.display='block';
+    let totalCostStoc=0, totalCostAchiz=0, totalCostTotal=0;
     const tbody = document.getElementById('necesar-tbody');
     const tfoot = document.getElementById('necesar-tfoot');
-
-    tbody.innerHTML = produseRandTratament.filter(p => p.nume).map(p => {
-      const stocProdus = produse.find(x => x.nume === p.nume);
-      const stocEx = stocProdus ? stocProdus.cantitate : 0;
-      const necesar = parseFloat((p.dozaPerHa * suprafata).toFixed(3));
-      const deAchiz = parseFloat(Math.max(0, necesar - stocEx).toFixed(3));
-      const pret = stocProdus ? (stocProdus.pretAchizitie||0) : 0;
-      const costStoc = parseFloat((Math.min(stocEx, necesar) * pret).toFixed(2));
-      const costAchiz = parseFloat((deAchiz * pret).toFixed(2));
-      totalCostStoc += costStoc;
-      totalCostAchiz += costAchiz;
-      totalCostTotal += necesar * pret;
+    tbody.innerHTML = produseRandTratament.filter(p=>p.nume).map(p=>{
+      const sp = produse.find(x=>x.nume===p.nume);
+      const stocEx = sp?sp.cantitate:0;
+      const necesar = parseFloat((p.dozaPerHa*suprafata).toFixed(3));
+      const deAchiz = parseFloat(Math.max(0,necesar-stocEx).toFixed(3));
+      const pret = sp?(sp.pretAchizitie||0):0;
+      const phi = sp?.phi??PRODUSE_LISTA.find(x=>x.nume===p.nume)?.phi;
+      const substanta = sp?.substantaActiva||PRODUSE_LISTA.find(x=>x.nume===p.nume)?.substantaActiva||'';
+      totalCostStoc += Math.min(stocEx,necesar)*pret;
+      totalCostAchiz += deAchiz*pret;
+      totalCostTotal += necesar*pret;
       return `<tr>
-        <td><strong>${p.nume}</strong>${p.procent?' <small style="color:var(--text-pal)">'+p.procent+'% sol.</small>':''}</td>
-        <td>${p.dozaPerHa} ${p.unitate}/ha</td>
+        <td><strong>${p.nume}</strong>${substanta?`<br><small style="color:var(--text-pal)">${substanta}</small>`:''}${phi?`<br><span class="phi-badge">PHI: ${phi}z</span>`:''}</td>
+        <td>${p.dozaPerHa} ${p.unitate}/ha${p.procent?`<br><small>${p.procent}%</small>`:''}</td>
         <td><strong>${necesar} ${p.unitate}</strong></td>
-        <td class="${stocEx >= necesar ? 'stoc-ok' : 'achizitie'}">${stocEx} ${p.unitate}</td>
-        <td class="${deAchiz > 0 ? 'achizitie' : 'stoc-ok'}">${deAchiz > 0 ? '<strong>'+deAchiz+' '+p.unitate+'</strong>' : '✓ suficient'}</td>
-        <td>${pret > 0 ? costStoc.toFixed(2)+' lei' : '—'}</td>
-        <td class="${deAchiz > 0 ? 'achizitie' : ''}">${pret > 0 && deAchiz > 0 ? '<strong>'+costAchiz.toFixed(2)+' lei</strong>' : deAchiz > 0 ? '<small>preț lipsă</small>' : '—'}</td>
+        <td class="${stocEx>=necesar?'stoc-ok-txt':'achizitie'}">${stocEx} ${p.unitate}</td>
+        <td class="${deAchiz>0?'achizitie':'stoc-ok-txt'}">${deAchiz>0?'<strong>'+deAchiz+' '+p.unitate+'</strong>':'✓ suficient'}</td>
+        <td>${pret>0?(Math.min(stocEx,necesar)*pret).toFixed(2)+' lei':'—'}</td>
+        <td class="${deAchiz>0?'achizitie':''}">${pret>0&&deAchiz>0?'<strong>'+(deAchiz*pret).toFixed(2)+' lei</strong>':deAchiz>0?'<small>preț lipsă</small>':'—'}</td>
       </tr>`;
     }).join('');
-
     tfoot.innerHTML = `<tr class="total-row">
       <td colspan="5"><strong>TOTAL</strong></td>
-      <td><strong>${totalCostStoc > 0 ? totalCostStoc.toFixed(2)+' lei' : '—'}</strong></td>
-      <td style="color:var(--rosu)"><strong>${totalCostAchiz > 0 ? totalCostAchiz.toFixed(2)+' lei' : '—'}</strong></td>
+      <td><strong>${totalCostStoc>0?totalCostStoc.toFixed(2)+' lei':'—'}</strong></td>
+      <td style="color:var(--rosu)"><strong>${totalCostAchiz>0?totalCostAchiz.toFixed(2)+' lei':'—'}</strong></td>
     </tr>`;
-
     document.getElementById('cost-summary').innerHTML = `
-      <div class="cost-item"><div class="cost-val">${totalCostTotal > 0 ? totalCostTotal.toFixed(2)+' lei' : '—'}</div><div class="cost-label">Cost total tratament</div></div>
-      <div class="cost-item"><div class="cost-val" style="color:var(--verde)">${totalCostStoc > 0 ? totalCostStoc.toFixed(2)+' lei' : '—'}</div><div class="cost-label">Valoare stoc existent</div></div>
-      <div class="cost-item achizitie"><div class="cost-val">${totalCostAchiz > 0 ? totalCostAchiz.toFixed(2)+' lei' : '—'}</div><div class="cost-label">Necesar achiziție</div></div>
+      <div class="cost-item"><div class="cost-val">${totalCostTotal>0?totalCostTotal.toFixed(2)+' lei':'—'}</div><div class="cost-label">Cost total tratament</div></div>
+      <div class="cost-item"><div class="cost-val" style="color:var(--verde)">${totalCostStoc>0?totalCostStoc.toFixed(2)+' lei':'—'}</div><div class="cost-label">Valoare stoc existent</div></div>
+      <div class="cost-item achizitie"><div class="cost-val">${totalCostAchiz>0?totalCostAchiz.toFixed(2)+' lei':'—'}</div><div class="cost-label">Necesar achiziție</div></div>
     `;
   };
 
@@ -1057,65 +1173,55 @@
     const numar = document.getElementById('trat-numar').value;
     const data = document.getElementById('trat-data').value;
     const suprafata = parseFloat(document.getElementById('trat-suprafata').value);
-    if (!numar || !data || isNaN(suprafata) || suprafata <= 0) {
-      alert('Completează numărul tratamentului, data și suprafața!'); return;
-    }
-    const produseValide = produseRandTratament.filter(p => p.nume && p.dozaPerHa > 0);
-    const tratamentDoc = {
+    if (!numar||!data||isNaN(suprafata)||suprafata<=0) { alert('Completează numărul tratamentului, data și suprafața!'); return; }
+    const produseValide = produseRandTratament.filter(p=>p.nume&&p.dozaPerHa>0);
+    const tratDoc = {
       numarTratament: parseInt(numar),
       dataTratament: data,
       suprafata,
       cultura: document.getElementById('trat-cultura').value,
+      motiv: document.getElementById('trat-motiv').value.trim(),
+      aplicator: document.getElementById('trat-aplicator').value.trim(),
       obs: document.getElementById('trat-obs').value.trim(),
       produse: produseValide,
       status: 'planificat',
       creatLa: serverTimestamp(),
     };
     const uid = currentUser.uid;
-    if (editTratamentId) {
-      await updateDoc(doc(db,'users',uid,'tratamente',editTratamentId), {...tratamentDoc, creatLa: undefined});
-    } else {
-      await addDoc(collection(db,'users',uid,'tratamente'), tratamentDoc);
-    }
+    if (editTratamentId) await updateDoc(doc(db,'users',uid,'tratamente',editTratamentId),{...tratDoc,creatLa:undefined});
+    else await addDoc(collection(db,'users',uid,'tratamente'),tratDoc);
     inchideModalTratamentFortat();
   };
 
   window.editeazaTratament = function(docId) { window.deschideModalTratament(docId); };
 
   window.marcheazaEfectuat = async function(docId) {
-    const t = tratamente.find(x => x._id === docId);
+    const t = tratamente.find(x=>x._id===docId);
     if (!t) return;
-    if (!confirm(`Marchezi tratamentul "${SABLOANE_TRATAMENTE[t.numarTratament]?.nume || 'Tratament '+t.numarTratament}" ca efectuat?\n\nStocurile vor fi scăzute automat.`)) return;
-
+    if (!confirm(`Marchezi "${SABLOANE_TRATAMENTE[t.numarTratament]?.nume||'Tratament '+t.numarTratament}" ca efectuat?\n\nStocurile vor fi scăzute automat.`)) return;
     const uid = currentUser.uid;
-    // Scade din stoc pentru fiecare produs
     for (const p of (t.produse||[])) {
-      const stocProdus = produse.find(x => x.nume === p.nume);
-      if (stocProdus) {
-        const cantitateScazuta = parseFloat((p.dozaPerHa * t.suprafata).toFixed(3));
-        const nouCantitate = Math.max(0, Math.round((stocProdus.cantitate - cantitateScazuta) * 1000) / 1000);
-        await updateDoc(doc(db,'users',uid,'produse',stocProdus._id), {
-          cantitate: nouCantitate,
-          dataUtilizare: t.dataTratament
-        });
-        // Adauga in istoric
-        await addDoc(collection(db,'users',uid,'istoric'), {
-          produs: p.nume, tip: stocProdus.tip||'', cultura: t.cultura||stocProdus.cultura,
-          cantitate: cantitateScazuta, unitate: p.unitate, data: t.dataTratament,
-          obs: `Tratament ${t.numarTratament} — ${t.suprafata} ha`,
-          timestamp: serverTimestamp()
+      const sp = produse.find(x=>x.nume===p.nume);
+      if (sp) {
+        const cant = parseFloat((p.dozaPerHa*t.suprafata).toFixed(3));
+        const nou = Math.max(0,Math.round((sp.cantitate-cant)*1000)/1000);
+        await updateDoc(doc(db,'users',uid,'produse',sp._id),{cantitate:nou,dataUtilizare:t.dataTratament});
+        await addDoc(collection(db,'users',uid,'istoric'),{
+          produs:p.nume,tip:sp.tip||'',cultura:t.cultura||sp.cultura,
+          cantitate:cant,unitate:p.unitate,data:t.dataTratament,
+          obs:`Tratament ${t.numarTratament}${t.motiv?' — '+t.motiv:''} — ${t.suprafata}ha`,
+          timestamp:serverTimestamp()
         });
       }
     }
-    await updateDoc(doc(db,'users',uid,'tratamente',docId), { status: 'efectuat', dataEfectuarii: t.dataTratament });
-    alert('✓ Tratament marcat ca efectuat! Stocurile au fost actualizate.');
+    await updateDoc(doc(db,'users',uid,'tratamente',docId),{status:'efectuat',dataEfectuarii:t.dataTratament});
+    alert('✓ Tratament marcat efectuat! Stocurile actualizate.');
   };
 
   window.stergeTratament = async function(docId) {
-    const t = tratamente.find(x => x._id === docId);
-    if (confirm(`Ștergi tratamentul "${SABLOANE_TRATAMENTE[t?.numarTratament]?.nume || 'Tratament '+t?.numarTratament}"?`)) {
+    const t = tratamente.find(x=>x._id===docId);
+    if (confirm(`Ștergi tratamentul "${SABLOANE_TRATAMENTE[t?.numarTratament]?.nume||'Tratament '+t?.numarTratament}"?`))
       await deleteDoc(doc(db,'users',currentUser.uid,'tratamente',docId));
-    }
   };
 
   window.inchideModalTratament = function(e) { if (e.target===document.getElementById('overlay-tratament')) inchideModalTratamentFortat(); };
@@ -1123,27 +1229,28 @@
 
   // ---- TABS ----
   window.schimbTab = function(tab) {
-    ['stocuri','tratamente','utilizare','istoric','rapoarte'].forEach(t => document.getElementById('tab-'+t).style.display = t===tab?'block':'none');
-    document.querySelectorAll('.tab').forEach((el,i) => el.classList.toggle('active', ['stocuri','tratamente','utilizare','istoric','rapoarte'][i]===tab));
-    document.getElementById('fab-btn').style.display = tab === 'stocuri' ? 'flex' : 'none';
-    if (tab === 'rapoarte') initRapoarte();
-    if (tab === 'tratamente') randeazaTratamente();
+    ['stocuri','tratamente','registru','utilizare','rapoarte'].forEach(t=>document.getElementById('tab-'+t).style.display=t===tab?'block':'none');
+    document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',['stocuri','tratamente','registru','utilizare','rapoarte'][i]===tab));
+    document.getElementById('fab-btn').style.display = tab==='stocuri'?'flex':'none';
+    if (tab==='rapoarte') initRapoarte();
+    if (tab==='registru') initRegistru();
+    if (tab==='tratamente') randeazaTratamente();
   };
 
-  window.filtreaza = function(tip, evt) {
-    filtruActiv = tip;
-    document.querySelectorAll('.filtru-btn').forEach(b => b.classList.remove('active'));
-    if (evt && evt.target) evt.target.classList.add('active');
+  window.filtreaza = function(tip,evt) {
+    filtruActiv=tip;
+    document.querySelectorAll('.filtru-btn').forEach(b=>b.classList.remove('active'));
+    if (evt&&evt.target) evt.target.classList.add('active');
     randeazaProduse();
   };
 
   // ---- MODAL PRODUS ----
   window.deschideModal = function(docId) {
-    editDocId = docId || null;
-    document.getElementById('modal-titlu').textContent = docId ? 'Editează produs' : 'Adaugă produs nou';
+    editDocId = docId||null;
+    document.getElementById('modal-titlu').textContent = docId?'Editează produs':'Adaugă produs nou';
     document.getElementById('produse-dropdown').classList.remove('open');
     if (docId) {
-      const p = produse.find(x => x._id === docId);
+      const p = produse.find(x=>x._id===docId);
       document.getElementById('form-nume').value = p.nume;
       setTipInForm(p.tip||'');
       document.getElementById('form-cultura').value = p.cultura;
@@ -1154,17 +1261,14 @@
       document.getElementById('form-data').value = p.dataUtilizare||'';
       document.getElementById('form-pret').value = p.pretAchizitie||'';
       document.getElementById('form-expirare').value = p.dataExpirare||'';
+      document.getElementById('form-substanta-activa').value = p.substantaActiva||'';
+      document.getElementById('form-phi').value = p.phi||'';
     } else {
-      document.getElementById('form-nume').value = '';
+      ['form-nume','form-cantitate','form-stoc-minim','form-doza','form-pret','form-expirare','form-substanta-activa','form-phi'].forEach(id=>document.getElementById(id).value='');
       setTipInForm('');
       document.getElementById('form-cultura').value = 'Vie';
       document.getElementById('form-unitate').value = 'L';
-      document.getElementById('form-cantitate').value = '';
-      document.getElementById('form-stoc-minim').value = '';
-      document.getElementById('form-doza').value = '';
       document.getElementById('form-data').value = new Date().toISOString().split('T')[0];
-      document.getElementById('form-pret').value = '';
-      document.getElementById('form-expirare').value = '';
     }
     document.getElementById('overlay').classList.add('active');
   };
@@ -1176,7 +1280,7 @@
   window.salveazaProdus = async function() {
     const nume = document.getElementById('form-nume').value.trim();
     const cantitate = parseFloat(document.getElementById('form-cantitate').value);
-    if (!nume || isNaN(cantitate)) { alert('Completează cel puțin numele și cantitatea!'); return; }
+    if (!nume||isNaN(cantitate)) { alert('Completează cel puțin numele și cantitatea!'); return; }
     const produs = {
       nume, tip: getTipSelectat(),
       cultura: document.getElementById('form-cultura').value,
@@ -1187,22 +1291,24 @@
       dataUtilizare: document.getElementById('form-data').value,
       pretAchizitie: parseFloat(document.getElementById('form-pret').value)||0,
       dataExpirare: document.getElementById('form-expirare').value||null,
+      substantaActiva: document.getElementById('form-substanta-activa').value.trim(),
+      phi: parseInt(document.getElementById('form-phi').value)||0,
     };
     const uid = currentUser.uid;
-    if (editDocId) await updateDoc(doc(db,'users',uid,'produse',editDocId), produs);
-    else await addDoc(collection(db,'users',uid,'produse'), produs);
+    if (editDocId) await updateDoc(doc(db,'users',uid,'produse',editDocId),produs);
+    else await addDoc(collection(db,'users',uid,'produse'),produs);
     window.inchideModalFortat();
   };
 
   window.stergeProdus = async function(docId) {
-    const p = produse.find(x => x._id===docId);
+    const p = produse.find(x=>x._id===docId);
     if (confirm(`Ștergi "${p.nume}"?`)) await deleteDoc(doc(db,'users',currentUser.uid,'produse',docId));
   };
 
   // ---- UTILIZARE ----
   window.mergeUtilizare = function(docId) {
     schimbTab('utilizare');
-    setTimeout(() => { document.getElementById('util-produs').value = docId; afiseazaInfoUtilizare(); }, 100);
+    setTimeout(()=>{document.getElementById('util-produs').value=docId; afiseazaInfoUtilizare();},100);
   };
 
   window.afiseazaInfoUtilizare = function() {
@@ -1211,7 +1317,7 @@
     if (!docId) { info.style.display='none'; return; }
     const p = produse.find(x=>x._id===docId);
     info.style.display='block';
-    info.innerHTML = `<strong>${p.nume}</strong>${p.tip?' · <em>'+p.tip+'</em>':''} · Stoc: <strong>${p.cantitate} ${p.unitate}</strong> · Doză: ${p.doza||'nespecificat'} · ${p.cultura}${p.pretAchizitie?' · Preț: '+p.pretAchizitie+' lei/'+p.unitate:''}`;
+    info.innerHTML = `<strong>${p.nume}</strong>${p.tip?' · <em>'+p.tip+'</em>':''} · Stoc: <strong>${p.cantitate} ${p.unitate}</strong> · Doză: ${p.doza||'—'} · PHI: ${p.phi?p.phi+'z':'—'}${p.pretAchizitie?' · Preț: '+p.pretAchizitie+' lei/'+p.unitate:''}`;
   };
 
   window.inregistreazaUtilizare = async function() {
@@ -1220,14 +1326,14 @@
     const data = document.getElementById('util-data').value;
     if (!docId||isNaN(cantitate)||cantitate<=0) { alert('Completează produsul și cantitatea!'); return; }
     const p = produse.find(x=>x._id===docId);
-    if (cantitate > p.cantitate) { alert('Cantitatea depășește stocul disponibil!'); return; }
+    if (cantitate>p.cantitate) { alert('Cantitatea depășește stocul disponibil!'); return; }
     const uid = currentUser.uid;
-    const nouCantitate = Math.round((p.cantitate-cantitate)*100)/100;
-    await updateDoc(doc(db,'users',uid,'produse',docId), { cantitate: nouCantitate, dataUtilizare: data });
-    await addDoc(collection(db,'users',uid,'istoric'), { produs: p.nume, tip: p.tip||'', cultura: p.cultura, cantitate, unitate: p.unitate, data, obs: document.getElementById('util-obs').value.trim(), timestamp: serverTimestamp() });
-    document.getElementById('util-cantitate').value = '';
-    document.getElementById('util-obs').value = '';
-    alert(`✓ Utilizare înregistrată! Stoc rămas: ${nouCantitate} ${p.unitate}`);
+    const nou = Math.round((p.cantitate-cantitate)*100)/100;
+    await updateDoc(doc(db,'users',uid,'produse',docId),{cantitate:nou,dataUtilizare:data});
+    await addDoc(collection(db,'users',uid,'istoric'),{produs:p.nume,tip:p.tip||'',cultura:p.cultura,cantitate,unitate:p.unitate,data,obs:document.getElementById('util-obs').value.trim(),timestamp:serverTimestamp()});
+    document.getElementById('util-cantitate').value='';
+    document.getElementById('util-obs').value='';
+    alert(`✓ Utilizare înregistrată! Stoc rămas: ${nou} ${p.unitate}`);
     schimbTab('stocuri');
   };
 
@@ -1235,140 +1341,109 @@
   function initRapoarte() {
     const sel = document.getElementById('raport-luna');
     const luni = new Set();
-    istoric.forEach(item => { if (item.data) { const d = new Date(item.data); luni.add(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`); } });
-    const luniSortate = [...luni].sort().reverse();
-    const valCurent = sel.value;
-    sel.innerHTML = '<option value="">— Selectează luna —</option>' +
-      luniSortate.map(l => {
-        const [an, luna] = l.split('-');
-        const numeL = new Date(an, luna-1, 1).toLocaleDateString('ro-RO', {month:'long', year:'numeric'});
-        return `<option value="${l}">${numeL}</option>`;
-      }).join('');
-    if (valCurent) sel.value = valCurent;
-    if (luniSortate.length > 0 && !sel.value) sel.value = luniSortate[0];
+    istoric.forEach(item=>{if(item.data){const d=new Date(item.data);luni.add(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`)}});
+    const sortate = [...luni].sort().reverse();
+    const val = sel.value;
+    sel.innerHTML = '<option value="">— Selectează luna —</option>'+sortate.map(l=>{
+      const [an,luna]=l.split('-');
+      return `<option value="${l}">${new Date(an,luna-1,1).toLocaleDateString('ro-RO',{month:'long',year:'numeric'})}</option>`;
+    }).join('');
+    if (val) sel.value=val;
+    if (sortate.length&&!sel.value) sel.value=sortate[0];
     genereazaRaport();
   }
 
   window.genereazaRaport = function() {
     const luna = document.getElementById('raport-luna').value;
     const container = document.getElementById('raport-continut');
-    if (!luna) { container.innerHTML = '<div class="no-raport">📊 Selectează o lună pentru a genera raportul.</div>'; return; }
-    const [an, lunaNum] = luna.split('-').map(Number);
-    const numeLuna = new Date(an, lunaNum-1, 1).toLocaleDateString('ro-RO', {month:'long', year:'numeric'});
-    const itemeLuna = istoric.filter(item => {
-      if (!item.data) return false;
-      const d = new Date(item.data);
-      return d.getFullYear() === an && d.getMonth()+1 === lunaNum;
-    }).sort((a,b) => new Date(a.data) - new Date(b.data));
-    if (itemeLuna.length === 0) { container.innerHTML = `<div class="no-raport">📭 Nicio utilizare înregistrată în ${numeLuna}.</div>`; return; }
-
-    const consum = {};
-    itemeLuna.forEach(item => {
-      const key = item.produs;
-      if (!consum[key]) consum[key] = { produs: item.produs, tip: item.tip, cultura: item.cultura, unitate: item.unitate, total: 0, aplicari: 0 };
-      consum[key].total += item.cantitate;
-      consum[key].aplicari++;
+    if (!luna) { container.innerHTML='<div class="no-raport">📊 Selectează o lună pentru a genera raportul.</div>'; return; }
+    const [an,lunaNum] = luna.split('-').map(Number);
+    const numeLuna = new Date(an,lunaNum-1,1).toLocaleDateString('ro-RO',{month:'long',year:'numeric'});
+    const items = istoric.filter(item=>{
+      if(!item.data) return false;
+      const d=new Date(item.data);
+      return d.getFullYear()===an&&d.getMonth()+1===lunaNum;
+    }).sort((a,b)=>new Date(a.data)-new Date(b.data));
+    if (!items.length) { container.innerHTML=`<div class="no-raport">📭 Nicio utilizare în ${numeLuna}.</div>`; return; }
+    const consum={};
+    items.forEach(item=>{
+      if (!consum[item.produs]) consum[item.produs]={tip:item.tip,cultura:item.cultura,unitate:item.unitate,total:0,aplicari:0};
+      consum[item.produs].total+=item.cantitate;
+      consum[item.produs].aplicari++;
     });
-
-    const stocMap = {};
-    produse.forEach(p => { stocMap[p.nume] = { cantitate: p.cantitate, unitate: p.unitate, pret: p.pretAchizitie||0 }; });
-
-    const totalAplicari = itemeLuna.length;
-    const produseDiferite = Object.keys(consum).length;
-    const totalLitriKg = Object.values(consum).reduce((s,c) => s + c.total, 0).toFixed(2);
-    const totalCost = Object.entries(consum).reduce((s,[k,c]) => s + (stocMap[k]?.pret||0)*c.total, 0).toFixed(2);
-
+    const stocMap={};
+    produse.forEach(p=>{stocMap[p.nume]={cantitate:p.cantitate,unitate:p.unitate,pret:p.pretAchizitie||0}});
+    const totalLitri = Object.values(consum).reduce((s,c)=>s+c.total,0).toFixed(2);
+    const totalCost = Object.entries(consum).reduce((s,[k,c])=>s+(stocMap[k]?.pret||0)*c.total,0).toFixed(2);
     container.innerHTML = `
       <div class="raport-luna-titlu">📊 Raport lunar — ${numeLuna}</div>
       <div class="raport-summary">
-        <div class="sum-card"><div class="num">${totalAplicari}</div><div class="label">Aplicări</div></div>
-        <div class="sum-card"><div class="num">${produseDiferite}</div><div class="label">Produse folosite</div></div>
-        <div class="sum-card"><div class="num">${totalLitriKg}</div><div class="label">Total L/Kg</div></div>
+        <div class="sum-card"><div class="num">${items.length}</div><div class="label">Aplicări</div></div>
+        <div class="sum-card"><div class="num">${Object.keys(consum).length}</div><div class="label">Produse</div></div>
+        <div class="sum-card"><div class="num">${totalLitri}</div><div class="label">Total L/Kg</div></div>
       </div>
-      <div class="raport-section">
-        <h3>📅 Tratamente efectuate</h3>
-        <table class="raport-table">
-          <thead><tr><th>Data</th><th>Produs</th><th>Tip</th><th>Cultură</th><th>Cantitate</th><th>Observații</th></tr></thead>
-          <tbody>${itemeLuna.map(item => `<tr>
-            <td>${new Date(item.data).toLocaleDateString('ro-RO')}</td>
-            <td><strong>${item.produs}</strong></td>
-            <td>${item.tip||'—'}</td><td>${item.cultura}</td>
-            <td><strong>${item.cantitate} ${item.unitate}</strong></td>
-            <td>${item.obs||'—'}</td>
-          </tr>`).join('')}</tbody>
-        </table>
+      <div class="raport-section"><h3>📅 Tratamente efectuate</h3>
+        <table class="raport-table"><thead><tr><th>Data</th><th>Produs</th><th>Tip</th><th>Cultură</th><th>Cantitate</th><th>Observații</th></tr></thead>
+        <tbody>${items.map(item=>`<tr>
+          <td>${new Date(item.data).toLocaleDateString('ro-RO')}</td>
+          <td><strong>${item.produs}</strong></td><td>${item.tip||'—'}</td>
+          <td>${item.cultura}</td><td><strong>${item.cantitate} ${item.unitate}</strong></td><td>${item.obs||'—'}</td>
+        </tr>`).join('')}</tbody></table>
       </div>
-      <div class="raport-section">
-        <h3>📦 Consum și costuri în ${numeLuna}</h3>
-        <table class="raport-table">
-          <thead><tr><th>Produs</th><th>Tip</th><th>Cultură</th><th>Nr. aplicări</th><th>Total consumat</th><th>Preț/unit.</th><th>Cost total</th><th>Stoc rămas</th></tr></thead>
-          <tbody>${Object.values(consum).map(c => {
-            const stoc = stocMap[c.produs];
-            const cost = stoc ? (stoc.pret * c.total).toFixed(2) : '—';
-            return `<tr>
-              <td><strong>${c.produs}</strong></td><td>${c.tip||'—'}</td><td>${c.cultura}</td>
-              <td>${c.aplicari}</td><td><strong>${c.total.toFixed(2)} ${c.unitate}</strong></td>
-              <td>${stoc?.pret ? stoc.pret.toFixed(2)+' lei' : '—'}</td>
-              <td><strong>${cost !== '—' ? cost+' lei' : '—'}</strong></td>
-              <td style="color:${stoc && stoc.cantitate <= 0 ? 'var(--rosu)' : 'var(--verde)'}">${stoc ? stoc.cantitate+' '+c.unitate : '—'}</td>
-            </tr>`;
-          }).join('')}
-          <tr class="total-row"><td colspan="6">TOTAL</td><td>${totalCost > 0 ? totalCost+' lei' : '—'}</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    `;
+      <div class="raport-section"><h3>📦 Consum și costuri — ${numeLuna}</h3>
+        <table class="raport-table"><thead><tr><th>Produs</th><th>Tip</th><th>Cultură</th><th>Aplicări</th><th>Consumat</th><th>Preț/unit.</th><th>Cost</th><th>Stoc rămas</th></tr></thead>
+        <tbody>${Object.entries(consum).map(([k,c])=>{
+          const s=stocMap[k];
+          return `<tr><td><strong>${k}</strong></td><td>${c.tip||'—'}</td><td>${c.cultura}</td>
+            <td>${c.aplicari}</td><td><strong>${c.total.toFixed(2)} ${c.unitate}</strong></td>
+            <td>${s?.pret?s.pret.toFixed(2)+' lei':'—'}</td>
+            <td><strong>${s?.pret?(s.pret*c.total).toFixed(2)+' lei':'—'}</strong></td>
+            <td style="color:${s&&s.cantitate<=0?'var(--rosu)':'var(--verde)'}">${s?s.cantitate+' '+c.unitate:'—'}</td>
+          </tr>`;
+        }).join('')}
+        <tr class="total-row"><td colspan="6">TOTAL</td><td>${totalCost>0?totalCost+' lei':'—'}</td><td></td></tr>
+        </tbody></table>
+      </div>`;
   };
 
   window.exportPDF = function() {
-    const luna = document.getElementById('raport-luna').value;
-    if (!luna) { alert('Selectează o lună mai întâi!'); return; }
+    if (!document.getElementById('raport-luna').value) { alert('Selectează o lună!'); return; }
     window.print();
   };
 
   window.exportExcel = function() {
     const luna = document.getElementById('raport-luna').value;
-    if (!luna) { alert('Selectează o lună mai întâi!'); return; }
-    const [an, lunaNum] = luna.split('-').map(Number);
-    const numeLuna = new Date(an, lunaNum-1, 1).toLocaleDateString('ro-RO', {month:'long', year:'numeric'});
-    const itemeLuna = istoric.filter(item => {
-      if (!item.data) return false;
-      const d = new Date(item.data);
-      return d.getFullYear() === an && d.getMonth()+1 === lunaNum;
-    }).sort((a,b) => new Date(a.data) - new Date(b.data));
-
-    let csv = 'RAPORT LUNAR - ' + numeLuna + '\n\n';
-    csv += 'TRATAMENTE EFECTUATE\n';
-    csv += 'Data,Produs,Tip,Cultura,Cantitate,Unitate,Observatii\n';
-    itemeLuna.forEach(item => { csv += `${item.data},${item.produs},${item.tip||''},${item.cultura},${item.cantitate},${item.unitate},"${item.obs||''}"\n`; });
-
-    csv += '\nCONSUM SI COSTURI\n';
-    csv += 'Produs,Tip,Cultura,Nr aplicari,Total consumat,Unitate,Pret/unit (lei),Cost total (lei),Stoc ramas\n';
-    const consum = {};
-    itemeLuna.forEach(item => {
-      if (!consum[item.produs]) consum[item.produs] = { tip: item.tip, cultura: item.cultura, unitate: item.unitate, total: 0, aplicari: 0 };
-      consum[item.produs].total += item.cantitate;
-      consum[item.produs].aplicari++;
+    if (!luna) { alert('Selectează o lună!'); return; }
+    const [an,lunaNum] = luna.split('-').map(Number);
+    const numeLuna = new Date(an,lunaNum-1,1).toLocaleDateString('ro-RO',{month:'long',year:'numeric'});
+    const items = istoric.filter(item=>{
+      if(!item.data) return false;
+      const d=new Date(item.data);
+      return d.getFullYear()===an&&d.getMonth()+1===lunaNum;
+    }).sort((a,b)=>new Date(a.data)-new Date(b.data));
+    let csv=`RAPORT LUNAR - ${numeLuna}\n\nTRATAMENTE EFECTUATE\nData,Produs,Tip,Cultura,Cantitate,Unitate,Observatii\n`;
+    items.forEach(item=>{csv+=`${item.data},${item.produs},${item.tip||''},${item.cultura},${item.cantitate},${item.unitate},"${item.obs||''}"\n`;});
+    csv+='\nCONSUM SI COSTURI\nProdus,Tip,Cultura,Nr aplicari,Total consumat,Unitate,Pret/unit (lei),Cost total (lei),Stoc ramas\n';
+    const consum={};
+    items.forEach(item=>{
+      if(!consum[item.produs]) consum[item.produs]={tip:item.tip,cultura:item.cultura,unitate:item.unitate,total:0,aplicari:0};
+      consum[item.produs].total+=item.cantitate; consum[item.produs].aplicari++;
     });
-    const stocMap = {};
-    produse.forEach(p => { stocMap[p.nume] = { cantitate: p.cantitate, pret: p.pretAchizitie||0 }; });
-    Object.entries(consum).forEach(([produs, c]) => {
-      const stoc = stocMap[produs];
-      const cost = stoc ? (stoc.pret * c.total).toFixed(2) : '';
-      csv += `${produs},${c.tip||''},${c.cultura},${c.aplicari},${c.total.toFixed(2)},${c.unitate},${stoc?.pret||''},${cost},${stoc?.cantitate||''}\n`;
+    const stocMap={};
+    produse.forEach(p=>{stocMap[p.nume]={cantitate:p.cantitate,pret:p.pretAchizitie||0}});
+    Object.entries(consum).forEach(([k,c])=>{
+      const s=stocMap[k];
+      csv+=`${k},${c.tip||''},${c.cultura},${c.aplicari},${c.total.toFixed(2)},${c.unitate},${s?.pret||''},${s?.pret?(s.pret*c.total).toFixed(2):''},${s?.cantitate||''}\n`;
     });
-
-    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = `AgroStoc_Raport_${luna}.csv`; a.click();
-    URL.revokeObjectURL(url);
+    const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+    const url=URL.createObjectURL(blob); const a=document.createElement('a');
+    a.href=url; a.download=`AgroStoc_Raport_${luna}.csv`; a.click(); URL.revokeObjectURL(url);
   };
 
   // ---- INIT ----
   document.getElementById('util-data').value = new Date().toISOString().split('T')[0];
-  document.getElementById('auth-parola').addEventListener('keydown', e => { if(e.key==='Enter') window.autentificare(); });
-  document.getElementById('auth-parola2').addEventListener('keydown', e => { if(e.key==='Enter') window.autentificare(); });
+  document.getElementById('auth-parola').addEventListener('keydown',e=>{if(e.key==='Enter')window.autentificare();});
+  document.getElementById('auth-parola2').addEventListener('keydown',e=>{if(e.key==='Enter')window.autentificare();});
 </script>
 </body>
 </html>
