@@ -249,6 +249,9 @@
       <input type="password" id="auth-parola2" placeholder="Confirmă parola" style="display:none" autocomplete="new-password">
       <div class="auth-error" id="auth-error"></div>
       <button class="btn-auth" id="btn-auth" onclick="autentificare()">Intră în cont</button>
+      <div style="text-align:center; margin-top:4px;">
+        <a href="#" onclick="resetParola(event)" style="font-size:0.82rem; color:var(--verde-deschis); text-decoration:none;">Am uitat parola</a>
+      </div>
     </div>
   </div>
 </div>
@@ -494,7 +497,7 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
   import { getFirestore, collection, doc, addDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -540,6 +543,10 @@
     { nume: 'Clinic 480 SL', tip: 'Erbicid', cultura: 'Ambele', doza: '3 L/ha', unitate: 'L', substantaActiva: 'Glifosat 480 g/L', phi: 0 },
     { nume: 'Coragen 20 SC', tip: 'Insecticid', cultura: 'Vie', doza: '0.175 L/ha', unitate: 'L', substantaActiva: 'Clorantraniliprol 200 g/L', phi: 14 },
     { nume: 'Revyona', tip: 'Fungicid', cultura: 'Vie', doza: '1 L/ha', unitate: 'L', substantaActiva: 'Mefentrifluconazol 200 g/L', phi: 21 },
+    { nume: 'Profiler', tip: 'Fungicid', cultura: 'Vie', doza: '2 L/ha', unitate: 'L', substantaActiva: 'Fosetil-Al 310g/L + Fluopicolide 62.5g/L', phi: 21 },
+    { nume: 'Flint Max 75 WG', tip: 'Fungicid', cultura: 'Vie', doza: '0.2 kg/ha', unitate: 'Kg', substantaActiva: 'Trifloxistrobin 500g/kg + Tebuconazol 250g/kg', phi: 28 },
+    { nume: 'Zorvec Vinabel', tip: 'Fungicid', cultura: 'Vie', doza: '0.6 L/ha', unitate: 'L', substantaActiva: 'Oxathiapiprolin 100g/L + Benthiavalicarb 50g/L', phi: 21 },
+    { nume: 'Talendo Extra', tip: 'Fungicid', cultura: 'Vie', doza: '0.4 L/ha', unitate: 'L', substantaActiva: 'Proquinazid 40g/L + Tetraconazol 160g/L', phi: 28 },
     { nume: 'Silwet Gold', tip: 'Adjuvant', cultura: 'Ambele', doza: '0.1 L/ha', unitate: 'L', substantaActiva: 'Trisiloxa n 830 g/L', phi: 0 },
     { nume: 'Wuxal Micro', tip: 'Îngrășământ foliar', cultura: 'Ambele', doza: '2 L/ha', unitate: 'L', substantaActiva: 'Microelemente chelate', phi: 0 },
     { nume: 'Cropmax', tip: 'Biostimulator', cultura: 'Ambele', doza: '1 L/ha', unitate: 'L', substantaActiva: 'Extracte alge marine', phi: 0 },
@@ -622,6 +629,31 @@
     document.getElementById('auth-parola2').style.display = mode==='register'?'block':'none';
     document.getElementById('btn-auth').textContent = mode==='login'?'Intră în cont':'Creează cont';
     document.getElementById('auth-error').classList.remove('visible');
+  };
+
+  window.resetParola = async function(e) {
+    e.preventDefault();
+    const email = document.getElementById('auth-email').value.trim();
+    if (!email) {
+      const err = document.getElementById('auth-error');
+      err.textContent = 'Introdu adresa de email mai întâi.';
+      err.classList.add('visible');
+      return;
+    }
+    try {
+      await sendPasswordResetEmail(auth, email);
+      const err = document.getElementById('auth-error');
+      err.style.background = 'var(--verde-pal)';
+      err.style.color = 'var(--verde)';
+      err.textContent = 'Email de resetare trimis. Verifică inbox-ul.';
+      err.classList.add('visible');
+    } catch(ex) {
+      const err = document.getElementById('auth-error');
+      err.style.background = '';
+      err.style.color = '';
+      err.textContent = 'Eroare: ' + ex.message;
+      err.classList.add('visible');
+    }
   };
 
   window.autentificare = async function() {
